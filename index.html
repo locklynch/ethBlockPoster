@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ethereum Block Viewer</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.6.0/dist/web3.min.js"></script>
+</head>
+<body>
+    <label for="apiKey">Enter Infura API Key:</label>
+    <input type="text" id="apiKey" placeholder="Infura API Key">
+
+    <label for="blockNumber">Enter Ethereum Block Number:</label>
+    <input type="text" id="blockNumber" placeholder="Block Number">
+
+    <button onclick="fetchBlock()">Fetch Block</button>
+
+    <!-- Display block information here -->
+    <div id="blockInfo"></div>
+
+    <script src="source.js"></script>
+</body>
+</html>
