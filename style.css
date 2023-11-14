@@ -1,9 +1,15 @@
 body {
     background-color: black;
-    color: rgb(179, 0, 179);
+    color: rgb(77, 0, 77);
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 20px;
+    position: relative;
+}
+
+.input-container {
+    width: 300px; /* Adjust as needed */
+    margin-right: 20px; /* Adjust as needed */
 }
 
 label {
@@ -31,4 +37,17 @@ button {
 
 button:hover {
     background-color: #5900a6;
+}
+
+#posterCanvas {
+    position: absolute;
+    top: 42%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    display:none;
+}
+
+#blockInfo {
+    pointer-events: none;
 }

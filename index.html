@@ -8,16 +8,23 @@
     <script src="https://cdn.jsdelivr.net/npm/web3@1.6.0/dist/web3.min.js"></script>
 </head>
 <body>
-    <label for="apiKey">Enter Infura API Key:</label>
-    <input type="text" id="apiKey" placeholder="Infura API Key">
-
-    <label for="blockNumber">Enter Ethereum Block Number:</label>
-    <input type="text" id="blockNumber" placeholder="Block Number">
-
-    <button onclick="fetchBlock()">Fetch Block</button>
+    <!-- SVG canvas -->
+    <svg id="posterCanvas" width="595.32" height="841.92">
+        <rect id="canvasBackground" width="100%" height="100%" fill=#101010 />
+    </svg>
 
     <!-- Display block information here -->
     <div id="blockInfo"></div>
+
+    <div class="input-container">
+        <label for="apiKey">Enter Infura API Key:</label>
+        <input type="text" id="apiKey" placeholder="Infura API Key">
+
+        <label for="blockNumber">Enter Ethereum Block Number:</label>
+        <input type="text" id="blockNumber" placeholder="Block Number">
+
+        <button onclick="fetchBlock()">Fetch Block</button>
+    </div>
 
     <script src="source.js"></script>
 </body>

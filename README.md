@@ -19,3 +19,20 @@ basic set up
 Sweet! looks like it's grabbing a block correctly!
 
 testing with my infura api key, and block 18181818
+
+
+Requirements:
+1. web3 shenanigans
+    a. npm install web3
+2. infura api
+    a. make infura account and get api key
+
+
+Poster Stuff:
+1. using react and svg for making the poster, all vector shenaigans, so it should be easy to blow up and reduce the poster as needed
+    a. npm install react-svg
+2. using A2 size for poster 4961px x 7016px (420mm x 594mm)
+    a. for formatting's sake, i'mma drop the pix down 1/10th (decimal over to the left one digit), then multiply by 1.2, so...
+        i. (4961/10)*1.2 = 595.32
+        ii. (7016/10)*1.2 = 841.92
+    b. can possibly make this changeable later!

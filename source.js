@@ -1,3 +1,5 @@
+let currentBlock; // Variable storing the block
+
 function fetchBlock() {
     // Get the input values
     const apiKey = document.getElementById('apiKey').value;
@@ -15,16 +17,23 @@ function fetchBlock() {
     // Fetch the block
     web3.eth.getBlock(blockNumber)
         .then(block => {
-            // Display the entire block as a JSON string
+            // Set the currentBlock variable
+            currentBlock = block;
+
+            // Display the entire block using currentBlock as the source
             const blockInfoDiv = document.getElementById('blockInfo');
-            blockInfoDiv.innerHTML = `
-                <h2>Block Information (JSON Format):</h2>
-                <pre>${JSON.stringify(block, null, 2)}</pre>
-            `;
+            blockInfoDiv.textContent = JSON.stringify(currentBlock, null, 2);
+
+            // Reveal the SVG canvas
+            const posterCanvas = document.getElementById('posterCanvas');
+            posterCanvas.style.display = 'block';
+
+            // Log the currentBlock after it has been assigned
+            console.log(currentBlock);
         })
         .catch(error => {
             console.error(error);
             const blockInfoDiv = document.getElementById('blockInfo');
-            blockInfoDiv.innerHTML = `<p>Error fetching block information.</p>`;
+            blockInfoDiv.textContent = 'Error fetching block information.';
         });
 }
