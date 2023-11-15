@@ -36,3 +36,13 @@ Poster Stuff:
         i. (4961/10)*1.2 = 595.32
         ii. (7016/10)*1.2 = 841.92
     b. can possibly make this changeable later!
+
+UPDATE
+
+the formatting looks like garbage on a phone, gotta fix that later.
+
+Got the transactions to appear as background text over the entire canvas, now, gonna start layering in graphics on top of it
+
+I'm thinking a strip along the left hand side of block shapes, representing each ethereum block, with the block number in each one, then, whatever block has been selected expands out into the majority of the poster, with breaks and sections of that block displayed
+
+Also, gotta figure out a way to make the svg canvas able to be saved or downloaded or whatever as an image, with options for scaling

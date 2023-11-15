@@ -39,6 +39,10 @@ button:hover {
     background-color: #5900a6;
 }
 
+#blockInfo {
+    pointer-events: none;
+}
+
 #posterCanvas {
     position: absolute;
     top: 42%;
@@ -48,6 +52,7 @@ button:hover {
     display:none;
 }
 
-#blockInfo {
-    pointer-events: none;
+#transactionText {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
 }
