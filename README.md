@@ -1,48 +1,36 @@
-# ethBlockPoster
-A program that displays an ethereum block in an informative but engaging way
+Turning the old setup into a vite project using react and JS.
 
-steps for thing to do stuff
-1. get an eth block from block chain based on eth block number
-2. display block
-3. make sure to display block in cool way
-4. give options for color palette, and possibly for style variations
-
-start with a way to get block off blockchain
-1. using infura's api (looks like imma need one no matter what if i'm not gonna run my own node, and def not for this duder)
-
-basic set up
-1. html.index page for input and display
-    a. input fields for
-        i. infura api key
-        ii. block number to access
-
-Sweet! looks like it's grabbing a block correctly!
-
-testing with my infura api key, and block 18181818
-
-
-Requirements:
-1. web3 shenanigans
-    a. npm install web3
-2. infura api
-    a. make infura account and get api key
-
-
-Poster Stuff:
-1. using react and svg for making the poster, all vector shenaigans, so it should be easy to blow up and reduce the poster as needed
-    a. npm install react-svg
-2. using A2 size for poster 4961px x 7016px (420mm x 594mm)
-    a. for formatting's sake, i'mma drop the pix down 1/10th (decimal over to the left one digit), then multiply by 1.2, so...
-        i. (4961/10)*1.2 = 595.32
-        ii. (7016/10)*1.2 = 841.92
-    b. can possibly make this changeable later!
-
-UPDATE
-
-the formatting looks like garbage on a phone, gotta fix that later.
-
-Got the transactions to appear as background text over the entire canvas, now, gonna start layering in graphics on top of it
-
-I'm thinking a strip along the left hand side of block shapes, representing each ethereum block, with the block number in each one, then, whatever block has been selected expands out into the majority of the poster, with breaks and sections of that block displayed
-
-Also, gotta figure out a way to make the svg canvas able to be saved or downloaded or whatever as an image, with options for scaling
+gonna make a few components, one for each element of the page.
+1. different cells that contain the elements of shenaigans. each with a label at the top of the cell, and a body made up of stuff
+2. input cell
+    a. label = Input
+    b. contains an infura api key entry element to type the api into (that's displayed like a password display)
+    c. contains a block number entry to type the block number
+    d. contains an optional transaction hash entry for a transaction hash if the user wants to display the info about a specific transaction
+3. settings cell
+    a. label = settings
+    b. contains options for
+        i. color palette selection (premade color palettes for the poster)
+        ii. notes cells to be included or not
+        iii. fun versus cool selection (can figure this out later, wanna make one that's got cute fun stuff in it)
+4. Poster cell, the viewbox that contains the other cells that make up the poster
+    a. no label for this one!
+5. small eth block cell
+    a. label = Eth Block
+    b. contains just a block number
+    c. use 7 of these in poster display
+        i. second from top block = block number input
+        ii. top block = block number -1
+        iii. bottom 5 are block number++ per block
+6. enlarged block cell for selected block
+    a. label = block number
+    b. contents of block displayed as object with key:value pairs
+        i. values limited to only a certain length so as not to overload the poster with too much data (maybe just first element of each array if the value is an array?)
+7. transaction cell for selected transaction
+    a. label = Transaction
+    b. contents of transaction cell displayed as object with key:value pairs.
+    c. this only appears if a transaction hash is given
+8. note cell, as layer of "comments"
+    a. label = block[key]
+    b. contents = quick note written about what that aspect of the block is for, like someone had been writing notes about what each part of the block means.
+    c. this layer of cells can be turned on or off depending on how they want the poster to look.

@@ -1,0 +1,11 @@
+.poster {
+  padding: 10px;
+  /* display: flex; */
+  /* justify-content: center; */
+  /* align-items: center; */
+  /* height: 100vh; */
+}
+
+.poster-container {
+  width: 100%; /* You can adjust this value as needed */
+}
