@@ -9,3 +9,9 @@
 .poster-container {
   width: 100%; /* You can adjust this value as needed */
 }
+
+.block {
+  word-wrap: break-word;
+  max-width: 600px;
+
+}

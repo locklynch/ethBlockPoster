@@ -1,21 +1,18 @@
-import React from 'react';
-import Inputs from './Components/Inputs';
-import Poster from './Components/Poster';
+import React, {useState} from 'react';
+import Inputs from './Components/UI/Inputs';
+import Poster from './Components/Poster/Poster';
 import './App.css';
-import { BlockInfoProvider } from './Components/BlockInfoContext';
 
 function App() {
-
+  const [blockInfo, setBlockInfo] = useState();
 
   return (
     <>
-    <BlockInfoProvider>
-      <Poster/>
+      <Poster blockInfo = {blockInfo}/>
       <br/>
-      <Inputs/>
+      <Inputs setBlockInfo={setBlockInfo}/>
       <br/>
       
-    </BlockInfoProvider>
     </>
   );
 }
