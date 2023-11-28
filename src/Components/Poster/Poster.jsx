@@ -1,6 +1,7 @@
 // Poster.jsx
-import React, {useState, useEffect} from 'react';
+import React, { useState } from 'react';
 import BlockData from './BlockData';
+import { DrapAndDropComponent } from './DragAndDrop';
 
 const Poster = ({ blockInfo }) => {
 
@@ -18,8 +19,9 @@ const Poster = ({ blockInfo }) => {
       <div className="poster-container">
       <svg width="1000" height="1414" viewBox="0 0 1000 1414" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect width="1000" height="1414" fill="#1E1E1E"/>
-        {/* the new dynamic poster */}
-        {blockInfo && <BlockData blockInfo={blockInfo} onMove={handleBlockMove}/>}
+        <DrapAndDropComponent>
+          {blockInfo && <BlockData blockInfo={blockInfo} onMove={handleBlockMove}/>}
+        </DrapAndDropComponent>
       </svg>
       </div>
     </div>

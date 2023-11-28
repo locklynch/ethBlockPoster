@@ -31,7 +31,7 @@ const Inputs = ({setBlockInfo}) => {
 
     } catch (error) {
       console.error('Error fetching block:', error.message);
-    };
+    }
   }
 
   // on first render
