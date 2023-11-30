@@ -34,3 +34,13 @@ gonna make a few components, one for each element of the page.
     a. label = block[key]
     b. contents = quick note written about what that aspect of the block is for, like someone had been writing notes about what each part of the block means.
     c. this layer of cells can be turned on or off depending on how they want the poster to look.
+
+
+   new notes on layers to buil
+   1. block window
+   2. transaction window
+   3. gas flow chart
+   4. contract window
+   5. notes window
+   6. chat window
+   7. cute graphics
