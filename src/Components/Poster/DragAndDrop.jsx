@@ -1,3 +1,6 @@
+//Parent module to make sure everything is draggable around the poster
+//in case the user wants to format the poster differently than the starting layout
+
 import React, { useEffect, useRef } from 'react';
 import * as d3 from 'd3';
 

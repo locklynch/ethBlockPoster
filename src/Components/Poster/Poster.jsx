@@ -6,7 +6,7 @@ import { notes } from '../../assets/staticText.json';
 
 const Poster = ({ blockInfo }) => {
 
-  console.log(notes);
+  // console.log(notes);
 
   return (
     <div className="poster">
@@ -18,7 +18,7 @@ const Poster = ({ blockInfo }) => {
         </DrapAndDropComponent>
         {notes.map((note, index) => (
           <DrapAndDropComponent>
-            <text key={note.id} x="330" y={60 + 20 * index} fill="white" font-size="20">{note.text}</text>
+            <text key={note.id} x="330" y={60 + 20 * index} fill="white" fontSize="20">{note.text}</text>
           </DrapAndDropComponent>
         ))}
       </svg>

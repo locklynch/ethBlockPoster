@@ -3,7 +3,7 @@ import {ethers} from 'ethers';
 import {Block} from '@ethereumjs/block'
 import {Buffer} from 'buffer'
 import { RLP } from '@ethereumjs/rlp'
-import fixtureBlockData from '../../fixtureBlock.json'
+import fixtureBlockData from '../../assets/fixtureBlock.json'
 
 
 const Inputs = ({setBlockInfo}) => {
@@ -21,8 +21,9 @@ const Inputs = ({setBlockInfo}) => {
       let blockObject
       if (blockNumber) {
         blockObject = await Block.fromJsonRpcProvider(provider, `0x${blockNumber.toString(16)}`)
+        console.log(blockObject)
       } else {
-        blockObject = Block.fromRPC(fixtureBlockData)
+        blockObject = Block.fromRPC(fixtureBlockData) // CHANGE THIS!!!! right now this is not equivilant to the blockObject when it gets fetched
       }
       const blockBinary = Buffer.from(blockObject.serialize())
       const decodedBlock = RLP.decode(blockBinary)

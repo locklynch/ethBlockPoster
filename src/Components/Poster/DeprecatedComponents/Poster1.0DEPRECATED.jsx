@@ -1,9 +1,9 @@
 // Poster.jsx
 import React, {useState, useEffect} from 'react';
-import DynamicTextBox from './DynamicTextBox';
+import DynamicTextBox from '../DynamicTextBox';
 // import NotesLayer from './NotesLayer';
 // import BlockElementsLayer from './BlockElementsLayer';
-import BlockData from './BlockData';
+import BlockData from '../BlockData';
 
 const Poster = ({ blockInfo }) => {
   

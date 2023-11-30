@@ -1,4 +1,4 @@
-// BlockData.jsx
+// BlockData.jsx The window to show the block being accessed
 
 import React, { useState, useEffect, useRef } from 'react';
 
@@ -102,7 +102,7 @@ const BlockData = ({ blockInfo, onMove }) => {
           </div>
         </foreignObject>
         <text x={posterStartX+80} y={posterStartY+40} fill="white" fontSize="20">
-          Block Information
+          Block
         </text>
     </>
   );

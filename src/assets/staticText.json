@@ -1,96 +1,12 @@
 {
     "notes": [
         {
-            "id": "baseFeePerGas",
-            "text": "The minimum cost per computational step (gas) that users need to pay when executing a transaction."
+            "id": "foundTransaction",
+            "text": "This Transaction!"
         },
         {
-            "id": "difficulty",
-            "text": "Measure of how hard it is to find an appropriate hash value for the block. Used for regulating the speed at which new hashes are found."
-        },
-        {
-            "id": "extraData",
-            "text": "A section for includig notes, be it technical information, text messages, or even just ASCII art. Whatever ya like."
-        },
-        {
-            "id": "gasLimit",
-            "text": "The maximum capacity of the block, measured in gas. Helps limit overly complex computation or infinite loops."
-        },
-        {
-            "id": "gasUsed",
-            "text": "The total amount of gas consumed by all transactions in the block."
-        },
-        {
-            "id": "hash",
-            "text": "The hash of the finished block header, created when a miner successfully mines a block."
-        },
-        {
-            "id": "logsBloom",
-            "text": "A space-efficient representation of smart contract logs used to search quickly through smart contract data."
-        },
-        {
-            "id": "miner",
-            "text": "The address of the participant in the network who added this block successfully to the blockchain."
-        },
-        {
-            "id": "mixHash",
-            "text": "The hash of the block header that meets the difficulty conditions. Found by modifying the nonce."
-        },
-        {
-            "id": "nonce",
-            "text": "A number used once, included in the block header to help generate a hash that meets the criteria set by the difficulty."
-        },
-        {
-            "id": "number",
-            "text": "The position of the block in the blockchain. Numbered from the genesis block."
-        },
-        {
-            "id": "parentHash",
-            "text": "The hash of the previous block, included in the current block header, linking the blocks together in a chain."
-        },
-        {
-            "id": "receiptsRoot",
-            "text": "The Merkle root hash of all transaction receipts included in the block."
-        },
-        {
-            "id": "sha3Uncles",
-            "text": "The hash of the headers of the uncles of the block, included for quick and efficient searching through the uncles of the block."
-        },
-        {
-            "id": "size",
-            "text": "The size of the block, measured in bytes."
-        },
-        {
-            "id": "stateRoot",
-            "text": "The root hash of the new global state after all transactions in the block have been successfully executed."
-        },
-        {
-            "id": "timestamp",
-            "text": "The exact moment the block has been successfully mined and added to the blockchain."
-        },
-        {
-            "id": "totalDifficulty",
-            "text": "The cumulative sum of the difficulty of all blocks in the blockchain. Used to assess the validity of competing chains."
-        },
-        {
-            "id": "transactions",
-            "text": "An array of all the state changes included in the block, such as value transfers, or smart contract actions."
-        },
-        {
-            "id": "transactionsRoot",
-            "text": "The Merkle Tree root hash of all the transactions included in  the block. Used for quick transaction verification."
-        },
-        {
-            "id": "uncles",
-            "text": "Valid blocks related to the block but not included on the main blockchain. Also known as stale blocks."
-        },
-        {
-            "id": "withdrawals",
-            "text": "The list of withdrawals of rewards claimed by validators from their participation in the network."
-        },
-        {
-            "id": "withdrawalsRoot",
-            "text": "The root hash of the withdrawals included in the block. Used for withdrawal validation."
+            "id": "possibleHack",
+            "text": "This looks suspicious right?!"
         }
     ]
 }
