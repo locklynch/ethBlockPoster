@@ -5,12 +5,13 @@ import './App.css';
 
 function App() {
   const [blockInfo, setBlockInfo] = useState();
+  const [blockChainNumber, setBlockChainNumber] = useState(1);
 
   return (
     <>
-      <Poster blockInfo = {blockInfo}/>
+      <Poster blockChainNumber= {blockChainNumber} blockInfo = {blockInfo}/>
       <br/>
-      <Inputs setBlockInfo={setBlockInfo}/>
+      <Inputs setBlockChainNumber={setBlockChainNumber} setBlockInfo={setBlockInfo}/>
       <br/>
       
     </>

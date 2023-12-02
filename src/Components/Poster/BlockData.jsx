@@ -27,7 +27,7 @@ const Rlp = ({ rlpObject, colorIndex = 0, parentKey='' }) => {
   })
 }
 
-const BlockData = ({ blockInfo, onMove }) => {
+const BlockData = ({ blockInfo }) => {
   const { decodedBlock } = blockInfo
   // block poster starting location
   const posterStartX = 250
@@ -35,29 +35,8 @@ const BlockData = ({ blockInfo, onMove }) => {
   // const scale = .253
   const scale = 0.25
 
-  const [isDragging, setIsDragging] = useState(false);
-  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+  const [isDragging] = useState(false);
   const [contentHeight, setContentHeight] = useState(0);
-
-  const handleMouseDown = (e) => {
-    setIsDragging(true);
-    setDragStart({ x: e.clientX, y: e.clientY });
-  };
-
-  const handleMouseMove = (e) => {
-    if (isDragging) {
-      const deltaX = e.clientX - dragStart.x;
-      const deltaY = e.clientY - dragStart.y;
-
-      onMove({ x: deltaX, y: deltaY });
-
-      setDragStart({ x: e.clientX, y: e.clientY });
-    }
-  };
-
-  const handleMouseUp = () => {
-    setIsDragging(false);
-  };
 
   const textRef = useRef(null);
 
@@ -72,26 +51,12 @@ const BlockData = ({ blockInfo, onMove }) => {
 
   return (
     <>
-      <rect
-        width="100%"
-        height="100%"
-        fill="#1E1E1E"
-        onMouseDown={handleMouseDown}
-        onMouseMove={handleMouseMove}
-        onMouseUp={handleMouseUp}
-        onMouseLeave={handleMouseUp}
-        style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
-      />
         <foreignObject
           x={posterStartX + (posterStartX / scale)}
           y={posterStartY + (posterStartY / scale)}
           width={(600) / scale}
           height={(1000) / scale}
           transform={`scale(${scale})`}
-          onMouseDown={handleMouseDown}
-          onMouseMove={handleMouseMove}
-          onMouseUp={handleMouseUp}
-          onMouseLeave={handleMouseUp}
           style={{
             cursor: isDragging ? 'grabbing' : 'grab',
             border: '10px solid white',

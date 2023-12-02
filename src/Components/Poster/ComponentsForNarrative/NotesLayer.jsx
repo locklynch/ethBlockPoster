@@ -1,7 +1,7 @@
 // the layer of little notes to self and postits on the screen pointing at elements of the "narrative"
 
 import React from 'react';
-import DynamicTextBox from './DynamicTextBox';
+import DynamicTextBox from '../DynamicTextBox';
 
 
 

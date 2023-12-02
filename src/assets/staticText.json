@@ -1,5 +1,133 @@
 {
-    "notes": [
+    "topLevelInfo": [
+        {
+            "id": "slot",
+            "text": "the slot the block belongs to in the beacon chain"
+        },
+        {
+            "id": "proposer_index",
+            "text": "the ID of the validator proposing the block"
+        },
+        {
+            "id": "parent_root",
+            "text": "the hash of the preceding block"
+        },
+        {
+            "id": "state_root",
+            "text": "the root hash of the state object"
+        },
+        {
+            "id": "body",
+            "text": "an object containing the bulk of the block, divided into several fields"
+        }
+    ],
+    "blockBody": [
+        {
+            "id": "randao_reveal",
+            "text": "a value used to select the next block proposer"
+        },
+        {
+            "id": "eth1_data",
+            "text": "information about the deposit contract"
+        },
+        {
+            "id": "graffiti",
+            "text": "arbitrary data used to tag blocks"
+        },
+        {
+            "id": "proposer_slashings",
+            "text": "list of validators to be slashed for proposing multiple conflicting blocks to one slot"
+        },
+        {
+            "id": "attester_slashings",
+            "text": "list of validators to be slashed for attesting to conflicting information"
+        },
+        {
+            "id": "attestations",
+            "text": "list of attestations in favor of current block"
+        },
+        {
+            "id": "deposits",
+            "text": "list of new deposits to the depost contract"
+        },
+        {
+            "id": "voluntary_exits",
+            "text": "list of validators exiting the network"
+        },
+        {
+            "id": "sync_aggregate",
+            "text": "subset of validators used to serve light clients"
+        },
+        {
+            "id": "execution_payload",
+            "text": "transactions passed from the execution client"
+        }
+    ],
+    "attestations": [
+        {
+            "id": "aggregation_bits",
+            "text": "a list of which validators participated in this attestation"
+        },
+        {
+            "id": "data",
+            "text": "a container with multiple subfields relating to the attestation"
+        },
+        {
+            "id": "signature",
+            "text": "aggregate signature of all attesting validators"
+        }
+    ],
+    "attestationData": [
+        {
+            "id": "",
+            "text": ""
+        },
+        {
+            "id": "",
+            "text": ""
+        },
+        {
+            "id": "",
+            "text": ""
+        },
+        {
+            "id": "",
+            "text": ""
+        },
+        {
+            "id": "",
+            "text": ""
+        }
+    ],
+    "execution_payload_header": [
+        {
+            "id": "",
+            "text": ""
+        }
+    ],
+    "execution_payload": [
+        {
+            "id": "",
+            "text": ""
+        }
+    ],
+    "withdrawals_list": [
+        {
+            "id": "",
+            "text": ""
+        }
+    ],
+    "infoNotes": [
+        {
+            "id": "slot_root_hash",
+            "text": "the hash of the slot the block belongs to"
+        },
+        {
+            "id": "epoch",
+            "text": "the epoch the current block's slot belongs to"
+        }
+    ],
+    "hackerNotes": [
         {
             "id": "foundTransaction",
             "text": "This Transaction!"
