@@ -28,7 +28,9 @@ const Rlp = ({ rlpObject, colorIndex = 0, parentKey='' }) => {
   })
 }
 
-const BlockData = ({ blockInfo, blockChainNumberFromApp}) => {
+const BlockData = ({ blockInfo, blockChainNumberFromApp, blockPosition}) => {
+  const smallBlockPosition = blockPosition
+  const blockWindowRef = useRef(null)
   const blockNumberTitle = blockChainNumberFromApp
   const { decodedBlock } = blockInfo
   // block poster starting location
@@ -42,6 +44,7 @@ const BlockData = ({ blockInfo, blockChainNumberFromApp}) => {
 
   const textRef = useRef(null);
 
+  // trying to make the box change its height depending on the length of the block info inside it, not working yet :-(
   useEffect(() => {
     if (textRef.current) {
       const bbox = textRef.current.getBBox();
@@ -50,10 +53,32 @@ const BlockData = ({ blockInfo, blockChainNumberFromApp}) => {
     }
   }, [decodedBlock]);
 
+  console.log('Top-left corner coordinates:', { x: smallBlockPosition.left, y: Math.abs(smallBlockPosition.top) })
+
+  const TopLeftLine = ({ x1, y1, x2, y2}) => {
+      // pulling the location of the blockdata to use in drawing a line between the small block in the chain and the blockdata block
+  useEffect(() => {
+    const blockWindow = blockWindowRef.current;
+    if (blockWindow) {
+      const blockWindowPosition = blockWindow.getBoundingClientRect()
+      console.log(blockWindowPosition)
+    }
+  }, [blockWindowRef.current])
+    return (
+      <line
+        x1={smallBlockPosition.left}
+        y1={Math.abs(smallBlockPosition.top)}
+        x2={blockWindowRef.current?.getBoundingClientRect().left || 0}
+        y2={Math.abs(blockWindowRef.current?.getBoundingClientRect().top) || 0}
+        style={{stroke: 'white', strokeWidth: 2}}
+      />
+    );
+  }
 
   return (
     <>
         <foreignObject
+          ref={blockWindowRef}
           x={posterStartX + (posterStartX / scale)}
           y={posterStartY + (posterStartY / scale)}
           width={(800) / scale}
@@ -73,6 +98,7 @@ const BlockData = ({ blockInfo, blockChainNumberFromApp}) => {
           Block {blockNumberTitle}
         </text>
         <image  width='1000' height='1000' x='50' y='150' href={Ethereum_Logo_2014} opacity='20%'/>
+        <TopLeftLine/>
     </>
   );
 };

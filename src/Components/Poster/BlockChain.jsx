@@ -3,14 +3,19 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Ethereum_Logo_2014 from '../../assets/Ethereum_logo_2014.svg'
 
-const BlockChain = ( { blockChainNumberFromApp }) => {
+const BlockChain = ( { blockChainNumberFromApp, setBlockPosition }) => {
     const number = blockChainNumberFromApp
-    console.log(number)
-    // const isValidNumber =!isNaN(parseInt(blockChainNumber, 10))
+    const targetBlockRef = useRef(null)
 
-    // if (!isValidNumber) {
-    //     return console.log(blockChainNumber)
-    // }
+    useEffect(() => {
+        const targetBlock = targetBlockRef.current;
+        if (targetBlock) {
+            const blockPosition = targetBlock.getBoundingClientRect();
+            setBlockPosition(blockPosition)
+            // console.log('Top-left corner coordinates:', { x: blockPosition.left, y: blockPosition.top });
+        }
+    }, [targetBlockRef.current])
+
         const prevBlockNumber = number-1;
         const mainBlockNumber = number;
         const nextBlockNumbers = Array.from({length: 7}, (_, index) => mainBlockNumber + index);
@@ -20,7 +25,9 @@ const BlockChain = ( { blockChainNumberFromApp }) => {
             {[prevBlockNumber, ...nextBlockNumbers].map((num, index) => (
                 <>
                 <rect
+                    ref={index === 1 ? targetBlockRef: null}
                     key={index}
+                    id={index}
                     x="40"
                     y={20+index*170}
                     width="100"
@@ -29,11 +36,11 @@ const BlockChain = ( { blockChainNumberFromApp }) => {
                     stroke="white"
                     strokeWidth="2"
                 ></rect>
-                <image  width='100' height='100' x='40' y={40+index*170} href={Ethereum_Logo_2014} opacity='10%'/>
-                    <text x="90" y={70+index*170} fill="white" textAnchor="middle" dy=".3em" style={{ fill: "white", fontSize: "17"}}>
+                <image  key={'smallethlogo'+index} width='100' height='100' x='40' y={40+index*170} href={Ethereum_Logo_2014} opacity='10%'/>
+                    <text key={'blocktext'+index} x="90" y={70+index*170} fill="white" textAnchor="middle" dy=".3em" style={{ fill: "white", fontSize: "17"}}>
                         block
                     </text>
-                    <text x="90" y={90+index*170} fill="white" textAnchor="middle" dy=".3em" style={{ fill: "white", fontSize: "17"}}>
+                    <text key={'numtext'+index} x="90" y={90+index*170} fill="white" textAnchor="middle" dy=".3em" style={{ fill: "white", fontSize: "17"}}>
                         {num}
                     </text>
                     
