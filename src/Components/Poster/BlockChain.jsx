@@ -1,10 +1,11 @@
 // block chain representation for display on the poster
 
 import React, { useState, useEffect, useRef } from 'react';
+import Ethereum_Logo_2014 from '../../assets/Ethereum_logo_2014.svg'
 
-const BlockChain = ( { blockChainNumber }) => {
-    let number = blockChainNumber
-    // console.log(number)
+const BlockChain = ( { blockChainNumberFromApp }) => {
+    const number = blockChainNumberFromApp
+    console.log(number)
     // const isValidNumber =!isNaN(parseInt(blockChainNumber, 10))
 
     // if (!isValidNumber) {
@@ -28,9 +29,14 @@ const BlockChain = ( { blockChainNumber }) => {
                     stroke="white"
                     strokeWidth="2"
                 ></rect>
-                    <text x="90" y={80+index*170} fill="white" textAnchor="middle" dy=".3em" style={{ fill: "white", fontSize: "17"}}>
+                <image  width='100' height='100' x='40' y={40+index*170} href={Ethereum_Logo_2014} opacity='10%'/>
+                    <text x="90" y={70+index*170} fill="white" textAnchor="middle" dy=".3em" style={{ fill: "white", fontSize: "17"}}>
+                        block
+                    </text>
+                    <text x="90" y={90+index*170} fill="white" textAnchor="middle" dy=".3em" style={{ fill: "white", fontSize: "17"}}>
                         {num}
                     </text>
+                    
                 </>
             ))}
         </>

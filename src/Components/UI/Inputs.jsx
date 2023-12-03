@@ -6,9 +6,8 @@ import { RLP } from '@ethereumjs/rlp'
 import fixtureBlockData from '../../assets/fixtureBlock.json'
 
 
-const Inputs = ({setBlockInfo}) => {
+const Inputs = ({setBlockInfo, setBlockChainNumber}) => {
   const [blockJsonString, setBlockJsonString] = useState(null);
-  const [blockChainNumber, setBlockChainNumber] = useState(null)
 
   const fetchBlock = async () => {
     const blockNumber = parseInt(document.getElementById('blockNumber').value);
@@ -17,17 +16,17 @@ const Inputs = ({setBlockInfo}) => {
       'mainnet',
       infuraAPIKey
     )
+    let blockChainNumber = 1
 
     try {
       let blockObject
       if (!blockNumber) {
         blockObject = Block.fromRPC(fixtureBlockData) // CHANGE THIS!!!! right now this is not equivilant to the blockObject when it gets fetched
-        // console.log(blockChainNumber)
       } else {
+        blockChainNumber = blockNumber
+        setBlockChainNumber(blockChainNumber)
         blockObject = await Block.fromJsonRpcProvider(provider, `0x${blockNumber.toString(16)}`)
-        setBlockChainNumber (blockNumber)
         console.log(blockObject)
-        console.log(blockChainNumber)
       }
         
       const blockBinary = Buffer.from(blockObject.serialize())
@@ -40,10 +39,10 @@ const Inputs = ({setBlockInfo}) => {
     }
   }
 
-  // on first render
-  useEffect(() => {
-    fetchBlock()
-  }, [])
+  // // on first render
+  // useEffect(() => {
+  //   fetchBlock()
+  // }, [])
 
 
   return (

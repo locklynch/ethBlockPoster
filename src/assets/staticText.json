@@ -119,12 +119,12 @@
     ],
     "infoNotes": [
         {
-            "id": "slot_root_hash",
-            "text": "the hash of the slot the block belongs to"
+            "id": "test",
+            "text": "some test text, remember to reorganize this staticText with the actual notes!"
         },
         {
-            "id": "epoch",
-            "text": "the epoch the current block's slot belongs to"
+            "id": "test_2",
+            "text": "another test text string baaabbyyy!!! resize this text! or add line breaks or something!"
         }
     ],
     "hackerNotes": [
