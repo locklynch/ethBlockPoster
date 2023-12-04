@@ -4,16 +4,9 @@ import BlockData from './BlockData';
 import { DrapAndDropComponent } from './DragAndDrop';
 import { infoNotes } from '../../assets/staticText.json';
 import BlockChain from './BlockChain';
-// import Ethereum_Logo_2014 from '../../assets/Ethereum_logo_2014.svg'
 
 const Poster = ({ blockInfo, blockChainNumberFromApp }) => {
   const [blockPosition, setBlockPosition] = useState ();
-
-  // const handleBlockPosition = (blockPosition) => {
-  //   setBlockPosition(blockPosition)
-  // }
-
-  // console.log(notes);
 
   return (
     <div className="poster">
@@ -24,8 +17,7 @@ const Poster = ({ blockInfo, blockChainNumberFromApp }) => {
           {blockChainNumberFromApp && <BlockChain blockChainNumberFromApp={blockChainNumberFromApp} setBlockPosition={setBlockPosition}/>}
         </DrapAndDropComponent>
         <DrapAndDropComponent>
-          {blockInfo && blockChainNumberFromApp && <BlockData blockInfo={blockInfo} blockChainNumberFromApp={blockChainNumberFromApp} blockPosition={blockPosition}/>}
-          {/* {blockInfo && <image  width='1000' height='1000' x='50' y='150' href={Ethereum_Logo_2014} opacity='20%'/>} */}
+          {blockInfo && blockChainNumberFromApp && <BlockData blockInfo={blockInfo} blockChainNumberFromApp={blockChainNumberFromApp}/>}
         </DrapAndDropComponent>
         {blockInfo && infoNotes.map((note, index,) => (
           <DrapAndDropComponent key={note.id} style={{ borderStyle: 'solid', borderWidth: '1px', borderColor: 'white'}}>

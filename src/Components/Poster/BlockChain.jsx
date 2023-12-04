@@ -12,7 +12,7 @@ const BlockChain = ( { blockChainNumberFromApp, setBlockPosition }) => {
         if (targetBlock) {
             const blockPosition = targetBlock.getBoundingClientRect();
             setBlockPosition(blockPosition)
-            // console.log('Top-left corner coordinates:', { x: blockPosition.left, y: blockPosition.top });
+            // console.log('Top-left corner coordinates:', { x: blockPosition.left, y: blockPosition.top }); // topLeftLine stuff!!
         }
     }, [targetBlockRef.current])
 

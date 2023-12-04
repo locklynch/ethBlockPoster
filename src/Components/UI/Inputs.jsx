@@ -21,7 +21,8 @@ const Inputs = ({setBlockInfo, setBlockChainNumber}) => {
     try {
       let blockObject
       if (!blockNumber) {
-        blockObject = Block.fromRPC(fixtureBlockData) // CHANGE THIS!!!! right now this is not equivilant to the blockObject when it gets fetched
+        blockObject = Block.fromBlockData(fixtureBlockData)
+        setBlockChainNumber(blockObject.header.number.toString())
       } else {
         blockChainNumber = blockNumber
         setBlockChainNumber(blockChainNumber)
@@ -39,10 +40,10 @@ const Inputs = ({setBlockInfo, setBlockChainNumber}) => {
     }
   }
 
-  // // on first render
-  // useEffect(() => {
-  //   fetchBlock()
-  // }, [])
+  // on first render
+  useEffect(() => {
+    fetchBlock()
+  }, [])
 
 
   return (
