@@ -11,29 +11,6 @@ const colorPalette = [
 
 ];
 
-// // The line that's supposed to connect the top left corner of the small block in the chain to the expanded block window
-// const TopLeftLine = ({ x1, y1, x2, y2}) => {
-//  const smallBlockPosition = blockPosition
-//  const blockWindowRef = useRef(null)
-//     // pulling the location of the blockdata to use in drawing a line between the small block in the chain and the blockdata block
-// useEffect(() => {
-//   const blockWindow = blockWindowRef.current;
-//   if (blockWindow) {
-//     const blockWindowPosition = blockWindow.getBoundingClientRect()
-//     console.log(blockWindowPosition)
-//   }
-// }, [blockWindowRef.current])
-//   return (
-//     <line
-//       x1={(smallBlockPosition.left)}
-//       y1={(smallBlockPosition.top)}
-//       x2={blockWindowRef.current?.getBoundingClientRect().left}
-//       y2={(blockWindowRef.current?.getBoundingClientRect().top)}
-//       style={{stroke: 'white', strokeWidth: 2}}
-//     />
-//   );
-// }
-
 
 const Rlp = ({ rlpObject, colorIndex = 0, parentKey='' }) => {
   if (!Array.isArray(rlpObject)) {
@@ -51,14 +28,13 @@ const Rlp = ({ rlpObject, colorIndex = 0, parentKey='' }) => {
   })
 }
 
-const BlockData = ({ blockInfo, blockChainNumberFromApp, blockPosition}) => {
+const BlockData = ({ blockInfo, blockChainNumberFromApp, setBlockPosition}) => {
   const blockNumberTitle = blockChainNumberFromApp
   const { decodedBlock } = blockInfo
   // block poster starting location
   const posterStartX = 180
   const posterStartY = 30
   const scale = 0.20
-
   const [isDragging] = useState(false);
   const [contentHeight, setContentHeight] = useState(1200);
 
@@ -66,11 +42,19 @@ const BlockData = ({ blockInfo, blockChainNumberFromApp, blockPosition}) => {
 
   // make the height of the BlockData window the height of the blockInfo
   useEffect(() => {
-    if (textRef.current) {
-      const bbox = textRef.current.getBoundingClientRect();
-      setContentHeight(bbox.height)
-      console.log(bbox)
+    const handleResize = () => {
+      if (textRef.current) {
+        const rect = textRef.current.getBoundingClientRect();
+        setContentHeight(rect.height)
+        setBlockPosition(rect)
+      };
     }
+    handleResize();
+    // Add event listener
+    window.addEventListener('resize', handleResize);
+
+    // Remove event listener on cleanup
+    return () => window.removeEventListener('resize', handleResize);
   }, [blockInfo]);
 
   return (
@@ -84,7 +68,6 @@ const BlockData = ({ blockInfo, blockChainNumberFromApp, blockPosition}) => {
         fill='black'
         strokeWidth='2'
       />
-      {/* <TopLeftLine/> */}
       <foreignObject
       // ref={blockWindowRef} // topLeftLine stuff!
         width={(800)/scale}

@@ -26,7 +26,9 @@ FIXES:
     1. draw boxes around the notes elements I know how to do this now!!! same set up as the block chain module!
     2. give background same color as poster background, then make 30% opacitiy
     3. maybe give text the same color as the element they're referencing? or somehow mark the colors in a cool way
-    4. also, draw a line from each section of the binary to the info window explaining what each element is.
+    4. also, draw a line from each section of the binary to the info window explaining what each element is. It Works!! Just don't scroll...
+        1. fix the scrolling issue lol
+        2. maybe make lines connecting all the coorrnnerrrss!!!
     5. make sure to render the text OUTSIDE of the rect element, but call them in the same <></> element so they move together.
     6. also, make the background of the rect like, 30% opacity
 4. right now I'm getting errors for pre Merge blocks

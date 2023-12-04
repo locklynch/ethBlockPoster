@@ -8,22 +8,30 @@ const BlockChain = ( { blockChainNumberFromApp, setBlockPosition }) => {
     const targetBlockRef = useRef(null)
 
     useEffect(() => {
-        const targetBlock = targetBlockRef.current;
-        if (targetBlock) {
-            const blockPosition = targetBlock.getBoundingClientRect();
-            setBlockPosition(blockPosition)
-            // console.log('Top-left corner coordinates:', { x: blockPosition.left, y: blockPosition.top }); // topLeftLine stuff!!
-        }
-    }, [targetBlockRef.current])
+        const handleResize = () => {
+            const targetBlock = targetBlockRef.current;
+            if (targetBlock) {
+                setBlockPosition(
+                    targetBlock.getBoundingClientRect()
+                )
+            };
+        };
+        handleResize();
+        // Add event listener
+        window.addEventListener('resize', handleResize);
+
+        // Remove event listener on cleanup
+        return () => window.removeEventListener('resize', handleResize);
+    }, [])
 
         const prevBlockNumber = number-1;
         const mainBlockNumber = number;
         const nextBlockNumbers = Array.from({length: 7}, (_, index) => mainBlockNumber + index);
 
     return (
-        <>
+        <g>
             {[prevBlockNumber, ...nextBlockNumbers].map((num, index) => (
-                <>
+                <g>
                 <rect
                     ref={index === 1 ? targetBlockRef: null}
                     key={index}
@@ -44,9 +52,9 @@ const BlockChain = ( { blockChainNumberFromApp, setBlockPosition }) => {
                         {num}
                     </text>
                     
-                </>
+                </g>
             ))}
-        </>
+        </g>
     )
 }
 

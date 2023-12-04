@@ -8,24 +8,22 @@ import fixtureBlockData from '../../assets/fixtureBlock.json'
 
 const Inputs = ({setBlockInfo, setBlockChainNumber}) => {
   const [blockJsonString, setBlockJsonString] = useState(null);
+  const [blockNumber, setBlockNumber] = useState(null)
 
   const fetchBlock = async () => {
-    const blockNumber = parseInt(document.getElementById('blockNumber').value);
-    const infuraAPIKey = document.getElementById('infuraAPIKey').value;
+    const infuraAPIKey = document.getElementById('infuraAPIKey').value; // make this like the block number input thing!!
     const provider = new ethers.InfuraProvider(
       'mainnet',
       infuraAPIKey
     )
-    let blockChainNumber = 1
 
     try {
       let blockObject
       if (!blockNumber) {
         blockObject = Block.fromBlockData(fixtureBlockData)
-        setBlockChainNumber(blockObject.header.number.toString())
+        setBlockChainNumber(Number(blockObject.header.number))
       } else {
-        blockChainNumber = blockNumber
-        setBlockChainNumber(blockChainNumber)
+        setBlockChainNumber(blockNumber)
         blockObject = await Block.fromJsonRpcProvider(provider, `0x${blockNumber.toString(16)}`)
         console.log(blockObject)
       }
@@ -54,7 +52,15 @@ const Inputs = ({setBlockInfo, setBlockChainNumber}) => {
       <input type='text' id='infuraAPIKey' name='infuraAPIKey' placeholder='Infura API Key'></input>
       <br/>
       <label htmlFor='blockNumber'>Block Number: </label>
-      <input type='text' id='blockNumber' name='blockNumber' placeholder='Block Number'></input>
+      <input
+        type='text'
+        id='blockNumber'
+        name='blockNumber'
+        placeholder='Block Number'
+        onInput={(event)=> {
+          setBlockNumber(parseInt(event.target.value, 10))
+        }}
+      />
       <br/>
       <button id='fetchBlock' onClick={fetchBlock}>Fetch Block</button>
     </div>
