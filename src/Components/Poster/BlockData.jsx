@@ -53,8 +53,10 @@ const BlockData = ({ blockInfo, blockChainNumberFromApp, blockPosition}) => {
     }
   }, [decodedBlock]);
 
-  console.log('Top-left corner coordinates:', { x: smallBlockPosition.left, y: Math.abs(smallBlockPosition.top) })
+  console.log('Top-left corner coordinates:', { x: smallBlockPosition.left, y: (smallBlockPosition.top) })
 
+
+  // The line that's supposed to connect the top left corner of the small block in the chain to the expanded block window
   const TopLeftLine = ({ x1, y1, x2, y2}) => {
       // pulling the location of the blockdata to use in drawing a line between the small block in the chain and the blockdata block
   useEffect(() => {
@@ -66,10 +68,10 @@ const BlockData = ({ blockInfo, blockChainNumberFromApp, blockPosition}) => {
   }, [blockWindowRef.current])
     return (
       <line
-        x1={smallBlockPosition.left}
-        y1={Math.abs(smallBlockPosition.top)}
-        x2={blockWindowRef.current?.getBoundingClientRect().left || 0}
-        y2={Math.abs(blockWindowRef.current?.getBoundingClientRect().top) || 0}
+        x1={(smallBlockPosition.left)}
+        y1={(smallBlockPosition.top)}
+        x2={blockWindowRef.current?.getBoundingClientRect().left}
+        y2={(blockWindowRef.current?.getBoundingClientRect().top)}
         style={{stroke: 'white', strokeWidth: 2}}
       />
     );
@@ -77,28 +79,28 @@ const BlockData = ({ blockInfo, blockChainNumberFromApp, blockPosition}) => {
 
   return (
     <>
-        <foreignObject
-          ref={blockWindowRef}
-          x={posterStartX + (posterStartX / scale)}
-          y={posterStartY + (posterStartY / scale)}
-          width={(800) / scale}
-          height={(1200) / scale}
-          transform={`scale(${scale})`}
-          style={{
-            cursor: isDragging ? 'grabbing' : 'grab',
-            border: '10px solid white',
-            background: 'black'
-          }}
-        >
-          <div xmlns="http://www.w3.org/1999/xhtml" className="block-data">
-            <Rlp rlpObject={decodedBlock} />
-          </div>
-        </foreignObject>
-        <text x={posterStartX+60} y={posterStartY+50} fill="white" fontSize="30">
-          Block {blockNumberTitle}
-        </text>
-        <image  width='1000' height='1000' x='50' y='150' href={Ethereum_Logo_2014} opacity='20%'/>
-        <TopLeftLine/>
+      <TopLeftLine/>
+      <foreignObject
+        ref={blockWindowRef}
+        x={posterStartX + (posterStartX / scale)}
+        y={posterStartY + (posterStartY / scale)}
+        width={(800) / scale}
+        height={(1200) / scale}
+        transform={`scale(${scale})`}
+        style={{
+          cursor: isDragging ? 'grabbing' : 'grab',
+          border: '10px solid white',
+          background: 'black'
+        }}
+      >
+        <div xmlns="http://www.w3.org/1999/xhtml" className="block-data">
+          <Rlp rlpObject={decodedBlock} />
+        </div>
+      </foreignObject>
+      <text x={posterStartX+60} y={posterStartY+50} fill="white" fontSize="30">
+        Block {blockNumberTitle}
+      </text>
+      <image  width='1000' height='1000' x='50' y='150' href={Ethereum_Logo_2014} opacity='20%'/>
     </>
   );
 };

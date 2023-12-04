@@ -79,42 +79,166 @@
     ],
     "attestationData": [
         {
-            "id": "",
-            "text": ""
+            "id": "slot",
+            "text": "the slot the attestation relates to"
         },
         {
-            "id": "",
-            "text": ""
+            "id": "index",
+            "text": "indices for attesting validators"
         },
         {
-            "id": "",
-            "text": ""
+            "id": "beacon_chain_root",
+            "text": "the root hash of the Beacon block containing this object"
         },
         {
-            "id": "",
-            "text": ""
+            "id": "source",
+            "text": "the last justified checkpoint"
         },
         {
-            "id": "",
-            "text": ""
+            "id": "target",
+            "text": "the latest epoch boundary block"
         }
     ],
     "execution_payload_header": [
         {
-            "id": "",
-            "text": ""
+            "id": "parent_hash",
+            "text": "hash of the parent block"
+        },
+        {
+            "id": "fee_recipient",
+            "text": "account address for paying transaction fees to"
+        },
+        {
+            "id": "state_root",
+            "text": "root hash for the global state after applying changes in this block"
+        },
+        {
+            "id": "recepits_root",
+            "text": "has of the transaction receipts trie"
+        },
+        {
+            "id": "logs_bloom",
+            "text": "data structure containing event logs"
+        },
+        {
+            "id": "prev_randao",
+            "text": "value used in random validator selection"
+        },
+        {
+            "id": "block_number",
+            "text": "the number of the current block"
+        },
+        {
+            "id": "gas_limit",
+            "text": "maximum gas allowed in this block"
+        },
+        {
+            "id": "gas_used",
+            "text": "the actual ammount of gas used in this block"
+        },
+        {
+            "id": "timestamp",
+            "text": "the block time"
+        },
+        {
+            "id": "extra_data",
+            "text": "arbitrary additional data as raw bytes"
+        },
+        {
+            "id": "base_fee_per_gas",
+            "text": "the base fee value"
+        },
+        {
+            "id": "block_hash",
+            "text": "hash of execution block"
+        },
+        {
+            "id": "tranasctions_root",
+            "text": "root hash of the transactions in the payload"
+        },
+        {
+            "id": "withdrawal_root",
+            "text": "root hash of the withdrawals in the payload"
         }
     ],
     "execution_payload": [
         {
-            "id": "",
-            "text": ""
+            "id": "parent_hash",
+            "text": "hash of the parent block"
+        },
+        {
+            "id": "fee_recipient",
+            "text": "account address for paying transaction fees to"
+        },
+        {
+            "id": "state_root",
+            "text": "root hash for the global state after applying changes in this block"
+        },
+        {
+            "id": "recepits_root",
+            "text": "has of the transaction receipts trie"
+        },
+        {
+            "id": "logs_bloom",
+            "text": "data structure containing event logs"
+        },
+        {
+            "id": "prev_randao",
+            "text": "value used in random validator selection"
+        },
+        {
+            "id": "block_number",
+            "text": "the number of the current block"
+        },
+        {
+            "id": "gas_limit",
+            "text": "maximum gas allowed in this block"
+        },
+        {
+            "id": "gas_used",
+            "text": "the actual ammount of gas used in this block"
+        },
+        {
+            "id": "timestamp",
+            "text": "the block time"
+        },
+        {
+            "id": "extra_data",
+            "text": "arbitrary additional data as raw bytes"
+        },
+        {
+            "id": "base_fee_per_gas",
+            "text": "the base fee value"
+        },
+        {
+            "id": "block_hash",
+            "text": "hash of execution block"
+        },
+        {
+            "id": "tranasctions",
+            "text": "list of transactions to be executed"
+        },
+        {
+            "id": "withdrawal",
+            "text": "list of withdrawal objects"
         }
     ],
     "withdrawals_list": [
         {
-            "id": "",
-            "text": ""
+            "id": "address",
+            "text": "account address that has withdrawn"
+        },
+        {
+            "id": "amount",
+            "text": "withdrawal amount"
+        },
+        {
+            "id": "index",
+            "text": "withdrawal index value"
+        },
+        {
+            "id": "validatorIndex",
+            "text": "validator index value"
         }
     ],
     "infoNotes": [
