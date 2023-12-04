@@ -1,6 +1,6 @@
-Turning the old setup into a vite project using react and JS. DONE
-
 New direction. Make the infographic poster, then pivot to the narrative one once we have the block data set up all good to go.
+
+Inforgraphic Poster - just display the block as an expanded block from the chain, then popup type windows on top of it displaying some particular notes about each part of the block
 
 The narrative idea - To show what looks a bit like the "screen" of a hacker who's exploring a block/transaction trace, to discover a vulterability or at least make sense of some kind of "event" that's happened in the web3 space.
 
@@ -22,32 +22,20 @@ DragAndDrop - parent component to call other elements of the poster within so th
 * all these are for the narrative style poster, work on this after we get the info-graphic set up first.
 
 FIXES:
-1. fixtureBlock isn't formatted correctly, need to get that in the right format so the initial block data shows up correctly before a block is fetched
-    1. the rlp method to fetch block in blockData module may be part of the problem. Look into this
-    2. maybe just don't use it?
-    3. could write some instructions at the app level describing the range of blocks and some fun ones to check out?
-2. fit the length of the BlockData display to the length of the text it's displaying
 3. Info elements
     1. draw boxes around the notes elements I know how to do this now!!! same set up as the block chain module!
     2. give background same color as poster background, then make 30% opacitiy
     3. maybe give text the same color as the element they're referencing? or somehow mark the colors in a cool way
+    4. also, draw a line from each section of the binary to the info window explaining what each element is.
+    5. make sure to render the text OUTSIDE of the rect element, but call them in the same <></> element so they move together.
+    6. also, make the background of the rect like, 30% opacity
 4. right now I'm getting errors for pre Merge blocks
     1. handle different ranges of block numbers differently depending on the updates having been done
     2. for instance, pre and post POS Merge (after 15537394 is post POS Merge)
 5. create a way to download the poster as an svg file!
 6. find a way to connect all four corners of the block in the block chain that's being examined, to the four corners of the expanded blockData (render them behind the blockData block!)
 
-Notes:
-1. update eth notes for eth.20 block!!!
-    1. Eth2.0 block for sure! make sure the info is up to date!
-    2. Update the staticText.json file with up to date notes about what each thing is FINISH UPDATING THIS!!!
-    3. also, draw a line from each section of the binary to the info window explaining what each element is.
+Eventual Stuff!
 2. narrative versus infographic style set up?
     1. infographic for sure first, then we can play with stuff!
     2. also, do the basic text style windows first! then we can play with graphics after talking to beatrice.
-3. the note text boxes can use the same kind of setup as the block chain boxes!!!
-    1. make sure to render the text OUTSIDE of the rect element, but call them in the same <></> element so they move together.
-    2. also, make the background of the rect like, 30% opacity
-4. do the same process to send the blockNumber to the BlockData module so it appears in the title after "Block"
-
-fix the friggin length of the block rect so it's always the right length for the blloooccckkk!!!
