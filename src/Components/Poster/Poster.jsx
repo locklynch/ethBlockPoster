@@ -24,14 +24,14 @@ const Poster = ({ blockInfo, blockChainNumberFromApp }) => {
   }
 
   const previewPoster = () => {
-    const svg = document.getElementById('poster-container').innerHTML;
+    const svg = posterRef.current.outerHTML;
     const encodedSVG = btoa(svg);
     const imgSrc = `data:image/svg+xml;base64,${encodedSVG}`;
     setSvgPreview(imgSrc)
   }
 
   const downloadSVG = () => {
-    const svg = document.getElementById('poster-container').innerHTML;
+    const svg = posterRef.current.outerHTML;
     const blob = new Blob([svg], { type: 'image/svg+xml'});
     const element = document.createElement("a");
     element.download = "poster.svg";
