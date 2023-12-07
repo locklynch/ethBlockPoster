@@ -13,6 +13,8 @@ BlockData - show the block accessed
 DynaimcTextBox - module that can be called to make a box around any component that wraps the component in the smallest sized box of 1px width outline (might not need, might be able to just do in CSS but it seemed like this was hard to do in SVG automatically?)
 BlockChain - a depiction of the block chain with the second from the top block being the block number selected by the user (and block above being number-1, and blocks below being number+1, +2, +3, etc...)
 DragAndDrop - parent component to call other elements of the poster within so they can be moved around the poster, to allow custom formatting by the user
+ResizeAndScrollHelper - helper function to make ya life easier when drawing dynamic lines between stuff
+SvgToBase64 - helper function to hopefully make the svg image asset download correctly (STILL WORKING ON THIS)
 
 *TransactionData - show a transaction inside the block being accessed
 *GasFlowChart - a visual of the gas expendetures in the block, isolating relevant gas usage involved in the transaction
@@ -26,16 +28,16 @@ FIXES:
     1. draw boxes around the notes elements I know how to do this now!!! same set up as the block chain module!
     2. give background same color as poster background, then make 30% opacitiy
     3. maybe give text the same color as the element they're referencing? or somehow mark the colors in a cool way
-    4. also, draw a line from each section of the binary to the info window explaining what each element is. It Works!! Just don't scroll...
-        1. fix the scrolling issue lol
-        2. maybe make lines connecting all the coorrnnerrrss!!!
+    4. also, draw a line from each section of the binary to the info window explaining what each element is. It Works!! And Scrolling doesn't affect it now!
+        1. fix the scrolling issue lol - DONE!
+        2. maybe make lines connecting all the coorrnnerrrss!!! - work on this after notes stuff done
     5. make sure to render the text OUTSIDE of the rect element, but call them in the same <></> element so they move together.
     6. also, make the background of the rect like, 30% opacity
 4. right now I'm getting errors for pre Merge blocks
     1. handle different ranges of block numbers differently depending on the updates having been done
     2. for instance, pre and post POS Merge (after 15537394 is post POS Merge)
-5. create a way to download the poster as an svg file!
-6. find a way to connect all four corners of the block in the block chain that's being examined, to the four corners of the expanded blockData (render them behind the blockData block!)
+5. create a way to download the poster as an svg file! - it downloads but it looks all hamajang
+    1. apparently we might need to convert the svg asset to base64 then inject that back into the image element to make the svg asset show up in the download. I made a helper for that, but it's hot garbage right now and i don't understand it well enough to fix it yet.
 
 Eventual Stuff!
 2. narrative versus infographic style set up?

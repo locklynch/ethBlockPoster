@@ -4,6 +4,7 @@ import React from 'react';
 
 
 const TopLeftLine = ({fromRect, toRect, posterRect}) => {
+    // console.log((fromRect))
     if (!fromRect || !toRect || !posterRect) {
         return
     }

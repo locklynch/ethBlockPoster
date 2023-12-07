@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import Ethereum_Logo_2014 from '../../assets/Ethereum_logo_2014.svg'
+import useResizeAndScrollEffect from './ResizeAndScrollHelper';
 
 const colorPalette = [
   '#FFD1DC', // Light Pink
@@ -31,30 +32,24 @@ const Rlp = ({ rlpObject, colorIndex = 0, parentKey='' }) => {
 const BlockData = ({ blockInfo, blockChainNumberFromApp, setBlockPosition}) => {
   const blockNumberTitle = blockChainNumberFromApp
   const { decodedBlock } = blockInfo
+
   // block poster starting location
   const posterStartX = 180
   const posterStartY = 30
+  
   const scale = 0.20
   const [isDragging] = useState(false);
   const [contentHeight, setContentHeight] = useState(1200);
-
+  const blockDataRef = useRef(null)
   const textRef = useRef(null);
 
-  // make the height of the BlockData window the height of the blockInfo
-  useEffect(() => {
-    const handleResize = () => {
-      if (textRef.current) {
-        const rect = textRef.current.getBoundingClientRect();
-        setContentHeight(rect.height)
-        setBlockPosition(rect)
-      };
-    }
-    handleResize();
-    // Add event listener
-    window.addEventListener('resize', handleResize);
+  useResizeAndScrollEffect(blockDataRef, setBlockPosition)
 
-    // Remove event listener on cleanup
-    return () => window.removeEventListener('resize', handleResize);
+  useEffect(() => {
+    if (textRef.current) {
+      const rect = textRef.current.getBoundingClientRect();
+      setContentHeight(rect.height)
+    };
   }, [blockInfo]);
 
   return (
@@ -62,20 +57,22 @@ const BlockData = ({ blockInfo, blockChainNumberFromApp, setBlockPosition}) => {
       transform={`translate(${posterStartX} ${posterStartY})`}
     >
       <rect
-        width={(800)}
-        height={(contentHeight+4)}
+        width={800}
+        height={contentHeight+4}
         stroke='white'
         fill='black'
         strokeWidth='2'
       />
       <foreignObject
-      // ref={blockWindowRef} // topLeftLine stuff!
-        width={(800)/scale}
-        height={(contentHeight)/scale}
+        ref={blockDataRef}
+        width={800/scale}
+        height={contentHeight/scale}
         transform={`scale(${scale})`}
-        
       >
-        <div ref={textRef} xmlns="http://www.w3.org/1999/xhtml" className="block-data">
+        <div
+          ref={textRef}
+          xmlns="http://www.w3.org/1999/xhtml"
+          className="block-data">
           <Rlp rlpObject={decodedBlock} />
         </div>
       </foreignObject>
