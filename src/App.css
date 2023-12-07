@@ -1,17 +1,23 @@
 .poster {
-  padding: 10px;
-  /* display: flex; */
-  /* justify-content: center; */
-  /* align-items: center; */
-  /* height: 100vh; */
+  padding-left: 100px;
 }
 
-.poster-container {
-  width: 100%; /* You can adjust this value as needed */
+.fetchBlock {
+  background-color: rgba(75, 75, 75, 0.205);
 }
 
-.block {
-  word-wrap: break-word;
-  max-width: 600px;
+.downloadSVG {
+  background-color: rgba(75, 75, 75, 0.205);
+}
 
+.inputs {
+  padding-left: 20px;
+}
+
+.blockInfo {
+  padding-left: 50px;
+}
+
+.instructions {
+  padding-left: 20px;
 }

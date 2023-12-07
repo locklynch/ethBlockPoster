@@ -3,7 +3,7 @@
 // resizing and scrolling for the lines between windows
 
 // NOTE!!!!!!!
-// make sure to declare const targetBlockRef = useRef(null)
+// make sure to declare const targetBlockRef = useRef(null) at the top level of the module
 // and attach the ref to the correct element in the module you import it to!
 
 import { useEffect } from 'react';
@@ -27,7 +27,7 @@ const useResizeAndScrollEffect = (targetBlockRef, setBlockPosition) => {
         const updatedRect = {
           top: originalRect.top + scrolledAmount,
           right: originalRect.right,
-          bottom: originalRect.bottom,
+          bottom: originalRect.bottom + scrolledAmount,
           left: originalRect.left,
           width: originalRect.width,
           height: originalRect.height,

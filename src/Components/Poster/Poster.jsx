@@ -1,9 +1,10 @@
 // Poster.jsx
+
 import React, { useState, useRef, useEffect } from 'react';
 import BlockData from './BlockData';
 import { DrapAndDropComponent } from './DragAndDrop';
 import BlockChain from './BlockChain';
-import TopLeftLine from './TopLeftLine';
+import Lines from './Lines';
 import NotesLayer from './NotesLayer';
 import useResizeAndScrollEffect from './ResizeAndScrollHelper';
 
@@ -44,7 +45,7 @@ const Poster = ({ blockInfo, blockChainNumberFromApp }) => {
           <DrapAndDropComponent>
             {blockChainNumberFromApp && <BlockChain blockChainNumberFromApp={blockChainNumberFromApp} setBlockPosition={setFromRect}/>}
           </DrapAndDropComponent>
-          <TopLeftLine fromRect={fromRect} toRect={toRect} posterRect={posterRect}/>
+          <Lines fromRect={fromRect} toRect={toRect} posterRect={posterRect}/>
           <DrapAndDropComponent>
             {blockInfo && blockChainNumberFromApp && <BlockData blockInfo={blockInfo} blockChainNumberFromApp={blockChainNumberFromApp} setBlockPosition={setToRect}/>}
           </DrapAndDropComponent>
@@ -52,7 +53,7 @@ const Poster = ({ blockInfo, blockChainNumberFromApp }) => {
         </svg>
       </div>
       <br/>
-      <button id='downloadSVG' onClick={downloadSVG}>Download Poster</button>
+      <button id='downloadSVG' className='downloadSVG' onClick={downloadSVG}>Download Poster</button>
     </div>
   );
 };

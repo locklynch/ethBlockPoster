@@ -46,7 +46,7 @@ const Inputs = ({setBlockInfo, setBlockChainNumber}) => {
 
   return (
     <>
-    <div id='inputs'>
+    <div id='inputs' className='inputs'>
       <h2>Inputs</h2>
       <label htmlFor='infuraAPIKey'>Infura API Key: </label>
       <input type='text' id='infuraAPIKey' name='infuraAPIKey' placeholder='Infura API Key'></input>
@@ -62,9 +62,9 @@ const Inputs = ({setBlockInfo, setBlockChainNumber}) => {
         }}
       />
       <br/>
-      <button id='fetchBlock' onClick={fetchBlock}>Fetch Block</button>
+      <button id='fetchBlock' className='fetchBlock' onClick={fetchBlock}>Fetch Block</button>
     </div>
-    <div id='blockInfo'>
+    <div id='blockInfo' className='blockInfo'>
       <h2>Block Info</h2>
       <pre id='block' style={{maxWidth: '600px', wordWrap: 'break-word'}}>{blockJsonString}</pre>
     </div>

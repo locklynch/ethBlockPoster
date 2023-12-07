@@ -39,7 +39,7 @@ const BlockData = ({ blockInfo, blockChainNumberFromApp, setBlockPosition}) => {
   
   const scale = 0.20
   const [isDragging] = useState(false);
-  const [contentHeight, setContentHeight] = useState(1200);
+  const [contentHeight, setContentHeight] = useState(1045);
   const blockDataRef = useRef(null)
   const textRef = useRef(null);
 
@@ -62,6 +62,7 @@ const BlockData = ({ blockInfo, blockChainNumberFromApp, setBlockPosition}) => {
         stroke='white'
         fill='black'
         strokeWidth='2'
+        fillOpacity={'80%'}
       />
       <foreignObject
         ref={blockDataRef}
@@ -76,11 +77,21 @@ const BlockData = ({ blockInfo, blockChainNumberFromApp, setBlockPosition}) => {
           <Rlp rlpObject={decodedBlock} />
         </div>
       </foreignObject>
+      <rect
+        stroke='white'
+        strokeWidth={'2'}
+        x={55}
+        y={22.5}
+        width={230}
+        height={35}
+
+      />
       <text
         x={60}
         y={50}
         fill="white"
-        fontSize="30">
+        fontSize="30"
+      >
         Block {blockNumberTitle}
       </text>
       <image

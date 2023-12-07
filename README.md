@@ -10,9 +10,9 @@ Inputs - all the controls for the poster, right now it's just API key and Block 
 Instructions - a quick readme on how to work it, and what they can do, and some notable blocks to try check out
 Poster - Display for the poster.
 BlockData - show the block accessed
-DynaimcTextBox - module that can be called to make a box around any component that wraps the component in the smallest sized box of 1px width outline (might not need, might be able to just do in CSS but it seemed like this was hard to do in SVG automatically?)
 BlockChain - a depiction of the block chain with the second from the top block being the block number selected by the user (and block above being number-1, and blocks below being number+1, +2, +3, etc...)
 DragAndDrop - parent component to call other elements of the poster within so they can be moved around the poster, to allow custom formatting by the user
+Lines - the lines connecting the block in the chain to the expanded block data window
 ResizeAndScrollHelper - helper function to make ya life easier when drawing dynamic lines between stuff
 SvgToBase64 - helper function to hopefully make the svg image asset download correctly (STILL WORKING ON THIS)
 
