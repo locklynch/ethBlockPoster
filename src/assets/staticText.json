@@ -106,11 +106,11 @@
         },
         {
             "id": "fee_recipient",
-            "text": "account address for paying transaction fees to"
+            "text": "account address who recieves transaction fees"
         },
         {
             "id": "state_root",
-            "text": "root hash for the global state after applying changes in this block"
+            "text": "root hash of global state afterblock changes"
         },
         {
             "id": "recepits_root",
@@ -172,7 +172,7 @@
         },
         {
             "id": "state_root",
-            "text": "root hash for the global state after applying changes in this block"
+            "text": "root hash of global state afterblock changes"
         },
         {
             "id": "recepits_root",

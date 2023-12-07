@@ -23,25 +23,25 @@ const NotesLayer = (blockInfo) => {
           <rect
             stroke="white"
             strokeWidth={2}
-            x={"345"}
-            y={85+(40 * index)}
-            width={contentWidth}
+            x={"500"}
+            y={200+(60 * index)}
+            width={contentWidth+30}
             height={40}
             fill="black"
             fillOpacity={'50%'}
           />
           <text
             id={'id-${$note.index}'}
-            x="350"
-            y={100 + (40 * index)}
+            x="510"
+            y={215 + (60 * index)}
             fill="white"
             fontSize="16"
           >{note.id}:</text>
           <text
             ref={textRef}
             id='note-{$note.index}'
-            x="350"
-            y={120 + (40 * index)}
+            x="520"
+            y={235 + (60 * index)}
             fill="white"
             fontSize="16"
           >{note.text}</text>

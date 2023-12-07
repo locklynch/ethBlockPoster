@@ -34,10 +34,10 @@ const BlockData = ({ blockInfo, blockChainNumberFromApp, setBlockPosition}) => {
   const { decodedBlock } = blockInfo
 
   // block poster starting location
-  const posterStartX = 180
-  const posterStartY = 30
+  const posterStartX = 120
+  const posterStartY = 80
   
-  const scale = 0.20
+  const scale = 0.22
   const [isDragging] = useState(false);
   const [contentHeight, setContentHeight] = useState(1045);
   const blockDataRef = useRef(null)
@@ -62,7 +62,7 @@ const BlockData = ({ blockInfo, blockChainNumberFromApp, setBlockPosition}) => {
         stroke='white'
         fill='black'
         strokeWidth='2'
-        fillOpacity={'80%'}
+        fillOpacity={'70%'}
       />
       <foreignObject
         ref={blockDataRef}
@@ -80,15 +80,15 @@ const BlockData = ({ blockInfo, blockChainNumberFromApp, setBlockPosition}) => {
       <rect
         stroke='white'
         strokeWidth={'2'}
-        x={55}
-        y={22.5}
+        x={275}
+        y={-47.5}
         width={230}
         height={35}
 
       />
       <text
-        x={60}
-        y={50}
+        x={280}
+        y={-20}
         fill="white"
         fontSize="30"
       >
