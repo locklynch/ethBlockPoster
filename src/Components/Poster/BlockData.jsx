@@ -29,7 +29,7 @@ const Rlp = ({ rlpObject, colorIndex = 0, parentKey='' }) => {
   })
 }
 
-const BlockData = ({ blockInfo, blockChainNumberFromApp, setBlockPosition}) => {
+const BlockData = ({ blockInfo, blockChainNumberFromApp, setBlockPosition, blockScale}) => {
   const blockNumberTitle = blockChainNumberFromApp
   const { decodedBlock } = blockInfo
 
@@ -37,7 +37,8 @@ const BlockData = ({ blockInfo, blockChainNumberFromApp, setBlockPosition}) => {
   const posterStartX = 120
   const posterStartY = 80
   
-  const scale = 0.22
+  // block scale - make this changable!!!
+  let scale = blockScale
   const [isDragging] = useState(false);
   const [contentHeight, setContentHeight] = useState(1045);
   const blockDataRef = useRef(null)
@@ -50,7 +51,7 @@ const BlockData = ({ blockInfo, blockChainNumberFromApp, setBlockPosition}) => {
       const rect = textRef.current.getBoundingClientRect();
       setContentHeight(rect.height)
     };
-  }, [blockInfo]);
+  }, [blockInfo, blockScale]);
 
   return (
     <g

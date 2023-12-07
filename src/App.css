@@ -6,7 +6,18 @@
   background-color: rgba(75, 75, 75, 0.205);
 }
 
+.previewPoster {
+  background-color: rgba(75, 75, 75, 0.205);
+  margin-top: 50px;
+  margin-right: 50px;
+}
+
 .downloadSVG {
+  background-color: rgba(75, 75, 75, 0.205);
+  margin-top: 50px;
+}
+
+.setBlockScale {
   background-color: rgba(75, 75, 75, 0.205);
 }
 

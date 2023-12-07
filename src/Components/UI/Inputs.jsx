@@ -49,7 +49,7 @@ const Inputs = ({setBlockInfo, setBlockChainNumber}) => {
     <div id='inputs' className='inputs'>
       <h2>Inputs</h2>
       <label htmlFor='infuraAPIKey'>Infura API Key: </label>
-      <input type='text' id='infuraAPIKey' name='infuraAPIKey' placeholder='Infura API Key'></input>
+      <input type='text' id='infuraAPIKey' name='infuraAPIKey' placeholder='Infura API Key'/>
       <br/>
       <label htmlFor='blockNumber'>Block Number: </label>
       <input
