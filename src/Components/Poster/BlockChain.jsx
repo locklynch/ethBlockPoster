@@ -1,8 +1,9 @@
 // block chain representation for display on the poster
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import Ethereum_Logo_2014 from '../../assets/Ethereum_logo_2014.svg'
 import useResizeAndScrollEffect from './ResizeAndScrollHelper';
+import EthLogo from './EthLogo';
 
 const BlockChain = ( { blockChainNumberFromApp, setBlockPosition }) => {
   const number = blockChainNumberFromApp
@@ -29,7 +30,15 @@ const BlockChain = ( { blockChainNumberFromApp, setBlockPosition }) => {
             stroke="white"
             strokeWidth="2"
           />
-          <image  key={'smallethlogo'+index} width='100' height='100' x='40' y={40+index*170} href={Ethereum_Logo_2014} opacity='10%'/>
+          <svg
+            key={'smallethlogo'+index}
+            x='-410'
+            y={40+index*170}
+            opacity={'50%'}
+            height={100}
+          >
+            <EthLogo/>
+          </svg>
           <text key={'blocktext'+index} x="90" y={70+index*170} fill="white" textAnchor="middle" dy=".3em" style={{ fill: "white", fontSize: "17"}}>
             block
           </text>

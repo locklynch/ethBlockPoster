@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Ethereum_Logo_2014 from '../../assets/Ethereum_logo_2014.svg'
 import useResizeAndScrollEffect from './ResizeAndScrollHelper';
+import EthLogo from './EthLogo';
 
 const colorPalette = [
   '#FFD1DC', // Light Pink
@@ -101,14 +102,15 @@ const BlockData = ({ blockInfo, blockChainNumberFromApp, setBlockPosition, block
       >
         Block {blockNumberTitle}
       </text>
-      <image
+      <svg
         overflow={'hidden'}
         width='600'
         height={contentHeight}
         x='100'
         y='0'
-        href={Ethereum_Logo_2014}
-        opacity='20%'/>
+        opacity='20%'>
+          <EthLogo/>
+        </svg>
     </g>
   );
 };
