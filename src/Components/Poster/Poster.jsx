@@ -1,10 +1,10 @@
 // Poster.jsx
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import BlockData from './BlockData';
 import { DrapAndDropComponent } from './DragAndDrop';
 import BlockChain from './BlockChain';
-import Lines from './Lines';
+import Lines from './LinesToBlock';
 import NotesLayer from './NotesLayer';
 import useResizeAndScrollEffect from './ResizeAndScrollHelper';
 
@@ -13,7 +13,7 @@ const Poster = ({ blockInfo, blockChainNumberFromApp }) => {
   const [toRect, setToRect] = useState ()
   const [posterRect, setPosterRect] = useState()
   const posterRef = useRef(null)
-  const [blockScale, setBlockScale] = useState(0.22)
+  const [blockScale, setBlockScale] = useState(0.27)
   const [svgPreview, setSvgPreview] = useState()
 
   useResizeAndScrollEffect(posterRef, setPosterRect)
@@ -50,11 +50,16 @@ const Poster = ({ blockInfo, blockChainNumberFromApp }) => {
         <svg
           ref={posterRef}
           key="posterWindow"
+          className='poster-itself'
           width="1000"
           height="1414"
           viewBox="0 0 1000 1414"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
+          style={{
+            fontFamily: 'system-ui',
+            lineHeight: '1'
+          }}
         >
           <rect key="renderWindow" width="1000" height="1414" fill="#1E1E1E"/>
           <DrapAndDropComponent>
@@ -76,7 +81,7 @@ const Poster = ({ blockInfo, blockChainNumberFromApp }) => {
       </div>
       <br/>
       <label htmlFor='setBlockScale'>Set Block Scale: </label>
-      <input type='number' id='setBlockScale' name='setBlockScale' placeholder='0.22'/>
+      <input type='number' id='setBlockScale' name='setBlockScale' placeholder='0.27'/>
       <button id='setBlockScale' className='setBlockScale' onClick={sendBlockScale}>SetBlockScale</button>
       <br/>
       <button id='previewPoster' className='previewPoster' onClick={previewPoster}>Preview Poster</button>

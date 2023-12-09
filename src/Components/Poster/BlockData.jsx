@@ -18,13 +18,18 @@ const Rlp = ({ rlpObject, colorIndex = 0, parentKey='' }) => {
     const hexString = Buffer.from(rlpObject).toString('hex')
     const color = colorPalette[colorIndex % colorPalette.length]
     return (
-      <span style={{ color, overflowWrap: 'break-word' }}>{hexString}</span>
+      <span style={{ color, overflowWrap: 'break-word'}}>{hexString}</span>
     )
   }
   return rlpObject.map((item, index) => {
     const key = `${parentKey}-${index}`
     return (
-      <Rlp rlpObject={item} colorIndex={colorIndex + index} key={key} parentKey={key}></Rlp>
+      <Rlp
+        rlpObject={item}
+        colorIndex={colorIndex + index}
+        key={key}
+        parentKey={key}
+      />
     )
   })
 }
@@ -74,7 +79,8 @@ const BlockData = ({ blockInfo, blockChainNumberFromApp, setBlockPosition, block
         <div
           ref={textRef}
           xmlns="http://www.w3.org/1999/xhtml"
-          className="block-data">
+          className="block-data"
+        >
           <Rlp rlpObject={decodedBlock} />
         </div>
       </foreignObject>

@@ -1,5 +1,13 @@
+body {
+  font-family: system-ui, sans-serif;
+}
+
 .poster {
   padding-left: 100px;
+}
+
+.poster-itself {
+  font-family: 'system-ui', sans-serif;
 }
 
 .fetchBlock {
