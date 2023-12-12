@@ -11,7 +11,6 @@ const BlockChain = ( { blockChainNumberFromApp, setBlockPosition }) => {
   const mainBlockNumber = number;
   const nextBlockNumbers = Array.from({length: 7}, (_, index) => mainBlockNumber + index);
   const blockNumberArray = [prevBlockNumber, ...nextBlockNumbers]
-  console.log(blockNumberArray)
 
   useResizeAndScrollEffect(targetBlockRef, setBlockPosition)
 
