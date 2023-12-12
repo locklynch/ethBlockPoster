@@ -13,6 +13,7 @@ BlockData - show the block accessed
 BlockChain - a depiction of the block chain with the second from the top block being the block number selected by the user (and block above being number-1, and blocks below being number+1, +2, +3, etc...)
 DragAndDrop - parent component to call other elements of the poster within so they can be moved around the poster, to allow custom formatting by the user
 Lines - the lines connecting the block in the chain to the expanded block data window
+NoteLine - line that connects the binary in the blockData module to the appropriate Note in the NotesLayer
 ResizeAndScrollHelper - helper function to make ya life easier when drawing dynamic lines between stuff
 SvgToBase64 - helper function to hopefully make the svg image asset download correctly (STILL WORKING ON THIS)
 
@@ -25,10 +26,11 @@ SvgToBase64 - helper function to hopefully make the svg image asset download cor
 
 FIXES:
 1. Info elements
-    2. also, import the blockinfo to the noteslayer and pull each property individually to display in the note box
-    3. then, position the noteslayer programmatically so they appear around the correct in the blockdata expanded block
+    2. also, import the blockJsonString to the noteslayer and pull each property individually to display in the note box
+    3. then, position the noteslayer programmatically so they appear around the correct in the blockdata expanded block HALF DONE!
         1. half done, got them to stagger at least
     4. then, make a line connecting the beginning of that section of binary, with the edge of the note box that contains the information about that data
+        1. make a new module for this, call it NoteLine DONE
     5. then!! change staticText asset to reflect the key value pairs as they exist in the blockdata we get
         1. done! but it's got some old eth 1.0 artifacts in there, might wanna take these notes out later
     6. maybe give text the same color as the element they're referencing? or somehow mark the colors in a cool way
