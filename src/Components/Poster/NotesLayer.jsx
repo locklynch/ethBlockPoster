@@ -6,11 +6,12 @@ import { execution_payload_header } from '../../assets/staticText.json';
 
 const NotesLayer = (blockInfo) => {
   const [contentWidth, setContentWidth] = useState(100);
-  let textRef = useRef(null)
+  const textRefs = useRef(execution_payload_header.map (() => React.createRef()));
 
   useEffect(() => {
     const newWidths = {};
     execution_payload_header.forEach((note, index) => {
+      const textRef = textRefs.current[index]
       if (textRef.current) {
         const rect = textRef.current.getBoundingClientRect();
         newWidths[index] = rect.width + 30
@@ -46,7 +47,7 @@ const NotesLayer = (blockInfo) => {
             fontSize="16"
           >{note.id}:</text>
           <text
-            ref={textRef}
+            ref={textRefs.current[index]}
             id='note-{$note.index}'
             x="520"
             y={235 + (60 * index)}

@@ -20,7 +20,8 @@ const Lines = ({fromRect, toRect, posterRect}) => {
           x2={(toRect.left-posterRect.left)}
           y2={(toRect.top-posterRect.top)}
           stroke='white'
-          strokeWidth={2}
+          strokeWidth={3}
+          opacity={'50%'}
         />
         <line
           id='top-right-line'
@@ -29,7 +30,8 @@ const Lines = ({fromRect, toRect, posterRect}) => {
           x2={(toRect.right-posterRect.left)}
           y2={(toRect.top-posterRect.top)}
           stroke='white'
-          strokeWidth={2}
+          strokeWidth={3}
+          opacity={'50%'}
         />
         <line
           id='bottom-left-line'
@@ -38,7 +40,8 @@ const Lines = ({fromRect, toRect, posterRect}) => {
           x2={(toRect.left-posterRect.left)}
           y2={(toRect.bottom-posterRect.top)}
           stroke='white'
-          strokeWidth={2}
+          strokeWidth={3}
+          opacity={'50%'}
         />
         <line
           id='bottom-right-line'
@@ -47,7 +50,8 @@ const Lines = ({fromRect, toRect, posterRect}) => {
           x2={(toRect.right-posterRect.left)}
           y2={(toRect.bottom-posterRect.top)}
           stroke='white'
-          strokeWidth={2}
+          strokeWidth={3}
+          opacity={'50%'}
         />
       </g>
     );

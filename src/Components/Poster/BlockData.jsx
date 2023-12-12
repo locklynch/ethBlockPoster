@@ -40,7 +40,7 @@ const BlockData = ({ blockInfo, blockChainNumberFromApp, setBlockPosition, block
   const { decodedBlock } = blockInfo
 
   // block poster starting location
-  const posterStartX = 120
+  const posterStartX = 130
   const posterStartY = 80
   
   // block scale - make this changable!!!

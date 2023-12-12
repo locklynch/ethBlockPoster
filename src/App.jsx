@@ -10,7 +10,7 @@ function App() {
 
   const handleBlockNumberFromInput = (blockChainNumber) => {
     setBlockChainNumber(blockChainNumber)
-    console.log(blockChainNumber)
+    // console.log(blockChainNumber)
   }
 
   return (

@@ -25,7 +25,6 @@ SvgToBase64 - helper function to hopefully make the svg image asset download cor
 
 FIXES:
 1. Info elements
-    1. the length of the boxes isn't different for each box, gotta call the function independantly for each iteration of the mapping?
     2. also, import the blockinfo to the noteslayer and pull each property individually to display in the note box
     3. then, position the noteslayer programmatically so they appear around the correct in the blockdata expanded block
     4. then, make a line connecting the beginning of that section of binary, with the edge of the note box that contains the information about that data
