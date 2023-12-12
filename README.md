@@ -27,8 +27,10 @@ FIXES:
 1. Info elements
     2. also, import the blockinfo to the noteslayer and pull each property individually to display in the note box
     3. then, position the noteslayer programmatically so they appear around the correct in the blockdata expanded block
+        1. half done, got them to stagger at least
     4. then, make a line connecting the beginning of that section of binary, with the edge of the note box that contains the information about that data
     5. then!! change staticText asset to reflect the key value pairs as they exist in the blockdata we get
+        1. done! but it's got some old eth 1.0 artifacts in there, might wanna take these notes out later
     6. maybe give text the same color as the element they're referencing? or somehow mark the colors in a cool way
 2. right now I'm getting errors for pre Merge blocks
     1. handle different ranges of block numbers differently depending on the updates having been done

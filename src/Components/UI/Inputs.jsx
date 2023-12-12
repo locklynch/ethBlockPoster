@@ -6,12 +6,12 @@ import { RLP } from '@ethereumjs/rlp'
 import fixtureBlockData from '../../assets/fixtureBlock.json'
 
 
-const Inputs = ({setBlockInfo, setBlockChainNumber}) => {
-  const [blockJsonString, setBlockJsonString] = useState(null);
+const Inputs = ({setBlockInfo, setBlockChainNumber, setBlockJsonString, blockJsonString}) => {
+  // const [blockJsonString, setBlockJsonString] = useState(null);
   const [blockNumber, setBlockNumber] = useState(null)
 
   const fetchBlock = async () => {
-    const infuraAPIKey = document.getElementById('infuraAPIKey').value; // make this like the block number input thing!!
+    const infuraAPIKey = document.getElementById('infuraAPIKey').value;
     const provider = new ethers.InfuraProvider(
       'mainnet',
       infuraAPIKey

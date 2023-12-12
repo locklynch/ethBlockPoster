@@ -90,17 +90,17 @@ const BlockData = ({ blockInfo, blockChainNumberFromApp, setBlockPosition, block
       <rect
         stroke='white'
         strokeWidth={'2'}
-        x={275}
-        y={-47.5}
-        width={230}
-        height={35}
+        x={265}
+        y={-54}
+        width={300}
+        height={40}
 
       />
       <text
-        x={280}
+        x={270}
         y={-20}
         fill="white"
-        fontSize="30"
+        fontSize="40"
       >
         Block {blockNumberTitle}
       </text>

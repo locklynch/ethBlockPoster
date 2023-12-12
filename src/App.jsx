@@ -7,6 +7,7 @@ import './App.css';
 function App() {
   const [blockInfo, setBlockInfo] = useState();
   const [blockChainNumber, setBlockChainNumber] = useState();
+  const [blockJsonString, setBlockJsonString] = useState(null);
 
   const handleBlockNumberFromInput = (blockChainNumber) => {
     setBlockChainNumber(blockChainNumber)
@@ -16,9 +17,16 @@ function App() {
   return (
     <>
       <Instructions/>
-      <Poster blockChainNumberFromApp={blockChainNumber} blockInfo = {blockInfo}/>
+      <Poster
+        blockChainNumberFromApp={blockChainNumber}
+        blockInfo = {blockInfo}
+        blockJsonString={blockJsonString}/>
       <br/>
-      <Inputs setBlockChainNumber={handleBlockNumberFromInput} setBlockInfo={setBlockInfo}/>
+      <Inputs
+        setBlockChainNumber={handleBlockNumberFromInput}
+        setBlockInfo={setBlockInfo}
+        setBlockJsonString={setBlockJsonString}
+        blockJsonString={blockJsonString}/>
       <br/>
     </>
   );
