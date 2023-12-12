@@ -24,22 +24,20 @@ SvgToBase64 - helper function to hopefully make the svg image asset download cor
 * all these are for the narrative style poster, work on this after we get the info-graphic set up first.
 
 FIXES:
-3. Info elements
-    1. draw boxes around the notes elements I know how to do this now!!! same set up as the block chain module!
-    2. give background same color as poster background, then make 30% opacitiy
-    3. maybe give text the same color as the element they're referencing? or somehow mark the colors in a cool way
-    4. also, draw a line from each section of the binary to the info window explaining what each element is. It Works!! And Scrolling doesn't affect it now!
-        1. fix the scrolling issue lol - DONE!
-        2. maybe make lines connecting all the coorrnnerrrss!!! - work on this after notes stuff done
-    5. make sure to render the text OUTSIDE of the rect element, but call them in the same <></> element so they move together.
-    6. also, make the background of the rect like, 30% opacity
-4. right now I'm getting errors for pre Merge blocks
+1. Info elements
+    1. the length of the boxes isn't different for each box, gotta call the function independantly for each iteration of the mapping?
+    2. also, import the blockinfo to the noteslayer and pull each property individually to display in the note box
+    3. then, position the noteslayer programmatically so they appear around the correct in the blockdata expanded block
+    4. then, make a line connecting the beginning of that section of binary, with the edge of the note box that contains the information about that data
+    5. then!! change staticText asset to reflect the key value pairs as they exist in the blockdata we get
+    6. maybe give text the same color as the element they're referencing? or somehow mark the colors in a cool way
+2. right now I'm getting errors for pre Merge blocks
     1. handle different ranges of block numbers differently depending on the updates having been done
     2. for instance, pre and post POS Merge (after 15537394 is post POS Merge)
-5. create a way to download the poster as an svg file! - it downloads but it looks all hamajang
-    1. apparently we might need to convert the svg asset to base64 then inject that back into the image element to make the svg asset show up in the download. I made a helper for that, but it's hot garbage right now and i don't understand it well enough to fix it yet.
-
-Eventual Stuff!
-2. narrative versus infographic style set up?
-    1. infographic for sure first, then we can play with stuff!
-    2. also, do the basic text style windows first! then we can play with graphics after talking to beatrice.
+    3. could make conditional statements for ranges and use different apis for each range? after getting the noteslayer stuff done, try use ethers for pre merge stuff?
+3. Visual Options
+    1. include blockdata in notes boxes or not
+    2. include blockchain or not
+    3. include notes in noteslayer or not
+    4. if block data in notes boxes and noteslayer notes not included, then remove the noteslayer completely
+    5. different color palettes.

@@ -6,15 +6,23 @@ import { execution_payload_header } from '../../assets/staticText.json';
 
 const NotesLayer = (blockInfo) => {
   const [contentWidth, setContentWidth] = useState(100);
-  const textRef = useRef(null)
+  let textRef = useRef(null)
 
   useEffect(() => {
-    if (textRef.current) {
-      const rect = textRef.current.getBoundingClientRect();
-      setContentWidth(rect.width)
-      // console.log(rect)
-    };
-  }, []);
+    const newWidths = {};
+    execution_payload_header.forEach((note, index) => {
+      if (textRef.current) {
+        const rect = textRef.current.getBoundingClientRect();
+        newWidths[index] = rect.width + 30
+        // console.log(newWidths)
+      }
+    });
+    setContentWidth(newWidths);
+    // if (textRef.current) {
+    //   const rect = textRef.current.getBoundingClientRect();
+    //   setContentWidth(rect.width)
+    // };
+  }, [blockInfo]);
 
   return (
     <g>
@@ -25,7 +33,7 @@ const NotesLayer = (blockInfo) => {
             strokeWidth={2}
             x={"500"}
             y={200+(60 * index)}
-            width={contentWidth+30}
+            width={contentWidth[index]}
             height={40}
             fill="black"
             fillOpacity={'50%'}

@@ -64,7 +64,7 @@ const BlockData = ({ blockInfo, blockChainNumberFromApp, setBlockPosition, block
       transform={`translate(${posterStartX} ${posterStartY})`}
     >
       <rect
-        width={800}
+        width={803}
         height={contentHeight+4}
         stroke='white'
         fill='black'
@@ -72,6 +72,8 @@ const BlockData = ({ blockInfo, blockChainNumberFromApp, setBlockPosition, block
         fillOpacity={'70%'}
       />
       <foreignObject
+        x={7}
+        y={5}
         ref={blockDataRef}
         width={800/scale}
         height={contentHeight/scale}
