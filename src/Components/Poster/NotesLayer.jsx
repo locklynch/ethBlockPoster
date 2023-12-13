@@ -25,30 +25,6 @@ const NotesLayer = ({blockInfo, blockObject}) => {
     setContentWidth(newWidths);
   }, [blockInfo]);
 
-  // const flattenBlockObject = (obj, parentKey = '') => {
-  //   let result = {}
-
-  //   for (const key in obj) {
-  //     if (obj.hasOwnProperty(key)) {
-  //       const newKey = parentKey ? '${parentKey}.${key}' : key;
-
-  //       if (typeof obj[key] === 'object' && obj[key] !==null) {
-  //         Object.assign(result, flattenBlockObject(obj[key], newKey))
-  //       } else {
-  //         result[newKey] = obj[key]
-  //       }
-  //     }
-  //   }
-
-  //   return result
-  // }
-
-  // const flattenedBlockObject = flattenBlockObject(blockObject)
-
-  // console.log(flattenedBlockObject)
-
-  // console.log(blockObject)
-
   return (
     <g>
       {blockInfo && ethereumjs_execution_block.map((note, index, blockJsonString) => (
@@ -78,12 +54,12 @@ const NotesLayer = ({blockInfo, blockObject}) => {
             fill="white"
             fontSize="16"
           >{note.text}</text>
-          <text
+          {/* <text
               x={x + 10 + (index % 2 === 0 ? 0 : deltaX)}
               y={y + 55 + (60 * index)}
               fill="white"
               fontSize="14"
-            >{JSON.stringify(blockObject[note.id])}</text>
+            >{JSON.stringify(blockObject[note.id])}</text> */}
         </DrapAndDropComponent>
       ))}
     </g>

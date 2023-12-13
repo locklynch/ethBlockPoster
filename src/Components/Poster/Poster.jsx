@@ -72,6 +72,7 @@ const Poster = ({ blockInfo, blockChainNumberFromApp, blockObject }) => {
               blockChainNumberFromApp={blockChainNumberFromApp}
               setBlockPosition={setToRect}
               blockScale={blockScale}
+              blockObject={blockObject}
             />}
           </DrapAndDropComponent>
           <NotesLayer blockInfo={blockInfo} blockObject={blockObject}/>
