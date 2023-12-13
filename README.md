@@ -25,16 +25,25 @@ SvgToBase64 - helper function to hopefully make the svg image asset download cor
 * all these are for the narrative style poster, work on this after we get the info-graphic set up first.
 
 FIXES:
+0. Fixing BlockData
+    1. reconstructing the displayed block in the BlockData module. Now it'll be displaying each element of the block individually, step by step, which should allow us to better point to them with the noteslayer NOOTEE SLLAAYYERR!!
+
+    DO THIS NEXT!
+    2. got the header stuff working, but gonna check with aaron about the transactions and other stuff. The code is a bit gnarlier in the block.ts definitions of the seralization function
+
+
 1. Info elements
-    2. also, import the blockJsonString to the noteslayer and pull each property individually to display in the note box
+    2. also, import the blockObject to the noteslayer and pull each property individually to display in the note box
+        1. Kinda done, but actually in the process of changing this to a better approach that will allow for the next steps
     3. then, position the noteslayer programmatically so they appear around the correct in the blockdata expanded block HALF DONE!
         1. half done, got them to stagger at least
     4. then, make a line connecting the beginning of that section of binary, with the edge of the note box that contains the information about that data
         1. make a new module for this, call it NoteLine DONE
     5. then!! change staticText asset to reflect the key value pairs as they exist in the blockdata we get
         1. done! but it's got some old eth 1.0 artifacts in there, might wanna take these notes out later
+        2. gonna need to update this now that i'm pulling the BlockData apart and showing things nicely
     6. maybe give text the same color as the element they're referencing? or somehow mark the colors in a cool way
-2. right now I'm getting errors for pre Merge blocks
+2. right now I'm getting errors for pre Merge blocks - The way I'm handling the BlockData module may help this!!! Might not need to do any of the following steps now!
     1. handle different ranges of block numbers differently depending on the updates having been done
     2. for instance, pre and post POS Merge (after 15537394 is post POS Merge)
     3. could make conditional statements for ranges and use different apis for each range? after getting the noteslayer stuff done, try use ethers for pre merge stuff?
