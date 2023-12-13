@@ -59,6 +59,8 @@ const BlockData = ({ blockInfo, blockChainNumberFromApp, setBlockPosition, block
     };
   }, [blockInfo, blockScale]);
 
+  // console.log(blockInfo)
+
   return (
     <g
       transform={`translate(${posterStartX} ${posterStartY})`}

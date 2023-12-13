@@ -6,8 +6,8 @@ import { RLP } from '@ethereumjs/rlp'
 import fixtureBlockData from '../../assets/fixtureBlock.json'
 
 
-const Inputs = ({setBlockInfo, setBlockChainNumber, setBlockJsonString, blockJsonString}) => {
-  // const [blockJsonString, setBlockJsonString] = useState(null);
+const Inputs = ({setBlockInfo, setBlockChainNumber, setBlockObject}) => {
+  const [blockJsonString, setBlockJsonString] = useState(null);
   const [blockNumber, setBlockNumber] = useState(null)
 
   const fetchBlock = async () => {
@@ -27,11 +27,12 @@ const Inputs = ({setBlockInfo, setBlockChainNumber, setBlockJsonString, blockJso
         blockObject = await Block.fromJsonRpcProvider(provider, `0x${blockNumber.toString(16)}`)
         console.log(blockObject)
       }
-        
+      
       const blockBinary = Buffer.from(blockObject.serialize())
       const decodedBlock = RLP.decode(blockBinary)
       setBlockInfo({ decodedBlock })
       setBlockJsonString(JSON.stringify(blockObject.toJSON(), null, 2))
+      setBlockObject(blockObject)
 
     } catch (error) {
       console.error('Error fetching block:', error.message);

@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { DrapAndDropComponent } from './DragAndDrop';
 import { ethereumjs_execution_block } from '../../assets/staticText.json';
 
-const NotesLayer = (blockInfo, blockJsonString) => {
+const NotesLayer = ({blockInfo, blockObject}) => {
   const [contentWidth, setContentWidth] = useState(100);
   const textRefs = useRef(ethereumjs_execution_block.map (() => React.createRef()));
 
@@ -24,7 +24,30 @@ const NotesLayer = (blockInfo, blockJsonString) => {
     });
     setContentWidth(newWidths);
   }, [blockInfo]);
-  console.log('blockJsonString:', blockJsonString)
+
+  // const flattenBlockObject = (obj, parentKey = '') => {
+  //   let result = {}
+
+  //   for (const key in obj) {
+  //     if (obj.hasOwnProperty(key)) {
+  //       const newKey = parentKey ? '${parentKey}.${key}' : key;
+
+  //       if (typeof obj[key] === 'object' && obj[key] !==null) {
+  //         Object.assign(result, flattenBlockObject(obj[key], newKey))
+  //       } else {
+  //         result[newKey] = obj[key]
+  //       }
+  //     }
+  //   }
+
+  //   return result
+  // }
+
+  // const flattenedBlockObject = flattenBlockObject(blockObject)
+
+  // console.log(flattenedBlockObject)
+
+  // console.log(blockObject)
 
   return (
     <g>
@@ -56,11 +79,11 @@ const NotesLayer = (blockInfo, blockJsonString) => {
             fontSize="16"
           >{note.text}</text>
           <text
-              x={x + 10 + (index % 2 === 0 ? 0 : deltaX)}  // Adjust x position for the value text
-              y={y + 55 + (60 * index)}  // Adjust y position for the value text
+              x={x + 10 + (index % 2 === 0 ? 0 : deltaX)}
+              y={y + 55 + (60 * index)}
               fill="white"
               fontSize="14"
-            >{blockJsonString[note.id]}</text>
+            >{JSON.stringify(blockObject[note.id])}</text>
         </DrapAndDropComponent>
       ))}
     </g>
