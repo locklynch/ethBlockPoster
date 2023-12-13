@@ -8,7 +8,7 @@ import Lines from './LinesToBlock';
 import NotesLayer from './NotesLayer';
 import useResizeAndScrollEffect from './ResizeAndScrollHelper';
 
-const Poster = ({ blockInfo, blockChainNumberFromApp, blockObject }) => {
+const Poster = ({ blockChainNumberFromApp, blockObject }) => {
   const [fromRect, setFromRect] = useState ()
   const [toRect, setToRect] = useState ()
   const [posterRect, setPosterRect] = useState()
@@ -42,8 +42,6 @@ const Poster = ({ blockInfo, blockChainNumberFromApp, blockObject }) => {
   }
 
 
-
-
   return (
     <div className="poster">
       <div className="poster-container" id='poster-container'>
@@ -67,15 +65,15 @@ const Poster = ({ blockInfo, blockChainNumberFromApp, blockObject }) => {
           </DrapAndDropComponent>
           <Lines fromRect={fromRect} toRect={toRect} posterRect={posterRect}/>
           <DrapAndDropComponent>
-            {blockInfo && blockChainNumberFromApp && <BlockData
-              blockInfo={blockInfo}
+            {blockObject && blockChainNumberFromApp && <BlockData
               blockChainNumberFromApp={blockChainNumberFromApp}
               setBlockPosition={setToRect}
               blockScale={blockScale}
               blockObject={blockObject}
             />}
           </DrapAndDropComponent>
-          <NotesLayer blockInfo={blockInfo} blockObject={blockObject}/>
+          <NotesLayer
+            blockObject={blockObject}/>
         </svg>
         <br/>
         {svgPreview && <img src={svgPreview}/>}

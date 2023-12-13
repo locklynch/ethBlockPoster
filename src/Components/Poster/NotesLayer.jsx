@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { DrapAndDropComponent } from './DragAndDrop';
 import { ethereumjs_execution_block } from '../../assets/staticText.json';
 
-const NotesLayer = ({blockInfo, blockObject}) => {
+const NotesLayer = ({blockObject}) => {
   const [contentWidth, setContentWidth] = useState(100);
   const textRefs = useRef(ethereumjs_execution_block.map (() => React.createRef()));
 
@@ -23,11 +23,11 @@ const NotesLayer = ({blockInfo, blockObject}) => {
       }
     });
     setContentWidth(newWidths);
-  }, [blockInfo]);
+  }, [blockObject]);
 
   return (
     <g>
-      {blockInfo && ethereumjs_execution_block.map((note, index, blockJsonString) => (
+      {blockObject && ethereumjs_execution_block.map((note, index, blockJsonString) => (
         <DrapAndDropComponent key={note.id} style={{ borderStyle: 'solid', borderWidth: '1px', borderColor: 'white'}}>
           <rect
             stroke="white"

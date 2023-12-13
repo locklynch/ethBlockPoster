@@ -1,13 +1,12 @@
 // BlockData.jsx The window to show the block being accessed
 
 import React, { useState, useEffect, useRef } from 'react';
-import Ethereum_Logo_2014 from '../../assets/Ethereum_logo_2014.svg'
 import useResizeAndScrollEffect from './ResizeAndScrollHelper';
 import EthLogo from './EthLogo';
 import {Buffer} from 'buffer'
-import { RLP } from '@ethereumjs/rlp'
+// import { RLP } from '@ethereumjs/rlp'
 import { bigIntToUnpaddedBytes } from '@ethereumjs/util'
-import {Block} from '@ethereumjs/block'
+// import {Block} from '@ethereumjs/block'
 
 const colorPalette = [
   '#FFD1DC', // Light Pink
@@ -40,7 +39,6 @@ const Rlp = ({ rlpObject, colorIndex = 0, parentKey='' }) => {
 
 const BlockData = ({ blockInfo, blockChainNumberFromApp, setBlockPosition, blockScale, blockObject}) => {
   const blockNumberTitle = blockChainNumberFromApp
-  // const { decodedBlock } = blockInfo
 
   // block poster starting location
   const posterStartX = 130
@@ -54,9 +52,6 @@ const BlockData = ({ blockInfo, blockChainNumberFromApp, setBlockPosition, block
   const textRef = useRef(null);
 
   useResizeAndScrollEffect(blockDataRef, setBlockPosition)
-
-  // const blockBinary = Buffer.from(blockObject.serialize())
-  // const decodedBlock = RLP.decode(blockBinary)
 
   // The block header, reconstructed for great justice, also including conditionals for EIP updates. May need to make more conditonals to account for pre Merge blocks
   const parentHash = Buffer.from(blockObject.header.parentHash).toString('hex');
@@ -102,11 +97,8 @@ const BlockData = ({ blockInfo, blockChainNumberFromApp, setBlockPosition, block
     prevRandao = false
   }
   
-
-
-
   // console.log('parentHash:', parentHash)
-  console.log('blockObject:', blockObject)
+  // console.log('blockObject:', blockObject)
 
   useEffect(() => {
     if (textRef.current) {

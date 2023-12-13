@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {ethers} from 'ethers';
 import {Block} from '@ethereumjs/block'
 import {Buffer} from 'buffer'
-import { RLP } from '@ethereumjs/rlp'
+// import { RLP } from '@ethereumjs/rlp'
 import fixtureBlockData from '../../assets/fixtureBlock.json'
 
 
@@ -28,9 +28,9 @@ const Inputs = ({setBlockInfo, setBlockChainNumber, setBlockObject}) => {
         console.log(blockObject)
       }
       
+      // keeping this for now to check the serialize definition
       const blockBinary = Buffer.from(blockObject.serialize())
-      const decodedBlock = RLP.decode(blockBinary)
-      setBlockInfo({ decodedBlock })
+
       setBlockJsonString(JSON.stringify(blockObject.toJSON(), null, 2))
       setBlockObject(blockObject)
 
