@@ -7,6 +7,7 @@ import BlockChain from './BlockChain';
 import Lines from './LinesToBlock';
 import NotesLayer from './NotesLayer';
 import useResizeAndScrollEffect from './ResizeAndScrollHelper';
+import NoteLine from './NoteLine';
 
 const Poster = ({ blockChainNumberFromApp, blockObject }) => {
   const [fromRect, setFromRect] = useState ()
@@ -15,6 +16,8 @@ const Poster = ({ blockChainNumberFromApp, blockObject }) => {
   const posterRef = useRef(null)
   const [blockScale, setBlockScale] = useState(0.27)
   const [svgPreview, setSvgPreview] = useState()
+  const [noteFromRect, setNoteFromRect] = useState ()
+  const [noteToRect, setNoteToRect] = useState()
 
   useResizeAndScrollEffect(posterRef, setPosterRect)
 
@@ -41,6 +44,11 @@ const Poster = ({ blockChainNumberFromApp, blockObject }) => {
     element.remove();
   }
 
+  const handleSetBlockScale = (event) => {
+    if (event.key === 'Enter') {
+      sendBlockScale();
+    }
+  }
 
   return (
     <div className="poster">
@@ -70,18 +78,22 @@ const Poster = ({ blockChainNumberFromApp, blockObject }) => {
               setBlockPosition={setToRect}
               blockScale={blockScale}
               blockObject={blockObject}
+              setNoteFromRect={setNoteFromRect}
             />}
           </DrapAndDropComponent>
+          <NoteLine noteFromRect={noteFromRect} noteToRect={noteToRect} posterRect={posterRect}/>
           <NotesLayer
-            blockObject={blockObject}/>
+            blockObject={blockObject}
+            setNoteToRect={setNoteToRect}
+          />
         </svg>
         <br/>
         {svgPreview && <img src={svgPreview}/>}
       </div>
       <br/>
       <label htmlFor='setBlockScale'>Set Block Scale: </label>
-      <input type='number' id='setBlockScale' name='setBlockScale' placeholder='0.27'/>
-      <button id='setBlockScale' className='setBlockScale' onClick={sendBlockScale}>SetBlockScale</button>
+      <input type='number' id='setBlockScale' name='setBlockScale' placeholder='0.27' onKeyDown={handleSetBlockScale}/>
+      <button id='setBlockScaleButton' className='setBlockScaleButton' onClick={sendBlockScale}>Rescale Block</button>
       <br/>
       <button id='previewPoster' className='previewPoster' onClick={previewPoster}>Preview Poster</button>
       <button id='downloadSVG' className='downloadSVG' onClick={downloadSVG}>Download Poster</button>

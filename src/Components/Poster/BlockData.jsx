@@ -4,9 +4,9 @@ import React, { useState, useEffect, useRef } from 'react';
 import useResizeAndScrollEffect from './ResizeAndScrollHelper';
 import EthLogo from './EthLogo';
 import {Buffer} from 'buffer'
-// import { RLP } from '@ethereumjs/rlp'
+import { RLP } from '@ethereumjs/rlp'
 import { bigIntToUnpaddedBytes } from '@ethereumjs/util'
-// import {Block} from '@ethereumjs/block'
+import {Block} from '@ethereumjs/block'
 
 const colorPalette = [
   '#FFD1DC', // Light Pink
@@ -37,7 +37,7 @@ const Rlp = ({ rlpObject, colorIndex = 0, parentKey='' }) => {
   })
 }
 
-const BlockData = ({ blockInfo, blockChainNumberFromApp, setBlockPosition, blockScale, blockObject}) => {
+const BlockData = ({ blockChainNumberFromApp, setBlockPosition, blockScale, blockObject}) => {
   const blockNumberTitle = blockChainNumberFromApp
 
   // block poster starting location
@@ -52,6 +52,8 @@ const BlockData = ({ blockInfo, blockChainNumberFromApp, setBlockPosition, block
   const textRef = useRef(null);
 
   useResizeAndScrollEffect(blockDataRef, setBlockPosition)
+
+  // console.log('blockObject:', blockObject)
 
   // The block header, reconstructed for great justice, also including conditionals for EIP updates. May need to make more conditonals to account for pre Merge blocks
   const parentHash = Buffer.from(blockObject.header.parentHash).toString('hex');
@@ -71,7 +73,6 @@ const BlockData = ({ blockInfo, blockChainNumberFromApp, setBlockPosition, block
   const nonce = Buffer.from(blockObject.header.nonce).toString('hex');
   const baseFeePerGas = Buffer.from(bigIntToUnpaddedBytes(blockObject.header.baseFeePerGas)).toString('hex');
   const withdrawalsRoot = Buffer.from(blockObject.header.withdrawalsRoot).toString('hex');
-
   let blobGasUsed
   if (blockObject.header.blobGasUsed !== undefined) {
     blobGasUsed = Buffer.from(bigIntToUnpaddedBytes(blockObject.header.blobGasUsed)).toString('hex');
@@ -96,18 +97,129 @@ const BlockData = ({ blockInfo, blockChainNumberFromApp, setBlockPosition, block
   } else {
     prevRandao = false
   }
+
+  // const transactionsObj = blockObject.transactions.map(transaction => ({
+  //   type: Buffer.from(bigIntToUnpaddedBytes(transaction.type)).toString('hex'),
+  //   nonce: Buffer.from(bigIntToUnpaddedBytes(transaction.nonce)).toString('hex'),
+  //   gasLimit: Buffer.from(bigIntToUnpaddedBytes(transaction.gasLimit)).toString('hex'),
+  //   to: transaction.to,
+  //   value: Buffer.from(bigIntToUnpaddedBytes(transaction.value)).toString('hex'),
+  //   data: transaction.data,
+  //   v: transaction.v,
+  //   r: transaction.r,
+  //   s: transaction.s,
+  //   chainId: transaction.chainId,
+  //   maxPriorityFeePerGas: transaction.maxPriorityFeePerGas,
+  //   maxFeePerGas: transaction.maxFeePerGas,
+  //   accessList: transaction.accessList,
+  // }));
+
+  // console.log('allTransactions:', transactionsObj)
+
+
+  // The Transactions, reconstructed
+  const transactionsObj = blockObject.transactions.map(transaction => ({
+    type: transaction.type,
+    nonce: transaction.nonce,
+    gasLimit: transaction.gasLimit,
+    to: transaction.to,
+    value: transaction.value,
+    data: transaction.data,
+    v: transaction.v,
+    r: transaction.r,
+    s: transaction.s,
+    chainId: transaction.chainId,
+    maxPriorityFeePerGas: transaction.maxPriorityFeePerGas,
+    maxFeePerGas: transaction.maxFeePerGas,
+    accessList: transaction.accessList,
+  }));
+
+
+  const transactionsString = Buffer.from((transactionsObj.map(transaction => {
+    return (`
+      type: ${transaction.type}
+      Nonce: ${transaction.nonce}
+      Gas Limit: ${transaction.gasLimit}
+      to: ${transaction.to}
+      value: ${transaction.value}
+      data: ${transaction.data}
+      v: ${transaction.v}
+      r: ${transaction.r}
+      s: ${transaction.s}
+      chainId: ${transaction.chainId}
+      maxPriorityFeePerGas: ${transaction.maxPriorityFeePerGas}
+      maxFeePerGas: ${transaction.maxFeePerGas}
+      accessList: ${transaction.accessList}
+    `);
+  }).join(''))).toString('hex')
+
+  // The Uncles reconstructed
+  const uncleHeadersArr = blockObject.uncleHeaders.map(uncleHeader => ({
+    uncleParentHash: Buffer.from(uncleHeader.parentHash).toString('hex'),
+    uncleUncleHash: Buffer.from(uncleHeader.uncleHash).toString('hex'),
+    uncleCoinbase: Buffer.from(uncleHeader.coinbase.bytes).toString('hex'),
+    uncleStateRoot: Buffer.from(uncleHeader.stateRoot).toString('hex'),
+    uncleTransactionsTrie: Buffer.from(uncleHeader.transactionsTrie).toString('hex'),
+    uncleReceiptTrie: Buffer.from(uncleHeader.receiptTrie).toString('hex'),
+    uncleLogsBloom: Buffer.from(uncleHeader.logsBloom).toString('hex'),
+    uncleDifficulty: Buffer.from(bigIntToUnpaddedBytes(uncleHeader.difficulty)).toString('hex'),
+    uncleNumber: Buffer.from(bigIntToUnpaddedBytes(uncleHeader.number)).toString('hex'),
+    uncleGasLimit: Buffer.from(bigIntToUnpaddedBytes(uncleHeader.gasLimit)).toString('hex'),
+    uncleGasUsed: Buffer.from(bigIntToUnpaddedBytes(uncleHeader.gasUsed)).toString('hex'),
+    uncleTimestamp: Buffer.from(bigIntToUnpaddedBytes(uncleHeader.timestamp ?? BIGINT_0)).toString('hex'),
+    uncleExtraData: Buffer.from(uncleHeader.extraData).toString('hex'),
+    uncleMixHash: Buffer.from(uncleHeader.mixHash).toString('hex'),
+    uncleNonce: Buffer.from(uncleHeader.nonce).toString('hex'),
+    uncleBaseFeePerGas: Buffer.from(bigIntToUnpaddedBytes(uncleHeader.baseFeePerGas)).toString('hex'),
+    uncleWithdrawalsRoot: Buffer.from(uncleHeader.withdrawalsRoot).toString('hex'),
+  }))
+
+  const uncleHeadersString = Buffer.from((uncleHeadersArr.map(uncleHeader => {
+    return (`
+      parentHash: ${uncleHeader.parentHash}
+      uncleHash: ${uncleHeader.uncleHash}
+      coinbase: ${uncleHeader.coinbase}
+      stateRoot: ${uncleHeader.stateRoot}
+      transactionsTrie: ${uncleHeader.transactionsTrie}
+      recepitTrie: ${uncleHeader.receiptTrie}
+      logsBloom: ${uncleHeader.logsBloom}
+      difficulty: ${uncleHeader.difficulty}
+      number: ${uncleHeader.number}
+      gasLimit: ${uncleHeader.gasLimit}
+      gasUsed: ${uncleHeader.gasUsed}
+      timeStamp: ${uncleHeader.timestamp}
+      extraData: ${uncleHeader.extraData}
+      mixHash: ${uncleHeader.mixHash}
+      nonce: ${uncleHeader.nonce}
+      baseFeePerGas: ${uncleHeader.baseFeePerGas}
+    `);
+  }).join(''))).toString('hex')
+
+    // The Transactions, reconstructed
+    const withdrawalsArr = blockObject.withdrawals.map(withdrawal => ({
+      address: withdrawal.address,
+      amount: withdrawal.amount,
+      index: withdrawal.index,
+      validatorIndex: withdrawal.validatorIndex,
+    }));
   
-  // console.log('parentHash:', parentHash)
-  // console.log('blockObject:', blockObject)
+    const withdrawalsString = Buffer.from((withdrawalsArr.map(withdrawal => {
+      return (`
+        address: ${withdrawal.address}
+        amount: ${withdrawal.amount}
+        index: ${withdrawal.index}
+        validatorIndex: ${withdrawal.validatorIndex}
+      `);
+    }).join(''))).toString('hex')
+
 
   useEffect(() => {
     if (textRef.current) {
       const rect = textRef.current.getBoundingClientRect();
       setContentHeight(rect.height)
     };
-  }, [blockInfo, blockScale]);
+  }, [blockObject, blockScale]);
 
-  // console.log(blockInfo)
 
   return (
     <g
@@ -155,6 +267,10 @@ const BlockData = ({ blockInfo, blockChainNumberFromApp, setBlockPosition, block
           { excessBlobGas && <span id='excessBlobGas' style={{color:'white', overflowWrap: 'break-word'}}>{excessBlobGas}</span>}
           { parentBeaconBlockRoot && <span id='parentBeaconBlockRoot' style={{color:'white', overflowWrap: 'break-word'}}>{parentBeaconBlockRoot}</span>}
           { prevRandao && <span id='prevRandao' style={{color:'white', overflowWrap: 'break-word'}}>{prevRandao}</span>}
+          <span id='transactionsString' style={{color:'white', overflowWrap: 'break-word'}}>{transactionsString}</span>
+          <span id='uncleHeadersString' style={{color:'white', overflowWrap: 'break-word'}}>{uncleHeadersString}</span>
+          <span id='withdrawalsString' style={{color:'white', overflowWrap: 'break-word'}}>{withdrawalsString}</span>
+
 
           {/* <Rlp rlpObject={parentHash} /> */}
         </div>

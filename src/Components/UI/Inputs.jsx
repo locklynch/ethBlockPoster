@@ -44,6 +44,11 @@ const Inputs = ({setBlockInfo, setBlockChainNumber, setBlockObject}) => {
     fetchBlock()
   }, [])
 
+  const handleSetBlockNumber = (event) => {
+    if (event.key === 'Enter') {
+      fetchBlock();
+    }
+  };
 
   return (
     <>
@@ -61,6 +66,7 @@ const Inputs = ({setBlockInfo, setBlockChainNumber, setBlockObject}) => {
         onInput={(event)=> {
           setBlockNumber(parseInt(event.target.value, 10))
         }}
+        onKeyDown={handleSetBlockNumber}
       />
       <br/>
       <button id='fetchBlock' className='fetchBlock' onClick={fetchBlock}>Fetch Block</button>

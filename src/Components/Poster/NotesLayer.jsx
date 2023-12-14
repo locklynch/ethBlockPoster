@@ -27,13 +27,13 @@ const NotesLayer = ({blockObject}) => {
 
   return (
     <g>
-      {blockObject && ethereumjs_execution_block.map((note, index, blockJsonString) => (
+      {blockObject && ethereumjs_execution_block.map((note, index) => (
         <DrapAndDropComponent key={note.id} style={{ borderStyle: 'solid', borderWidth: '1px', borderColor: 'white'}}>
           <rect
             stroke="white"
             strokeWidth={2}
             x={x + (index % 2 === 0 ? 0 : deltaX)}
-            y={y + (60 * index)}
+            y={y + (52 * index)}
             width={contentWidth[index]}
             height={40}
             fill="black"
@@ -42,17 +42,17 @@ const NotesLayer = ({blockObject}) => {
           <text
             id={'id-${$note.index}'}
             x={x + 10 + (index % 2 === 0 ? 0 : deltaX)}
-            y={y + 15 + (60 * index)}
+            y={y + 18 + (52 * index)}
             fill="white"
-            fontSize="16"
+            fontSize="18"
           >{note.id}:</text>
           <text
             ref={textRefs.current[index]}
             id='note-{$note.index}'
             x={x + 20 + (index % 2 === 0 ? 0 : deltaX)}
-            y={y + 35 + (60 * index)}
+            y={y + 35 + (52 * index)}
             fill="white"
-            fontSize="16"
+            fontSize="15"
           >{note.text}</text>
           {/* <text
               x={x + 10 + (index % 2 === 0 ? 0 : deltaX)}

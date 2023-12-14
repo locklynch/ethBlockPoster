@@ -263,10 +263,6 @@
     ],
     "ethereumjs_execution_block": [
         {
-            "id": "header",
-            "text": "summary information about the execution data"
-        },
-        {
             "id": "parentHash",
             "text": "the hash of the previous execution block"
         },
@@ -285,10 +281,6 @@
         {
             "id": "transactionsTrie",
             "text": "root hash of the transactions in the payload"
-        },
-        {
-            "id": "withdrawalsRoot",
-            "text": "root hash of the withdrawals in the payload"
         },
         {
             "id": "receiptTrie",
@@ -333,6 +325,26 @@
         {
             "id": "baseFeePerGas",
             "text": "the base fee value in Gwei"
+        },
+        {
+            "id": "withdrawalsRoot",
+            "text": "root hash of the withdrawals in the payload"
+        },
+        {
+            "id": "blobGasUsed",
+            "text": "amount of gas consumed by transactions"
+        },
+        {
+            "id": "excessBlobGas",
+            "text": "running total of blob gas consumed in excess of the target blob gas amount"
+        },
+        {
+            "id": "parentBeaconBlockRoot",
+            "text": "hash of the Beacon Chain Block the current execution block belongs to"
+        },
+        {
+            "id": "prevRandao",
+            "text": "value used in random validator selection"
         },
         {
             "id": "transactions",
