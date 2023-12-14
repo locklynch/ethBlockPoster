@@ -8,12 +8,12 @@ const NoteLine = ({ noteFromRect, noteToRect, posterRect }) => {
   return (
     <g>
       <line
-        id='parent-hash-line'
+        id='notes-layer-lines'
         x1={(noteFromRect.left-posterRect.left)}
         y1={(noteFromRect.top-posterRect.top)}
         x2={(noteToRect.left-posterRect.left)}
         y2={(noteToRect.top-posterRect.top)}
-        stroke='white'
+        stroke='red'
         strokeWidth={3}
         opacity={'50%'}
       />

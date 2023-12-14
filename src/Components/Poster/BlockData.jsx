@@ -37,6 +37,12 @@ const Rlp = ({ rlpObject, colorIndex = 0, parentKey='' }) => {
   })
 }
 
+const valueToHex = (value) => value === undefined ? false : Buffer.from(value).toString('hex')
+const addressToHex = (value) => value === undefined ? false : Buffer.from(value.bytes).toString('hex')
+const bigIntToHex = (value) => value === undefined ? false : Buffer.from(bigIntToUnpaddedBytes(value)).toString('hex')
+
+
+
 const BlockData = ({ blockChainNumberFromApp, setBlockPosition, setNoteFromRect, blockScale, blockObject}) => {
   const blockNumberTitle = blockChainNumberFromApp
 
@@ -53,53 +59,95 @@ const BlockData = ({ blockChainNumberFromApp, setBlockPosition, setNoteFromRect,
 
   useResizeAndScrollEffect(blockDataRef, setBlockPosition)
 
-  const parentHashRef = useRef()
-  useResizeAndScrollEffect(blockDataRef, (rect) => setNoteFromRect('parentHash', rect))
-
-  // console.log('blockObject:', blockObject)
-
-  // The block header, reconstructed for great justice, also including conditionals for EIP updates. May need to make more conditonals to account for pre Merge blocks
-  const parentHash = Buffer.from(blockObject.header.parentHash).toString('hex');
-  const uncleHash = Buffer.from(blockObject.header.uncleHash).toString('hex');
-  const coinbase = Buffer.from(blockObject.header.coinbase.bytes).toString('hex');
-  const stateRoot = Buffer.from(blockObject.header.stateRoot).toString('hex');
-  const transactionsTrie = Buffer.from(blockObject.header.transactionsTrie).toString('hex');
-  const receiptTrie = Buffer.from(blockObject.header.receiptTrie).toString('hex');
-  const logsBloom = Buffer.from(blockObject.header.logsBloom).toString('hex');
-  const difficulty = Buffer.from(bigIntToUnpaddedBytes(blockObject.header.difficulty)).toString('hex');
-  const number = Buffer.from(bigIntToUnpaddedBytes(blockObject.header.number)).toString('hex');
-  const gasLimit = Buffer.from(bigIntToUnpaddedBytes(blockObject.header.gasLimit)).toString('hex');
-  const gasUsed = Buffer.from(bigIntToUnpaddedBytes(blockObject.header.gasUsed)).toString('hex');
-  const timestamp = Buffer.from(bigIntToUnpaddedBytes(blockObject.header.timestamp ?? BIGINT_0)).toString('hex');
-  const extraData = Buffer.from(blockObject.header.extraData).toString('hex');
-  const mixHash = Buffer.from(blockObject.header.mixHash).toString('hex');
-  const nonce = Buffer.from(blockObject.header.nonce).toString('hex');
-  const baseFeePerGas = Buffer.from(bigIntToUnpaddedBytes(blockObject.header.baseFeePerGas)).toString('hex');
-  const withdrawalsRoot = Buffer.from(blockObject.header.withdrawalsRoot).toString('hex');
-  let blobGasUsed
-  if (blockObject.header.blobGasUsed !== undefined) {
-    blobGasUsed = Buffer.from(bigIntToUnpaddedBytes(blockObject.header.blobGasUsed)).toString('hex');
-  } else {
-    blobGasUsed = false
+  const blockHeaderUtils = {
+    parentHash: {
+      ref: useRef(),
+      value: valueToHex(blockObject.header.parentHash),
+    },
+    uncleHash: {
+      ref: useRef(),
+      value: valueToHex(blockObject.header.uncleHash),
+    },
+    coinbase: {
+      ref: useRef(),
+      value: addressToHex(blockObject.header.coinbase),
+    },
+    stateRoot: {
+      ref: useRef(),
+      value: valueToHex(blockObject.header.stateRoot),
+    },
+    transactionsTrie: {
+      ref: useRef(),
+      value: valueToHex(blockObject.header.transactionsTrie),
+    },
+    receiptTrie: {
+      ref: useRef(),
+      value: valueToHex(blockObject.header.receiptTrie),
+    },
+    logsBloom: {
+      ref: useRef(),
+      value: valueToHex(blockObject.header.logsBloom),
+    },
+    difficulty: {
+      ref: useRef(),
+      value: bigIntToHex(blockObject.header.difficulty),
+    },
+    number: {
+      ref: useRef(),
+      value: bigIntToHex(blockObject.header.number),
+    },
+    gasLimit: {
+      ref: useRef(),
+      value: bigIntToHex(blockObject.header.gasLimit),
+    },
+    gasUsed: {
+      ref: useRef(),
+      value: bigIntToHex(blockObject.header.gasUsed),
+    },
+    timestamp: {
+      ref: useRef(),
+      value: bigIntToHex(blockObject.header.timestamp ?? BIGINT_0),
+    },
+    extraData: {
+      ref: useRef(),
+      value: valueToHex(blockObject.header.extraData),
+    },
+    mixHash: {
+      ref: useRef(),
+      value: valueToHex(blockObject.header.mixHash),
+    },
+    nonce: {
+      ref: useRef(),
+      value: valueToHex(blockObject.header.nonce),
+    },
+    baseFeePerGas: {
+      ref: useRef(),
+      value: bigIntToHex(blockObject.header.baseFeePerGas),
+    },
+    withdrawalsRoot: {
+      ref: useRef(),
+      value: valueToHex(blockObject.header.withdrawalsRoot),
+    },
+    blobGasUsed: {
+      ref: useRef(bigIntToHex(blockObject.header.blobGasUsed)),
+      value: null,
+    },
+    excessBlobGas: {
+      ref: useRef(),
+      value: bigIntToHex(blockObject.header.excessBlobGas),
+    },
+    parentBeaconBlockRoot: {
+      ref: useRef(),
+      value: valueToHex(blockObject.header.parentBeaconBlockRoot),
+    },
+    prevRandao: {
+      ref: useRef(),
+      value: valueToHex(blockObject.header.prevRandao),
+    },
   }
-  let excessBlobGas
-  if (blockObject.header.excessBlobGas !== undefined) {
-    excessBlobGas = Buffer.from(blockObject.header.excessBlobGas).toString('hex');
-  } else {
-    excessBlobGas = false
-  }
-  let parentBeaconBlockRoot
-  if (blockObject.header.parentBeaconBlockRoot !== undefined) {
-    parentBeaconBlockRoot = Buffer.from(blockObject.header.parentBeaconBlockRoot).toString('hex');
-  } else {
-    parentBeaconBlockRoot = false
-  }
-  let prevRandao
-  if (blockObject.header.prevRandao !== undefined) {
-    prevRandao = Buffer.from(blockObject.header.prevRandao).toString('hex'); 
-  } else {
-    prevRandao = false
-  }
+  Object.keys(blockHeaderUtils).map((id) => {
+    useResizeAndScrollEffect(blockDataRef, (rect) => setNoteFromRect(id, rect))
+  })
 
   // const transactionsObj = blockObject.transactions.map(transaction => ({
   //   type: Buffer.from(bigIntToUnpaddedBytes(transaction.type)).toString('hex'),
@@ -249,27 +297,29 @@ const BlockData = ({ blockChainNumberFromApp, setBlockPosition, setNoteFromRect,
           xmlns="http://www.w3.org/1999/xhtml"
           className="block-data"
         >
-          <span ref={parentHashRef} id='parentHash' style={{color:'white', overflowWrap: 'break-word'}}>{parentHash}</span>
-          <span id='uncleHash' style={{color:'white', overflowWrap: 'break-word'}}>{uncleHash}</span>
-          <span id='coinbase' style={{color:'white', overflowWrap: 'break-word'}}>{coinbase}</span>
-          <span id='stateRoot' style={{color:'white', overflowWrap: 'break-word'}}>{stateRoot}</span>
-          <span id='transactionsTrie' style={{color:'white', overflowWrap: 'break-word'}}>{transactionsTrie}</span>
-          <span id='receiptTrie' style={{color:'white', overflowWrap: 'break-word'}}>{receiptTrie}</span>
-          <span id='logsBloom' style={{color:'white', overflowWrap: 'break-word'}}>{logsBloom}</span>
-          <span id='difficulty' style={{color:'white', overflowWrap: 'break-word'}}>{difficulty}</span>
-          <span id='number' style={{color:'white', overflowWrap: 'break-word'}}>{number}</span>
-          <span id='gasLimit' style={{color:'white', overflowWrap: 'break-word'}}>{gasLimit}</span>
-          <span id='gasUsed' style={{color:'white', overflowWrap: 'break-word'}}>{gasUsed}</span>
-          <span id='timestamp' style={{color:'white', overflowWrap: 'break-word'}}>{timestamp}</span>
-          <span id='extraData' style={{color:'white', overflowWrap: 'break-word'}}>{extraData}</span>
-          <span id='mixHash' style={{color:'white', overflowWrap: 'break-word'}}>{mixHash}</span>
-          <span id='nonce' style={{color:'white', overflowWrap: 'break-word'}}>{nonce}</span>
-          <span id='baseFeePerGas' style={{color:'white', overflowWrap: 'break-word'}}>{baseFeePerGas}</span>
-          <span id='withdrawalsRoot' style={{color:'white', overflowWrap: 'break-word'}}>{withdrawalsRoot}</span>
-          { blobGasUsed && <span id='blobGasUsed' style={{color:'white', overflowWrap: 'break-word'}}>{blobGasUsed}</span>}
-          { excessBlobGas && <span id='excessBlobGas' style={{color:'white', overflowWrap: 'break-word'}}>{excessBlobGas}</span>}
-          { parentBeaconBlockRoot && <span id='parentBeaconBlockRoot' style={{color:'white', overflowWrap: 'break-word'}}>{parentBeaconBlockRoot}</span>}
-          { prevRandao && <span id='prevRandao' style={{color:'white', overflowWrap: 'break-word'}}>{prevRandao}</span>}
+          <span ref={blockHeaderUtils.parentHash} id='parentHash' style={{color:'white', overflowWrap: 'break-word'}}>{blockHeaderUtils.parentHash.value}</span>
+          <span ref={blockHeaderUtils.uncleHash} id='uncleHash' style={{color:'white', overflowWrap: 'break-word'}}>{blockHeaderUtils.uncleHash.value}</span>
+          <span ref={blockHeaderUtils.coinbase} id='coinbase' style={{color:'white', overflowWrap: 'break-word'}}>{blockHeaderUtils.coinbase.value}</span>
+          <span ref={blockHeaderUtils.stateRoot} id='stateRoot' style={{color:'white', overflowWrap: 'break-word'}}>{blockHeaderUtils.stateRoot.value}</span>
+          <span ref={blockHeaderUtils.transactionsTrie} id='transactionsTrie' style={{color:'white', overflowWrap: 'break-word'}}>{blockHeaderUtils.transactionsTrie.value}</span>
+          <span ref={blockHeaderUtils.receiptTrie} id='receiptTrie' style={{color:'white', overflowWrap: 'break-word'}}>{blockHeaderUtils.receiptTrie.value}</span>
+          <span ref={blockHeaderUtils.logsBloom} id='logsBloom' style={{color:'white', overflowWrap: 'break-word'}}>{blockHeaderUtils.logsBloom.value}</span>
+          <span ref={blockHeaderUtils.difficulty} id='difficulty' style={{color:'white', overflowWrap: 'break-word'}}>{blockHeaderUtils.difficulty.value}</span>
+          <span ref={blockHeaderUtils.number} id='number' style={{color:'white', overflowWrap: 'break-word'}}>{blockHeaderUtils.number.value}</span>
+          <span ref={blockHeaderUtils.gasLimit} id='gasLimit' style={{color:'white', overflowWrap: 'break-word'}}>{blockHeaderUtils.gasLimit.value}</span>
+          <span ref={blockHeaderUtils.gasUsed} id='gasUsed' style={{color:'white', overflowWrap: 'break-word'}}>{blockHeaderUtils.gasUsed.value}</span>
+          <span ref={blockHeaderUtils.timestamp} id='timestamp' style={{color:'white', overflowWrap: 'break-word'}}>{blockHeaderUtils.timestamp.value}</span>
+          <span ref={blockHeaderUtils.extraData} id='extraData' style={{color:'white', overflowWrap: 'break-word'}}>{blockHeaderUtils.extraData.value}</span>
+          <span ref={blockHeaderUtils.mixHash} id='mixHash' style={{color:'white', overflowWrap: 'break-word'}}>{blockHeaderUtils.mixHash.value}</span>
+          <span ref={blockHeaderUtils.nonce} id='nonce' style={{color:'white', overflowWrap: 'break-word'}}>{blockHeaderUtils.nonce.value}</span>
+          <span ref={blockHeaderUtils.baseFeePerGas} id='baseFeePerGas' style={{color:'white', overflowWrap: 'break-word'}}>{blockHeaderUtils.baseFeePerGas.value}</span>
+          <span ref={blockHeaderUtils.withdrawalsRoot} id='withdrawalsRoot' style={{color:'white', overflowWrap: 'break-word'}}>{blockHeaderUtils.withdrawalsRoot.value}</span>
+          
+          { blockHeaderUtils.blobGasUsed.value && <span id='blobGasUsed' style={{color:'white', overflowWrap: 'break-word'}}>{blockHeaderUtils.blobGasUsed.value}</span>}
+          { blockHeaderUtils.excessBlobGas.value && <span id='excessBlobGas' style={{color:'white', overflowWrap: 'break-word'}}>{blockHeaderUtils.excessBlobGas.value}</span>}
+          { blockHeaderUtils.parentBeaconBlockRoot.value && <span id='parentBeaconBlockRoot' style={{color:'white', overflowWrap: 'break-word'}}>{blockHeaderUtils.parentBeaconBlockRoot.value}</span>}
+          { blockHeaderUtils.prevRandao.value && <span id='prevRandao' style={{color:'white', overflowWrap: 'break-word'}}>{blockHeaderUtils.prevRandao.value}</span>}
+          
           <span id='transactionsString' style={{color:'white', overflowWrap: 'break-word'}}>{transactionsString}</span>
           <span id='uncleHeadersString' style={{color:'white', overflowWrap: 'break-word'}}>{uncleHeadersString}</span>
           <span id='withdrawalsString' style={{color:'white', overflowWrap: 'break-word'}}>{withdrawalsString}</span>
