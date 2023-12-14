@@ -37,7 +37,7 @@ const Rlp = ({ rlpObject, colorIndex = 0, parentKey='' }) => {
   })
 }
 
-const BlockData = ({ blockChainNumberFromApp, setBlockPosition, blockScale, blockObject}) => {
+const BlockData = ({ blockChainNumberFromApp, setBlockPosition, setNoteFromRect, blockScale, blockObject}) => {
   const blockNumberTitle = blockChainNumberFromApp
 
   // block poster starting location
@@ -52,6 +52,9 @@ const BlockData = ({ blockChainNumberFromApp, setBlockPosition, blockScale, bloc
   const textRef = useRef(null);
 
   useResizeAndScrollEffect(blockDataRef, setBlockPosition)
+
+  const parentHashRef = useRef()
+  useResizeAndScrollEffect(blockDataRef, (rect) => setNoteFromRect('parentHash', rect))
 
   // console.log('blockObject:', blockObject)
 
@@ -246,7 +249,7 @@ const BlockData = ({ blockChainNumberFromApp, setBlockPosition, blockScale, bloc
           xmlns="http://www.w3.org/1999/xhtml"
           className="block-data"
         >
-          <span id='parentHash' style={{color:'white', overflowWrap: 'break-word'}}>{parentHash}</span>
+          <span ref={parentHashRef} id='parentHash' style={{color:'white', overflowWrap: 'break-word'}}>{parentHash}</span>
           <span id='uncleHash' style={{color:'white', overflowWrap: 'break-word'}}>{uncleHash}</span>
           <span id='coinbase' style={{color:'white', overflowWrap: 'break-word'}}>{coinbase}</span>
           <span id='stateRoot' style={{color:'white', overflowWrap: 'break-word'}}>{stateRoot}</span>

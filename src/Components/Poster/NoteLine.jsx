@@ -1,6 +1,6 @@
 import React from 'react';
 
-const NoteLine = (noteFromRect, noteToRect, posterRect) => {
+const NoteLine = ({ noteFromRect, noteToRect, posterRect }) => {
   if (!noteFromRect || !noteToRect || !posterRect) {
     return
   }

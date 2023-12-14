@@ -9,6 +9,49 @@ import NotesLayer from './NotesLayer';
 import useResizeAndScrollEffect from './ResizeAndScrollHelper';
 import NoteLine from './NoteLine';
 
+const useNotesController  = (posterRect) => {
+  const [noteState, setNoteState] = useState({})
+
+  const set = (id, type, rect) => {
+    console.log(id, type, rect)
+    setNoteState(oldState => {
+      return {
+        ...oldState,
+        [id]: {
+          ...oldState[id],
+          [type]: rect,
+        }
+      }
+    })
+  }
+
+  const setTo = (id, rect) => {
+    set(id, 'to', rect)
+  }
+  const setFrom = (id, rect) => {
+    set(id, 'from', rect)
+  }
+
+  const render = () => {
+    return React.createElement(React.Fragment, null, Object.entries(noteState).map(([id, rects]) => {
+      const { to, from } = rects
+      // console.log(id, rects, posterRect)
+      if (!posterRect || !to || !from) return
+      console.log('rendering note line', id)
+      return (
+        <NoteLine noteFromRect={from} noteToRect={to} posterRect={posterRect}/>
+      )
+    }))
+  }
+
+  return {
+    setTo,
+    setFrom,
+    noteState,
+    render,
+  }
+}
+
 const Poster = ({ blockChainNumberFromApp, blockObject }) => {
   const [fromRect, setFromRect] = useState ()
   const [toRect, setToRect] = useState ()
@@ -16,8 +59,14 @@ const Poster = ({ blockChainNumberFromApp, blockObject }) => {
   const posterRef = useRef(null)
   const [blockScale, setBlockScale] = useState(0.27)
   const [svgPreview, setSvgPreview] = useState()
-  const [noteFromRect, setNoteFromRect] = useState ()
-  const [noteToRect, setNoteToRect] = useState()
+  // const [noteFromRect, setNoteFromRect] = useState ()
+  // const [noteToRect, setNoteToRect] = useState()
+  const {
+    setTo,
+    setFrom,
+    noteState,
+    render,
+  } = useNotesController(posterRect)
 
   useResizeAndScrollEffect(posterRef, setPosterRect)
 
@@ -78,13 +127,18 @@ const Poster = ({ blockChainNumberFromApp, blockObject }) => {
               setBlockPosition={setToRect}
               blockScale={blockScale}
               blockObject={blockObject}
-              setNoteFromRect={setNoteFromRect}
+              setNoteFromRect={setFrom}
             />}
           </DrapAndDropComponent>
-          <NoteLine noteFromRect={noteFromRect} noteToRect={noteToRect} posterRect={posterRect}/>
+
+              {'X'}
+              {render()}
+              {/* {React.createElement('span', null, 'fuck')} */}
+              {'z'}
+
           <NotesLayer
             blockObject={blockObject}
-            setNoteToRect={setNoteToRect}
+            setNoteToRect={setTo}
           />
         </svg>
         <br/>

@@ -3,10 +3,14 @@
 import React, { useState, useEffect, useRef } from "react";
 import { DrapAndDropComponent } from './DragAndDrop';
 import { ethereumjs_execution_block } from '../../assets/staticText.json';
+import useResizeAndScrollEffect from "./ResizeAndScrollHelper";
 
-const NotesLayer = ({blockObject}) => {
+const NotesLayer = ({blockObject, setNoteToRect}) => {
   const [contentWidth, setContentWidth] = useState(100);
-  const textRefs = useRef(ethereumjs_execution_block.map (() => React.createRef()));
+  const textRefs = ethereumjs_execution_block.map (() => useRef());
+  const lineRefs = ethereumjs_execution_block.map (() => useRef());
+
+  // console.log('linerefs:', lineRefs)
 
   //starting position of note boxes
   const x = 250
@@ -16,7 +20,7 @@ const NotesLayer = ({blockObject}) => {
   useEffect(() => {
     const newWidths = {};
     ethereumjs_execution_block.forEach((note, index) => {
-      const textRef = textRefs.current[index]
+      const textRef = textRefs[index]
       if (textRef.current) {
         const rect = textRef.current.getBoundingClientRect();
         newWidths[index] = rect.width + 30
@@ -24,6 +28,11 @@ const NotesLayer = ({blockObject}) => {
     });
     setContentWidth(newWidths);
   }, [blockObject]);
+
+  lineRefs.forEach((lineRef, index) => {
+    const note = ethereumjs_execution_block[index]
+    useResizeAndScrollEffect(lineRef, (rect) => setNoteToRect(note.id, rect))
+  })
 
   return (
     <g>
@@ -38,6 +47,7 @@ const NotesLayer = ({blockObject}) => {
             height={40}
             fill="black"
             fillOpacity={'40%'}
+            ref={lineRefs[index]}
           />
           <text
             id={'id-${$note.index}'}
@@ -47,7 +57,7 @@ const NotesLayer = ({blockObject}) => {
             fontSize="18"
           >{note.id}:</text>
           <text
-            ref={textRefs.current[index]}
+            ref={textRefs[index]}
             id='note-{$note.index}'
             x={x + 20 + (index % 2 === 0 ? 0 : deltaX)}
             y={y + 35 + (52 * index)}
