@@ -15,7 +15,7 @@ const useResizeAndScrollEffect = (targetBlockRef, setBlockPosition) => {
 
     const handleResize = () => {
       if (targetBlockRef.current) {
-        setBlockPosition(targetBlock.getBoundingClientRect());
+        setBlockPosition(targetBlockRef.current.getBoundingClientRect());
       }
     };
 
@@ -25,7 +25,8 @@ const useResizeAndScrollEffect = (targetBlockRef, setBlockPosition) => {
       if (currentScrollY !== prevScrollY) {
         const originalRect = targetBlockRef.current.getBoundingClientRect();
         const scrolledAmount = window.scrollY;
-        const updatedRect = {...originalRect,
+        const updatedRect = {
+          ...originalRect,
           top: originalRect.top + scrolledAmount,
           right: originalRect.right,
           bottom: originalRect.bottom + scrolledAmount,

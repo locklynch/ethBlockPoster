@@ -7,13 +7,13 @@ import BlockChain from './BlockChain';
 import Lines from './LinesToBlock';
 import NotesLayer from './NotesLayer';
 import useResizeAndScrollEffect from './ResizeAndScrollHelper';
-import NoteLine from './NoteLine';
+import NoteLine from './LinesToNotes';
 
 const useNotesController  = (posterRect) => {
   const [noteState, setNoteState] = useState({})
 
   const set = (id, type, rect) => {
-    console.log(id, type, rect)
+    // console.log(id, type, rect)
     setNoteState(oldState => {
       return {
         ...oldState,
@@ -37,9 +37,9 @@ const useNotesController  = (posterRect) => {
       const { to, from } = rects
       // console.log(id, rects, posterRect)
       if (!posterRect || !to || !from) return
-      console.log('rendering note line', id)
+      // console.log('rendering note line', id)
       return (
-        <NoteLine noteFromRect={from} noteToRect={to} posterRect={posterRect}/>
+        <NoteLine key={'noteline'+id} noteFromRect={from} noteToRect={to} posterRect={posterRect}/>
       )
     }))
   }

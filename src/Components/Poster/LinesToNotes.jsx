@@ -12,7 +12,7 @@ const NoteLine = ({ noteFromRect, noteToRect, posterRect }) => {
         x1={(noteFromRect.left-posterRect.left)}
         y1={(noteFromRect.top-posterRect.top)}
         x2={(noteToRect.left-posterRect.left)}
-        y2={(noteToRect.top-posterRect.top)}
+        y2={(noteToRect.top-posterRect.top+20)}
         stroke='red'
         strokeWidth={3}
         opacity={'50%'}
