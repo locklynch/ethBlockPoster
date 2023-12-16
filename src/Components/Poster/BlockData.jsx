@@ -144,7 +144,8 @@ const BlockData = ({ blockChainNumberFromApp, setBlockPosition, setNoteFromRect,
     },
   }
   Object.keys(blockHeaderUtils).map((id) => {
-    useResizeAndScrollEffect(blockDataRef, (rect) => setNoteFromRect(id, rect))
+    const {ref} = blockHeaderUtils[id];
+    useResizeAndScrollEffect(ref, (rect) => setNoteFromRect(id, rect))
   })
 
   // const transactionsObj = blockObject.transactions.map(transaction => ({
@@ -295,32 +296,32 @@ const BlockData = ({ blockChainNumberFromApp, setBlockPosition, setNoteFromRect,
           xmlns="http://www.w3.org/1999/xhtml"
           className="block-data"
         >
-          <span ref={blockHeaderUtils.parentHash.ref} id='parentHash' style={{color:'white', overflowWrap: 'break-word'}}>{blockHeaderUtils.parentHash.value}</span>
-          <span ref={blockHeaderUtils.uncleHash.ref} id='uncleHash' style={{color:'white', overflowWrap: 'break-word'}}>{blockHeaderUtils.uncleHash.value}</span>
-          <span ref={blockHeaderUtils.coinbase.ref} id='coinbase' style={{color:'white', overflowWrap: 'break-word'}}>{blockHeaderUtils.coinbase.value}</span>
-          <span ref={blockHeaderUtils.stateRoot.ref} id='stateRoot' style={{color:'white', overflowWrap: 'break-word'}}>{blockHeaderUtils.stateRoot.value}</span>
-          <span ref={blockHeaderUtils.transactionsTrie.ref} id='transactionsTrie' style={{color:'white', overflowWrap: 'break-word'}}>{blockHeaderUtils.transactionsTrie.value}</span>
-          <span ref={blockHeaderUtils.receiptTrie.ref} id='receiptTrie' style={{color:'white', overflowWrap: 'break-word'}}>{blockHeaderUtils.receiptTrie.value}</span>
-          <span ref={blockHeaderUtils.logsBloom.ref} id='logsBloom' style={{color:'white', overflowWrap: 'break-word'}}>{blockHeaderUtils.logsBloom.value}</span>
-          <span ref={blockHeaderUtils.difficulty.ref} id='difficulty' style={{color:'white', overflowWrap: 'break-word'}}>{blockHeaderUtils.difficulty.value}</span>
-          <span ref={blockHeaderUtils.number.ref} id='number' style={{color:'white', overflowWrap: 'break-word'}}>{blockHeaderUtils.number.value}</span>
-          <span ref={blockHeaderUtils.gasLimit.ref} id='gasLimit' style={{color:'white', overflowWrap: 'break-word'}}>{blockHeaderUtils.gasLimit.value}</span>
-          <span ref={blockHeaderUtils.gasUsed.ref} id='gasUsed' style={{color:'white', overflowWrap: 'break-word'}}>{blockHeaderUtils.gasUsed.value}</span>
-          <span ref={blockHeaderUtils.timestamp.ref} id='timestamp' style={{color:'white', overflowWrap: 'break-word'}}>{blockHeaderUtils.timestamp.value}</span>
-          <span ref={blockHeaderUtils.extraData.ref} id='extraData' style={{color:'white', overflowWrap: 'break-word'}}>{blockHeaderUtils.extraData.value}</span>
-          <span ref={blockHeaderUtils.mixHash.ref} id='mixHash' style={{color:'white', overflowWrap: 'break-word'}}>{blockHeaderUtils.mixHash.value}</span>
-          <span ref={blockHeaderUtils.nonce.ref} id='nonce' style={{color:'white', overflowWrap: 'break-word'}}>{blockHeaderUtils.nonce.value}</span>
-          <span ref={blockHeaderUtils.baseFeePerGas.ref} id='baseFeePerGas' style={{color:'white', overflowWrap: 'break-word'}}>{blockHeaderUtils.baseFeePerGas.value}</span>
-          <span ref={blockHeaderUtils.withdrawalsRoot.ref} id='withdrawalsRoot' style={{color:'white', overflowWrap: 'break-word'}}>{blockHeaderUtils.withdrawalsRoot.value}</span>
+          <span ref={blockHeaderUtils.parentHash.ref} id='parentHash' style={{color:'white', overflowWrap: 'break-word', width: '100', height: '100'}}>{blockHeaderUtils.parentHash.value}</span>
+          <span ref={blockHeaderUtils.uncleHash.ref} id='uncleHash' style={{color:'white', overflowWrap: 'break-word', width: '100', height: '100'}}>{blockHeaderUtils.uncleHash.value}</span>
+          <span ref={blockHeaderUtils.coinbase.ref} id='coinbase' style={{color:'white', overflowWrap: 'break-word', width: '100', height: '100'}}>{blockHeaderUtils.coinbase.value}</span>
+          <span ref={blockHeaderUtils.stateRoot.ref} id='stateRoot' style={{color:'white', overflowWrap: 'break-word', width: '100', height: '100'}}>{blockHeaderUtils.stateRoot.value}</span>
+          <span ref={blockHeaderUtils.transactionsTrie.ref} id='transactionsTrie' style={{color:'white', overflowWrap: 'break-word', width: '100', height: '100'}}>{blockHeaderUtils.transactionsTrie.value}</span>
+          <span ref={blockHeaderUtils.receiptTrie.ref} id='receiptTrie' style={{color:'white', overflowWrap: 'break-word', width: '100', height: '100'}}>{blockHeaderUtils.receiptTrie.value}</span>
+          <span ref={blockHeaderUtils.logsBloom.ref} id='logsBloom' style={{color:'white', overflowWrap: 'break-word', width: '100', height: '100'}}>{blockHeaderUtils.logsBloom.value}</span>
+          <span ref={blockHeaderUtils.difficulty.ref} id='difficulty' style={{color:'white', overflowWrap: 'break-word', width: '100', height: '100'}}>{blockHeaderUtils.difficulty.value}</span>
+          <span ref={blockHeaderUtils.number.ref} id='number' style={{color:'white', overflowWrap: 'break-word', width: '100', height: '100'}}>{blockHeaderUtils.number.value}</span>
+          <span ref={blockHeaderUtils.gasLimit.ref} id='gasLimit' style={{color:'white', overflowWrap: 'break-word', width: '100', height: '100'}}>{blockHeaderUtils.gasLimit.value}</span>
+          <span ref={blockHeaderUtils.gasUsed.ref} id='gasUsed' style={{color:'white', overflowWrap: 'break-word', width: '100', height: '100'}}>{blockHeaderUtils.gasUsed.value}</span>
+          <span ref={blockHeaderUtils.timestamp.ref} id='timestamp' style={{color:'white', overflowWrap: 'break-word', width: '100', height: '100'}}>{blockHeaderUtils.timestamp.value}</span>
+          <span ref={blockHeaderUtils.extraData.ref} id='extraData' style={{color:'white', overflowWrap: 'break-word', width: '100', height: '100'}}>{blockHeaderUtils.extraData.value}</span>
+          <span ref={blockHeaderUtils.mixHash.ref} id='mixHash' style={{color:'white', overflowWrap: 'break-word', width: '100', height: '100'}}>{blockHeaderUtils.mixHash.value}</span>
+          <span ref={blockHeaderUtils.nonce.ref} id='nonce' style={{color:'white', overflowWrap: 'break-word', width: '100', height: '100'}}>{blockHeaderUtils.nonce.value}</span>
+          <span ref={blockHeaderUtils.baseFeePerGas.ref} id='baseFeePerGas' style={{color:'white', overflowWrap: 'break-word', width: '100', height: '100'}}>{blockHeaderUtils.baseFeePerGas.value}</span>
+          <span ref={blockHeaderUtils.withdrawalsRoot.ref} id='withdrawalsRoot' style={{color:'white', overflowWrap: 'break-word', width: '100', height: '100'}}>{blockHeaderUtils.withdrawalsRoot.value}</span>
           
-          { blockHeaderUtils.blobGasUsed.value && <span id='blobGasUsed' style={{color:'white', overflowWrap: 'break-word'}}>{blockHeaderUtils.blobGasUsed.value}</span>}
-          { blockHeaderUtils.excessBlobGas.value && <span id='excessBlobGas' style={{color:'white', overflowWrap: 'break-word'}}>{blockHeaderUtils.excessBlobGas.value}</span>}
-          { blockHeaderUtils.parentBeaconBlockRoot.value && <span id='parentBeaconBlockRoot' style={{color:'white', overflowWrap: 'break-word'}}>{blockHeaderUtils.parentBeaconBlockRoot.value}</span>}
-          { blockHeaderUtils.prevRandao.value && <span id='prevRandao' style={{color:'white', overflowWrap: 'break-word'}}>{blockHeaderUtils.prevRandao.value}</span>}
+          { blockHeaderUtils.blobGasUsed.value && <span id='blobGasUsed' style={{color:'white', overflowWrap: 'break-word', width: '100', height: '100'}}>{blockHeaderUtils.blobGasUsed.value}</span>}
+          { blockHeaderUtils.excessBlobGas.value && <span id='excessBlobGas' style={{color:'white', overflowWrap: 'break-word', width: '100', height: '100'}}>{blockHeaderUtils.excessBlobGas.value}</span>}
+          { blockHeaderUtils.parentBeaconBlockRoot.value && <span id='parentBeaconBlockRoot' style={{color:'white', overflowWrap: 'break-word', width: '100', height: '100'}}>{blockHeaderUtils.parentBeaconBlockRoot.value}</span>}
+          { blockHeaderUtils.prevRandao.value && <span id='prevRandao' style={{color:'white', overflowWrap: 'break-word', width: '100', height: '100'}}>{blockHeaderUtils.prevRandao.value}</span>}
           
-          <span id='transactionsString' style={{color:'white', overflowWrap: 'break-word'}}>{transactionsString}</span>
-          <span id='uncleHeadersString' style={{color:'white', overflowWrap: 'break-word'}}>{uncleHeadersString}</span>
-          <span id='withdrawalsString' style={{color:'white', overflowWrap: 'break-word'}}>{withdrawalsString}</span>
+          <span id='transactionsString' style={{color:'white', overflowWrap: 'break-word', width: '100', height: '100'}}>{transactionsString}</span>
+          <span id='uncleHeadersString' style={{color:'white', overflowWrap: 'break-word', width: '100', height: '100'}}>{uncleHeadersString}</span>
+          <span id='withdrawalsString' style={{color:'white', overflowWrap: 'break-word', width: '100', height: '100'}}>{withdrawalsString}</span>
 
 
           {/* <Rlp rlpObject={parentHash} /> */}
