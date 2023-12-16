@@ -4,16 +4,15 @@ import React, { useState, useEffect, useRef } from "react";
 import { DrapAndDropComponent } from './DragAndDrop';
 import { ethereumjs_execution_block } from '../../assets/staticText.json';
 import useResizeAndScrollEffect from "./ResizeAndScrollHelper";
+import BlockUtils from './BlockUtils'
 
 const NotesLayer = ({blockObject, setNoteToRect}) => {
   const [contentWidth, setContentWidth] = useState(100);
   const textRefs = ethereumjs_execution_block.map (() => useRef());
   const lineRefs = ethereumjs_execution_block.map (() => useRef());
 
-  // console.log('linerefs:', lineRefs)
-
   //starting position of note boxes
-  const x = 250
+  const x = 150
   const y = 100
   const deltaX = 200
 
@@ -34,6 +33,8 @@ const NotesLayer = ({blockObject, setNoteToRect}) => {
     useResizeAndScrollEffect(lineRef, (rect) => setNoteToRect(note.id, rect))
   })
 
+  const blockHeaderUtils = BlockUtils(blockObject)
+
   return (
     <g>
       {blockObject && ethereumjs_execution_block.map((note, index) => (
@@ -41,7 +42,8 @@ const NotesLayer = ({blockObject, setNoteToRect}) => {
           <rect
             stroke="white"
             strokeWidth={2}
-            x={x + (index % 2 === 0 ? 0 : deltaX)}
+            // x={x + (index % 2 === 0 ? 0 : deltaX)} // old stagger display
+            x={x + (index*15)}
             y={y + (52 * index)}
             width={contentWidth[index]}
             height={40}
@@ -51,7 +53,8 @@ const NotesLayer = ({blockObject, setNoteToRect}) => {
           />
           <text
             id={'id-${$note.index}'}
-            x={x + 10 + (index % 2 === 0 ? 0 : deltaX)}
+            // x={x + 10 + (index % 2 === 0 ? 0 : deltaX)} // old stagger display
+            x={x + 10 + (index*15)}
             y={y + 18 + (52 * index)}
             fill="white"
             fontSize="18"
@@ -59,17 +62,18 @@ const NotesLayer = ({blockObject, setNoteToRect}) => {
           <text
             ref={textRefs[index]}
             id='note-{$note.index}'
-            x={x + 20 + (index % 2 === 0 ? 0 : deltaX)}
+            // x={x + 20 + (index % 2 === 0 ? 0 : deltaX)} // old stagger display
+            x={x + 20 + (index*15)}
             y={y + 35 + (52 * index)}
             fill="white"
             fontSize="15"
           >{note.text}</text>
-          {/* <text
+          {/* {blockHeaderUtils && <text
               x={x + 10 + (index % 2 === 0 ? 0 : deltaX)}
               y={y + 55 + (60 * index)}
               fill="white"
               fontSize="14"
-            >{JSON.stringify(blockObject[note.id])}</text> */}
+            >{(blockHeaderUtils[note.id].value)}</text>} */}
         </DrapAndDropComponent>
       ))}
     </g>

@@ -136,10 +136,10 @@ const Poster = ({ blockChainNumberFromApp, blockObject }) => {
               {/* {React.createElement('span', null, 'fuck')} */}
               {'z'}
 
-          <NotesLayer
+          {blockObject && <NotesLayer
             blockObject={blockObject}
             setNoteToRect={setTo}
-          />
+          />}
         </svg>
         <br/>
         {svgPreview && <img src={svgPreview}/>}

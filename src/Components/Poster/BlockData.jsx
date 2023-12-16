@@ -7,6 +7,7 @@ import {Buffer} from 'buffer'
 import { RLP } from '@ethereumjs/rlp'
 import { bigIntToUnpaddedBytes } from '@ethereumjs/util'
 import {Block} from '@ethereumjs/block'
+import BlockUtils from './BlockUtils'
 
 const colorPalette = [
   '#FFD1DC', // Light Pink
@@ -37,12 +38,6 @@ const Rlp = ({ rlpObject, colorIndex = 0, parentKey='' }) => {
   })
 }
 
-const valueToHex = (value) => value === undefined ? false : Buffer.from(value).toString('hex')
-const addressToHex = (value) => value === undefined ? false : Buffer.from(value.bytes).toString('hex')
-const bigIntToHex = (value) => value === undefined ? false : Buffer.from(bigIntToUnpaddedBytes(value)).toString('hex')
-
-
-
 const BlockData = ({ blockChainNumberFromApp, setBlockPosition, setNoteFromRect, blockScale, blockObject}) => {
   const blockNumberTitle = blockChainNumberFromApp
 
@@ -57,92 +52,8 @@ const BlockData = ({ blockChainNumberFromApp, setBlockPosition, setNoteFromRect,
 
   useResizeAndScrollEffect(blockDataRef, setBlockPosition)
 
-  const blockHeaderUtils = {
-    parentHash: {
-      ref: useRef(),
-      value: valueToHex(blockObject.header.parentHash),
-    },
-    uncleHash: {
-      ref: useRef(),
-      value: valueToHex(blockObject.header.uncleHash),
-    },
-    coinbase: {
-      ref: useRef(),
-      value: addressToHex(blockObject.header.coinbase),
-    },
-    stateRoot: {
-      ref: useRef(),
-      value: valueToHex(blockObject.header.stateRoot),
-    },
-    transactionsTrie: {
-      ref: useRef(),
-      value: valueToHex(blockObject.header.transactionsTrie),
-    },
-    receiptTrie: {
-      ref: useRef(),
-      value: valueToHex(blockObject.header.receiptTrie),
-    },
-    logsBloom: {
-      ref: useRef(),
-      value: valueToHex(blockObject.header.logsBloom),
-    },
-    difficulty: {
-      ref: useRef(),
-      value: bigIntToHex(blockObject.header.difficulty),
-    },
-    number: {
-      ref: useRef(),
-      value: bigIntToHex(blockObject.header.number),
-    },
-    gasLimit: {
-      ref: useRef(),
-      value: bigIntToHex(blockObject.header.gasLimit),
-    },
-    gasUsed: {
-      ref: useRef(),
-      value: bigIntToHex(blockObject.header.gasUsed),
-    },
-    timestamp: {
-      ref: useRef(),
-      value: bigIntToHex(blockObject.header.timestamp ?? BIGINT_0),
-    },
-    extraData: {
-      ref: useRef(),
-      value: valueToHex(blockObject.header.extraData),
-    },
-    mixHash: {
-      ref: useRef(),
-      value: valueToHex(blockObject.header.mixHash),
-    },
-    nonce: {
-      ref: useRef(),
-      value: valueToHex(blockObject.header.nonce),
-    },
-    baseFeePerGas: {
-      ref: useRef(),
-      value: bigIntToHex(blockObject.header.baseFeePerGas),
-    },
-    withdrawalsRoot: {
-      ref: useRef(),
-      value: valueToHex(blockObject.header.withdrawalsRoot),
-    },
-    blobGasUsed: {
-      ref: useRef(bigIntToHex(blockObject.header.blobGasUsed)),
-      value: null,
-    },
-    excessBlobGas: {
-      ref: useRef(),
-      value: bigIntToHex(blockObject.header.excessBlobGas),
-    },
-    parentBeaconBlockRoot: {
-      ref: useRef(),
-      value: valueToHex(blockObject.header.parentBeaconBlockRoot),
-    },
-    prevRandao: {
-      ref: useRef(),
-      value: valueToHex(blockObject.header.prevRandao),
-    },
-  }
+  const blockHeaderUtils = BlockUtils(blockObject)
+
   Object.keys(blockHeaderUtils).map((id) => {
     const {ref} = blockHeaderUtils[id];
     useResizeAndScrollEffect(ref, (rect) => setNoteFromRect(id, rect))
@@ -314,10 +225,10 @@ const BlockData = ({ blockChainNumberFromApp, setBlockPosition, setNoteFromRect,
           <span ref={blockHeaderUtils.baseFeePerGas.ref} id='baseFeePerGas' style={{color:'white', overflowWrap: 'break-word', width: '100', height: '100'}}>{blockHeaderUtils.baseFeePerGas.value}</span>
           <span ref={blockHeaderUtils.withdrawalsRoot.ref} id='withdrawalsRoot' style={{color:'white', overflowWrap: 'break-word', width: '100', height: '100'}}>{blockHeaderUtils.withdrawalsRoot.value}</span>
           
-          { blockHeaderUtils.blobGasUsed.value && <span id='blobGasUsed' style={{color:'white', overflowWrap: 'break-word', width: '100', height: '100'}}>{blockHeaderUtils.blobGasUsed.value}</span>}
-          { blockHeaderUtils.excessBlobGas.value && <span id='excessBlobGas' style={{color:'white', overflowWrap: 'break-word', width: '100', height: '100'}}>{blockHeaderUtils.excessBlobGas.value}</span>}
-          { blockHeaderUtils.parentBeaconBlockRoot.value && <span id='parentBeaconBlockRoot' style={{color:'white', overflowWrap: 'break-word', width: '100', height: '100'}}>{blockHeaderUtils.parentBeaconBlockRoot.value}</span>}
-          { blockHeaderUtils.prevRandao.value && <span id='prevRandao' style={{color:'white', overflowWrap: 'break-word', width: '100', height: '100'}}>{blockHeaderUtils.prevRandao.value}</span>}
+          { blockHeaderUtils.blobGasUsed.value && <span ref={blockHeaderUtils.blobGasUsed.ref} id='blobGasUsed' style={{color:'white', overflowWrap: 'break-word', width: '100', height: '100'}}>{blockHeaderUtils.blobGasUsed.value}</span>}
+          { blockHeaderUtils.excessBlobGas.value && <span ref={blockHeaderUtils.excessBlobGas.ref} id='excessBlobGas' style={{color:'white', overflowWrap: 'break-word', width: '100', height: '100'}}>{blockHeaderUtils.excessBlobGas.value}</span>}
+          { blockHeaderUtils.parentBeaconBlockRoot.value && <span ref={blockHeaderUtils.parentBeaconBlockRoot.ref} id='parentBeaconBlockRoot' style={{color:'white', overflowWrap: 'break-word', width: '100', height: '100'}}>{blockHeaderUtils.parentBeaconBlockRoot.value}</span>}
+          { blockHeaderUtils.prevRandao.value && <span ref={blockHeaderUtils.prevRandao.ref} id='prevRandao' style={{color:'white', overflowWrap: 'break-word', width: '100', height: '100'}}>{blockHeaderUtils.prevRandao.value}</span>}
           
           <span id='transactionsString' style={{color:'white', overflowWrap: 'break-word', width: '100', height: '100'}}>{transactionsString}</span>
           <span id='uncleHeadersString' style={{color:'white', overflowWrap: 'break-word', width: '100', height: '100'}}>{uncleHeadersString}</span>
