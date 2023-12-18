@@ -2,14 +2,16 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { DrapAndDropComponent } from './DragAndDrop';
-import { ethereumjs_execution_block } from '../../assets/staticText.json';
+import notesText from './staticText.js';
 import useResizeAndScrollEffect from "./ResizeAndScrollHelper";
 import BlockUtils from './BlockUtils'
 
+const theNotes = notesText.ethereumjs_execution_block
+
 const NotesLayer = ({blockObject, setNoteToRect}) => {
   const [contentWidth, setContentWidth] = useState(100);
-  const textRefs = ethereumjs_execution_block.map (() => useRef());
-  const lineRefs = ethereumjs_execution_block.map (() => useRef());
+  const textRefs = notesText.ethereumjs_execution_block.map (() => useRef());
+  const lineRefs = notesText.ethereumjs_execution_block.map (() => useRef());
 
   //starting position of note boxes
   const x = 150
@@ -18,7 +20,7 @@ const NotesLayer = ({blockObject, setNoteToRect}) => {
 
   useEffect(() => {
     const newWidths = {};
-    ethereumjs_execution_block.forEach((note, index) => {
+    notesText.ethereumjs_execution_block.forEach((note, index) => {
       const textRef = textRefs[index]
       if (textRef.current) {
         const rect = textRef.current.getBoundingClientRect();
@@ -29,7 +31,7 @@ const NotesLayer = ({blockObject, setNoteToRect}) => {
   }, [blockObject]);
 
   lineRefs.forEach((lineRef, index) => {
-    const note = ethereumjs_execution_block[index]
+    const note = notesText.ethereumjs_execution_block[index]
     useResizeAndScrollEffect(lineRef, (rect) => setNoteToRect(note.id, rect))
   })
 
@@ -37,10 +39,10 @@ const NotesLayer = ({blockObject, setNoteToRect}) => {
 
   return (
     <g>
-      {blockObject && ethereumjs_execution_block.map((note, index) => (
-        <DrapAndDropComponent key={note.id} style={{ borderStyle: 'solid', borderWidth: '1px', borderColor: 'white'}}>
+      {blockObject && notesText.ethereumjs_execution_block.map((theNotes, index) => (
+        <DrapAndDropComponent key={theNotes.id} style={{ borderStyle: 'solid', borderWidth: '1px', borderColor: theNotes.color}}>
           <rect
-            stroke="white"
+            stroke={theNotes.color}
             strokeWidth={2}
             // x={x + (index % 2 === 0 ? 0 : deltaX)} // old stagger display
             x={x + (index*15)}
@@ -56,18 +58,18 @@ const NotesLayer = ({blockObject, setNoteToRect}) => {
             // x={x + 10 + (index % 2 === 0 ? 0 : deltaX)} // old stagger display
             x={x + 10 + (index*15)}
             y={y + 18 + (52 * index)}
-            fill="white"
+            fill={theNotes.color}
             fontSize="18"
-          >{note.id}:</text>
+          >{theNotes.id}:</text>
           <text
             ref={textRefs[index]}
             id='note-{$note.index}'
             // x={x + 20 + (index % 2 === 0 ? 0 : deltaX)} // old stagger display
             x={x + 20 + (index*15)}
             y={y + 35 + (52 * index)}
-            fill="white"
+            fill={theNotes.color}
             fontSize="15"
-          >{note.text}</text>
+          >{theNotes.text}</text>
           {/* {blockHeaderUtils && <text
               x={x + 10 + (index % 2 === 0 ? 0 : deltaX)}
               y={y + 55 + (60 * index)}

@@ -8,6 +8,9 @@ import Lines from './LinesToBlock';
 import NotesLayer from './NotesLayer';
 import useResizeAndScrollEffect from './ResizeAndScrollHelper';
 import NoteLine from './LinesToNotes';
+import notesText from './staticText.js';
+
+const theNotes = notesText.ethereumjs_execution_block
 
 const useNotesController  = (posterRect) => {
   const [noteState, setNoteState] = useState({})
@@ -36,10 +39,12 @@ const useNotesController  = (posterRect) => {
     return React.createElement(React.Fragment, null, Object.entries(noteState).map(([id, rects]) => {
       const { to, from } = rects
       // console.log(id, rects, posterRect)
-      if (!posterRect || !to || !from) return
-      // console.log('rendering note line', id)
+      const noteProp = theNotes.find(prop => prop.id === id)
+  
+      const color = noteProp ? noteProp.color : 'white'
+
       return (
-        <NoteLine key={'noteline'+id} noteFromRect={from} noteToRect={to} posterRect={posterRect}/>
+        <NoteLine key={'noteline'+id} noteFromRect={from} noteToRect={to} posterRect={posterRect} color={color} />
       )
     }))
   }
@@ -65,7 +70,7 @@ const Poster = ({ blockChainNumberFromApp, blockObject }) => {
     setTo,
     setFrom,
     noteState,
-    render,
+    render: renderPolygons,
   } = useNotesController(posterRect)
 
   useResizeAndScrollEffect(posterRef, setPosterRect)
@@ -130,12 +135,7 @@ const Poster = ({ blockChainNumberFromApp, blockObject }) => {
               setNoteFromRect={setFrom}
             />}
           </DrapAndDropComponent>
-
-              {'X'}
-              {render()}
-              {/* {React.createElement('span', null, 'fuck')} */}
-              {'z'}
-
+          {renderPolygons()}
           {blockObject && <NotesLayer
             blockObject={blockObject}
             setNoteToRect={setTo}
