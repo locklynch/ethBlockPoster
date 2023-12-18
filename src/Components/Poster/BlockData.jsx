@@ -52,6 +52,10 @@ const BlockData = ({ blockChainNumberFromApp, setBlockPosition, setNoteFromRect,
 
   useResizeAndScrollEffect(blockDataRef, setBlockPosition)
 
+  const valueToHex = (value) => value === undefined ? false : Buffer.from(value).toString('hex')
+  const addressToHex = (value) => value === undefined ? false : Buffer.from(value.bytes).toString('hex')
+  const bigIntToHex = (value) => value === undefined ? false : Buffer.from(bigIntToUnpaddedBytes(value)).toString('hex')
+
   const blockHeaderUtils = BlockUtils(blockObject)
 
   Object.keys(blockHeaderUtils).map((id) => {
@@ -59,119 +63,69 @@ const BlockData = ({ blockChainNumberFromApp, setBlockPosition, setNoteFromRect,
     useResizeAndScrollEffect(ref, (rect) => setNoteFromRect(id, rect))
   })
 
-  // const transactionsObj = blockObject.transactions.map(transaction => ({
-  //   type: Buffer.from(bigIntToUnpaddedBytes(transaction.type)).toString('hex'),
-  //   nonce: Buffer.from(bigIntToUnpaddedBytes(transaction.nonce)).toString('hex'),
-  //   gasLimit: Buffer.from(bigIntToUnpaddedBytes(transaction.gasLimit)).toString('hex'),
-  //   to: transaction.to,
-  //   value: Buffer.from(bigIntToUnpaddedBytes(transaction.value)).toString('hex'),
-  //   data: transaction.data,
-  //   v: transaction.v,
-  //   r: transaction.r,
-  //   s: transaction.s,
-  //   chainId: transaction.chainId,
-  //   maxPriorityFeePerGas: transaction.maxPriorityFeePerGas,
-  //   maxFeePerGas: transaction.maxFeePerGas,
-  //   accessList: transaction.accessList,
-  // }));
+  const transactionsString = ((blockObject.transactions.map(transaction => {
+    return (
+      Buffer.from(transaction.serialize()).toString('hex')
+    );
+  }).join('')))
 
-  // console.log('allTransactions:', transactionsObj)
+  // // The Uncles reconstructed
+  // const uncleHeadersArr = blockObject.uncleHeaders.map(uncleHeader => ({
+  //   uncleParentHash: Buffer.from(uncleHeader.parentHash).toString('hex'),
+  //   uncleUncleHash: Buffer.from(uncleHeader.uncleHash).toString('hex'),
+  //   uncleCoinbase: Buffer.from(uncleHeader.coinbase.bytes).toString('hex'),
+  //   uncleStateRoot: Buffer.from(uncleHeader.stateRoot).toString('hex'),
+  //   uncleTransactionsTrie: Buffer.from(uncleHeader.transactionsTrie).toString('hex'),
+  //   uncleReceiptTrie: Buffer.from(uncleHeader.receiptTrie).toString('hex'),
+  //   uncleLogsBloom: Buffer.from(uncleHeader.logsBloom).toString('hex'),
+  //   uncleDifficulty: Buffer.from(bigIntToUnpaddedBytes(uncleHeader.difficulty)).toString('hex'),
+  //   uncleNumber: Buffer.from(bigIntToUnpaddedBytes(uncleHeader.number)).toString('hex'),
+  //   uncleGasLimit: Buffer.from(bigIntToUnpaddedBytes(uncleHeader.gasLimit)).toString('hex'),
+  //   uncleGasUsed: Buffer.from(bigIntToUnpaddedBytes(uncleHeader.gasUsed)).toString('hex'),
+  //   uncleTimestamp: Buffer.from(bigIntToUnpaddedBytes(uncleHeader.timestamp ?? BIGINT_0)).toString('hex'),
+  //   uncleExtraData: Buffer.from(uncleHeader.extraData).toString('hex'),
+  //   uncleMixHash: Buffer.from(uncleHeader.mixHash).toString('hex'),
+  //   uncleNonce: Buffer.from(uncleHeader.nonce).toString('hex'),
+  //   uncleBaseFeePerGas: Buffer.from(bigIntToUnpaddedBytes(uncleHeader.baseFeePerGas)).toString('hex'),
+  //   uncleWithdrawalsRoot: Buffer.from(uncleHeader.withdrawalsRoot).toString('hex'),
+  // }))
 
-
-  // The Transactions, reconstructed
-  const transactionsObj = blockObject.transactions.map(transaction => ({
-    type: transaction.type,
-    nonce: transaction.nonce,
-    gasLimit: transaction.gasLimit,
-    to: transaction.to,
-    value: transaction.value,
-    data: transaction.data,
-    v: transaction.v,
-    r: transaction.r,
-    s: transaction.s,
-    chainId: transaction.chainId,
-    maxPriorityFeePerGas: transaction.maxPriorityFeePerGas,
-    maxFeePerGas: transaction.maxFeePerGas,
-    accessList: transaction.accessList,
-  }));
-
-
-  const transactionsString = Buffer.from((transactionsObj.map(transaction => {
-    return (`
-      type: ${transaction.type}
-      Nonce: ${transaction.nonce}
-      Gas Limit: ${transaction.gasLimit}
-      to: ${transaction.to}
-      value: ${transaction.value}
-      data: ${transaction.data}
-      v: ${transaction.v}
-      r: ${transaction.r}
-      s: ${transaction.s}
-      chainId: ${transaction.chainId}
-      maxPriorityFeePerGas: ${transaction.maxPriorityFeePerGas}
-      maxFeePerGas: ${transaction.maxFeePerGas}
-      accessList: ${transaction.accessList}
-    `);
-  }).join(''))).toString('hex')
-
-  // The Uncles reconstructed
-  const uncleHeadersArr = blockObject.uncleHeaders.map(uncleHeader => ({
-    uncleParentHash: Buffer.from(uncleHeader.parentHash).toString('hex'),
-    uncleUncleHash: Buffer.from(uncleHeader.uncleHash).toString('hex'),
-    uncleCoinbase: Buffer.from(uncleHeader.coinbase.bytes).toString('hex'),
-    uncleStateRoot: Buffer.from(uncleHeader.stateRoot).toString('hex'),
-    uncleTransactionsTrie: Buffer.from(uncleHeader.transactionsTrie).toString('hex'),
-    uncleReceiptTrie: Buffer.from(uncleHeader.receiptTrie).toString('hex'),
-    uncleLogsBloom: Buffer.from(uncleHeader.logsBloom).toString('hex'),
-    uncleDifficulty: Buffer.from(bigIntToUnpaddedBytes(uncleHeader.difficulty)).toString('hex'),
-    uncleNumber: Buffer.from(bigIntToUnpaddedBytes(uncleHeader.number)).toString('hex'),
-    uncleGasLimit: Buffer.from(bigIntToUnpaddedBytes(uncleHeader.gasLimit)).toString('hex'),
-    uncleGasUsed: Buffer.from(bigIntToUnpaddedBytes(uncleHeader.gasUsed)).toString('hex'),
-    uncleTimestamp: Buffer.from(bigIntToUnpaddedBytes(uncleHeader.timestamp ?? BIGINT_0)).toString('hex'),
-    uncleExtraData: Buffer.from(uncleHeader.extraData).toString('hex'),
-    uncleMixHash: Buffer.from(uncleHeader.mixHash).toString('hex'),
-    uncleNonce: Buffer.from(uncleHeader.nonce).toString('hex'),
-    uncleBaseFeePerGas: Buffer.from(bigIntToUnpaddedBytes(uncleHeader.baseFeePerGas)).toString('hex'),
-    uncleWithdrawalsRoot: Buffer.from(uncleHeader.withdrawalsRoot).toString('hex'),
-  }))
-
-  const uncleHeadersString = Buffer.from((uncleHeadersArr.map(uncleHeader => {
-    return (`
-      parentHash: ${uncleHeader.parentHash}
-      uncleHash: ${uncleHeader.uncleHash}
-      coinbase: ${uncleHeader.coinbase}
-      stateRoot: ${uncleHeader.stateRoot}
-      transactionsTrie: ${uncleHeader.transactionsTrie}
-      recepitTrie: ${uncleHeader.receiptTrie}
-      logsBloom: ${uncleHeader.logsBloom}
-      difficulty: ${uncleHeader.difficulty}
-      number: ${uncleHeader.number}
-      gasLimit: ${uncleHeader.gasLimit}
-      gasUsed: ${uncleHeader.gasUsed}
-      timeStamp: ${uncleHeader.timestamp}
-      extraData: ${uncleHeader.extraData}
-      mixHash: ${uncleHeader.mixHash}
-      nonce: ${uncleHeader.nonce}
-      baseFeePerGas: ${uncleHeader.baseFeePerGas}
-    `);
-  }).join(''))).toString('hex')
+  // const uncleHeadersString = Buffer.from((uncleHeadersArr.map(uncleHeader => {
+  //   return (`
+  //     parentHash: ${uncleHeader.parentHash}
+  //     uncleHash: ${uncleHeader.uncleHash}
+  //     coinbase: ${uncleHeader.coinbase}
+  //     stateRoot: ${uncleHeader.stateRoot}
+  //     transactionsTrie: ${uncleHeader.transactionsTrie}
+  //     recepitTrie: ${uncleHeader.receiptTrie}
+  //     logsBloom: ${uncleHeader.logsBloom}
+  //     difficulty: ${uncleHeader.difficulty}
+  //     number: ${uncleHeader.number}
+  //     gasLimit: ${uncleHeader.gasLimit}
+  //     gasUsed: ${uncleHeader.gasUsed}
+  //     timeStamp: ${uncleHeader.timestamp}
+  //     extraData: ${uncleHeader.extraData}
+  //     mixHash: ${uncleHeader.mixHash}
+  //     nonce: ${uncleHeader.nonce}
+  //     baseFeePerGas: ${uncleHeader.baseFeePerGas}
+  //   `);
+  // }).join(''))).toString('hex')
 
     // The Transactions, reconstructed
-    const withdrawalsArr = blockObject.withdrawals.map(withdrawal => ({
-      address: withdrawal.address,
-      amount: withdrawal.amount,
-      index: withdrawal.index,
-      validatorIndex: withdrawal.validatorIndex,
-    }));
-  
-    const withdrawalsString = Buffer.from((withdrawalsArr.map(withdrawal => {
-      return (`
-        address: ${withdrawal.address}
-        amount: ${withdrawal.amount}
-        index: ${withdrawal.index}
-        validatorIndex: ${withdrawal.validatorIndex}
-      `);
-    }).join(''))).toString('hex')
+    // const withdrawalsArr = blockObject.withdrawals.map(withdrawal => ({
+    //   address: withdrawal.address,
+    //   amount: withdrawal.amount,
+    //   index: withdrawal.index,
+    //   validatorIndex: withdrawal.validatorIndex,
+    // }));
+
+    // console.log(blockObject)
+
+    const withdrawalsString = ((blockObject.withdrawals.map(withdrawal => {
+      return (
+        Buffer.from(RLP.encode(withdrawal.raw())).toString('hex')
+      );
+    }).join('')))
 
 
   useEffect(() => {
@@ -180,6 +134,10 @@ const BlockData = ({ blockChainNumberFromApp, setBlockPosition, setNoteFromRect,
       setContentHeight(rect.height)
     };
   }, [blockObject, blockScale]);
+
+  // const buffer = blockObject.serialize()
+  // const sizeInBytes = buffer.length
+  // console.log(`Size of "${blockObject}" in bytes: ${sizeInBytes}`)
 
 
   return (
@@ -231,7 +189,7 @@ const BlockData = ({ blockChainNumberFromApp, setBlockPosition, setNoteFromRect,
           { blockHeaderUtils.prevRandao.value && <span ref={blockHeaderUtils.prevRandao.ref} id='prevRandao' style={{color:'white', overflowWrap: 'break-word', width: '100', height: '100'}}>{blockHeaderUtils.prevRandao.value}</span>}
           
           <span id='transactionsString' style={{color:'white', overflowWrap: 'break-word', width: '100', height: '100'}}>{transactionsString}</span>
-          <span id='uncleHeadersString' style={{color:'white', overflowWrap: 'break-word', width: '100', height: '100'}}>{uncleHeadersString}</span>
+          {/* <span id='uncleHeadersString' style={{color:'white', overflowWrap: 'break-word', width: '100', height: '100'}}>{uncleHeadersString}</span> */}
           <span id='withdrawalsString' style={{color:'white', overflowWrap: 'break-word', width: '100', height: '100'}}>{withdrawalsString}</span>
 
 
