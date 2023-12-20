@@ -9,11 +9,14 @@ import NotesLayer from './NotesLayer';
 import useResizeAndScrollEffect from './ResizeAndScrollHelper';
 import NoteLine from './LinesToNotes';
 import notesText from './staticText.js';
+import "../../App.css";
 
 const theNotes = notesText.ethereumjs_execution_block
 
 const useNotesController  = (posterRect) => {
   const [noteState, setNoteState] = useState({})
+  const [transactionStringRect, setTransactionStringRect] = useState(null);
+  const [withdrawalStringRect, setWithdrawalStringRect] = useState(null);
 
   const set = (id, type, rect) => {
     // console.log(id, type, rect)
@@ -38,13 +41,19 @@ const useNotesController  = (posterRect) => {
   const render = () => {
     return React.createElement(React.Fragment, null, Object.entries(noteState).map(([id, rects]) => {
       const { to, from } = rects
-      // console.log(id, rects, posterRect)
       const noteProp = theNotes.find(prop => prop.id === id)
   
       const color = noteProp ? noteProp.color : 'white'
 
       return (
-        <NoteLine key={'noteline'+id} noteFromRect={from} noteToRect={to} posterRect={posterRect} color={color} />
+        <NoteLine
+          key={'noteline'+id}
+          noteFromRect={from}
+          noteToRect={to}
+          posterRect={posterRect}
+          transactionStringRect={transactionStringRect}
+          withdrawalStringRect={withdrawalStringRect}
+          color={color} />
       )
     }))
   }
@@ -53,6 +62,8 @@ const useNotesController  = (posterRect) => {
     setTo,
     setFrom,
     noteState,
+    setTransactionStringRect,
+    setWithdrawalStringRect,
     render,
   }
 }
@@ -64,12 +75,14 @@ const Poster = ({ blockChainNumberFromApp, blockObject }) => {
   const posterRef = useRef(null)
   const [blockScale, setBlockScale] = useState(0.27)
   const [svgPreview, setSvgPreview] = useState()
-  // const [noteFromRect, setNoteFromRect] = useState ()
-  // const [noteToRect, setNoteToRect] = useState()
+  const [isToggled, setToggled] = useState(true)
+
   const {
     setTo,
     setFrom,
     noteState,
+    setTransactionStringRect,
+    setWithdrawalStringRect,
     render: renderPolygons,
   } = useNotesController(posterRect)
 
@@ -104,6 +117,23 @@ const Poster = ({ blockChainNumberFromApp, blockObject }) => {
     }
   }
 
+  const handleToggleChange = () => {
+    setToggled(!isToggled)
+  }
+
+  const transSwitch = () => {
+    return (
+      <label className='switch'>
+          <input type='checkbox'
+            checked={isToggled}
+            onChange={handleToggleChange}
+            id='includeTranstions'
+          />
+          <span className='slider'/>
+        </label>
+    )
+  }
+
   return (
     <div className="poster">
       <div className="poster-container" id='poster-container'>
@@ -125,7 +155,11 @@ const Poster = ({ blockChainNumberFromApp, blockObject }) => {
           <DrapAndDropComponent>
             {blockChainNumberFromApp && <BlockChain blockChainNumberFromApp={blockChainNumberFromApp} setBlockPosition={setFromRect}/>}
           </DrapAndDropComponent>
-          <Lines fromRect={fromRect} toRect={toRect} posterRect={posterRect}/>
+          <Lines
+            fromRect={fromRect}
+            toRect={toRect}
+            posterRect={posterRect}
+          />
           <DrapAndDropComponent>
             {blockObject && blockChainNumberFromApp && <BlockData
               blockChainNumberFromApp={blockChainNumberFromApp}
@@ -133,12 +167,16 @@ const Poster = ({ blockChainNumberFromApp, blockObject }) => {
               blockScale={blockScale}
               blockObject={blockObject}
               setNoteFromRect={setFrom}
+              isToggled={isToggled}
+              setTransactionStringRect={setTransactionStringRect}
+              setWithdrawalStringRect={setWithdrawalStringRect}
             />}
           </DrapAndDropComponent>
           {renderPolygons()}
           {blockObject && <NotesLayer
             blockObject={blockObject}
             setNoteToRect={setTo}
+            isToggled={isToggled}
           />}
         </svg>
         <br/>
@@ -148,6 +186,9 @@ const Poster = ({ blockChainNumberFromApp, blockObject }) => {
       <label htmlFor='setBlockScale'>Set Block Scale: </label>
       <input type='number' id='setBlockScale' name='setBlockScale' placeholder='0.27' onKeyDown={handleSetBlockScale}/>
       <button id='setBlockScaleButton' className='setBlockScaleButton' onClick={sendBlockScale}>Rescale Block</button>
+      <br/>
+      <label className='transAndWithdrawalSwitchLabel' htmlFor='includeTransactions'>Include Transactions and Widthrawals: </label>
+        {transSwitch()}
       <br/>
       <button id='previewPoster' className='previewPoster' onClick={previewPoster}>Preview Poster</button>
       <button id='downloadSVG' className='downloadSVG' onClick={downloadSVG}>Download Poster</button>

@@ -21,8 +21,8 @@ const BlockChain = ( { blockChainNumberFromApp, setBlockPosition }) => {
           <rect
             ref={index === 1 ? targetBlockRef: null}
             id={index}
-            x="40"
-            y={20+index*170}
+            x="870"
+            y={40+index*170}
             width="100"
             height="148"
             fill="black"
@@ -30,16 +30,16 @@ const BlockChain = ( { blockChainNumberFromApp, setBlockPosition }) => {
             strokeWidth="2"
           />
           <svg
-            x='-410'
-            y={40+index*170}
+            x='420'
+            y={60+index*170}
             opacity={'50%'}
             height={100}
           >
             <EthLogo/>
           </svg>
           <text
-            x="90"
-            y={70+index*170}
+            x="920"
+            y={90+index*170}
             fill="white"
             textAnchor="middle"
             dy=".3em"
@@ -50,8 +50,8 @@ const BlockChain = ( { blockChainNumberFromApp, setBlockPosition }) => {
             block
           </text>
           <text
-            x="90"
-            y={90+index*170}
+            x="920"
+            y={110+index*170}
             fill="white"
             textAnchor="middle"
             dy=".3em"

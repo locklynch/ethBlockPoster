@@ -8,15 +8,18 @@ import BlockUtils from './BlockUtils'
 
 const theNotes = notesText.ethereumjs_execution_block
 
-const NotesLayer = ({blockObject, setNoteToRect}) => {
+const NotesLayer = ({blockObject, setNoteToRect, isToggled}) => {
   const [contentWidth, setContentWidth] = useState(100);
   const textRefs = notesText.ethereumjs_execution_block.map (() => useRef());
   const lineRefs = notesText.ethereumjs_execution_block.map (() => useRef());
 
   //starting position of note boxes
-  const x = 150
-  const y = 100
+  const x = 20
+  const y = 40
   const deltaX = 200
+  const xSpread = 0
+  const ySpread = 68
+  
 
   useEffect(() => {
     const newWidths = {};
@@ -42,31 +45,31 @@ const NotesLayer = ({blockObject, setNoteToRect}) => {
       {blockObject && notesText.ethereumjs_execution_block.map((theNotes, index) => (
         <DrapAndDropComponent key={theNotes.id} style={{ borderStyle: 'solid', borderWidth: '1px', borderColor: theNotes.color}}>
           <rect
-            stroke={theNotes.color}
+            stroke='white'
             strokeWidth={2}
             // x={x + (index % 2 === 0 ? 0 : deltaX)} // old stagger display
-            x={x + (index*15)}
-            y={y + (52 * index)}
+            x={x + (index*xSpread)}
+            y={y + (ySpread * index)}
             width={contentWidth[index]}
-            height={40}
+            height={45}
             fill="black"
-            fillOpacity={'40%'}
+            fillOpacity={'90%'}
             ref={lineRefs[index]}
           />
           <text
             id={'id-${$note.index}'}
             // x={x + 10 + (index % 2 === 0 ? 0 : deltaX)} // old stagger display
-            x={x + 10 + (index*15)}
-            y={y + 18 + (52 * index)}
+            x={x + 10 + (index*xSpread)}
+            y={y + 23 + (ySpread * index)}
             fill={theNotes.color}
-            fontSize="18"
+            fontSize="26"
           >{theNotes.id}:</text>
           <text
             ref={textRefs[index]}
             id='note-{$note.index}'
             // x={x + 20 + (index % 2 === 0 ? 0 : deltaX)} // old stagger display
-            x={x + 20 + (index*15)}
-            y={y + 35 + (52 * index)}
+            x={x + 20 + (index*xSpread)}
+            y={y + 38 + (ySpread * index)}
             fill={theNotes.color}
             fontSize="15"
           >{theNotes.text}</text>

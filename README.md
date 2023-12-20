@@ -16,6 +16,7 @@ DragAndDrop - parent component to call other elements of the poster within so th
 LinesToBlock - the lines connecting the block in the chain to the expanded block data window
 LinesToNotes - line that connects the binary in the blockData module to the appropriate Note in the NotesLayer
 ResizeAndScrollHelper - helper function to make ya life easier when drawing dynamic lines between stuff
+EthLogo - deconstruction of the ethereum logo svg to be used in poster
 
 *TransactionData - show a transaction inside the block being accessed
 *GasFlowChart - a visual of the gas expendetures in the block, isolating relevant gas usage involved in the transaction
@@ -26,28 +27,8 @@ ResizeAndScrollHelper - helper function to make ya life easier when drawing dyna
 
 FIXES:
 
-DO THIS NEXT!!!!!
-6. Definitely give text the same color as the element they're referencing? or somehow mark the colors in a cool way
-
-
-0. Fixing BlockData
-    1. reconstructing the displayed block in the BlockData module. Now it'll be displaying each element of the block individually, step by step, which should allow us to better point to them with the noteslayer NOOTEE SLLAAYYERR!!
-
-    DO THIS AFTER COLOR STUFF!
-    2. got the header stuff working, but gonna check with aaron about the transactions and other stuff. The code is a bit gnarlier in the block.ts definitions of the seralization function
-
-
-1. Info elements
-    2. also, import the blockObject to the noteslayer and pull each property individually to display in the note box
-        1. Kinda done, but actually in the process of changing this to a better approach that will allow for the next steps
-    3. then, position the noteslayer programmatically so they appear around the correct in the blockdata expanded block HALF DONE!
-        1. half done, got them to stagger at least
-    5. then!! change staticText asset to reflect the key value pairs as they exist in the blockdata we get
-        1. done! but it's got some old eth 1.0 artifacts in there, might wanna take these notes out later
-        2. gonna need to update this now that i'm pulling the BlockData apart and showing things nicely
-
-    DO THIS NEXT!!!!!
-    6. Definitely give text the same color as the element they're referencing? or somehow mark the colors in a cool way
+    1. gonna need to update how it displays the notes in the noteslayer now that i'm pulling the BlockData apart and showing things nicely
+        1. basically, wanna only display the note for an element of the block if it exists (depends on how old or new the block is)
 
 
 2. right now I'm getting errors for pre Merge blocks - The way I'm handling the BlockData module may help this!!! Might not need to do any of the following steps now!

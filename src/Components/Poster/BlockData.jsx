@@ -5,8 +5,8 @@ import useResizeAndScrollEffect from './ResizeAndScrollHelper';
 import EthLogo from './EthLogo';
 import {Buffer} from 'buffer'
 import { RLP } from '@ethereumjs/rlp'
-import { bigIntToUnpaddedBytes } from '@ethereumjs/util'
-import {Block} from '@ethereumjs/block'
+// import { bigIntToUnpaddedBytes } from '@ethereumjs/util'
+// import {Block} from '@ethereumjs/block'
 import BlockUtils from './BlockUtils'
 
 const colorPalette = [
@@ -30,46 +30,25 @@ const useColorPalette = () => {
   return getColor
 }
 
-
-// const Rlp = ({ rlpObject, colorIndex = 0, parentKey='' }) => {
-//   if (!Array.isArray(rlpObject)) {
-//     const hexString = Buffer.from(rlpObject).toString('hex')
-//     const color = colorPalette[colorIndex % colorPalette.length]
-//     return (
-//       <span style={{ color, overflowWrap: 'break-word'}}>{hexString}</span>
-//     )
-//   }
-//   return rlpObject.map((item, index) => {
-//     const key = `${parentKey}-${index}`
-//     return (
-//       <Rlp
-//         rlpObject={item}
-//         colorIndex={colorIndex + index}
-//         key={key}
-//         parentKey={key}
-//       />
-//     )
-//   })
-// }
-
-const BlockData = ({ blockChainNumberFromApp, setBlockPosition, setNoteFromRect, blockScale, blockObject}) => {
+const BlockData = ({ blockChainNumberFromApp, setBlockPosition, setNoteFromRect, blockScale, blockObject, isToggled, setTransactionStringRect, setWithdrawalStringRect}) => {
   const blockNumberTitle = blockChainNumberFromApp
   const getColor = useColorPalette()
 
   // block poster starting location
-  const posterStartX = 130
-  const posterStartY = 80
+  const posterStartX = 80
+  const posterStartY = 90
+  const marginRight = 5
+  const marginBottom = 10
+
 
   let scale = blockScale
   const [contentHeight, setContentHeight] = useState(1045);
   const blockDataRef = useRef(null)
   const textRef = useRef(null);
+  const transactionStringRef = useRef(null)
+  const withdrawalStringRef = useRef(null)
 
   useResizeAndScrollEffect(blockDataRef, setBlockPosition)
-
-  const valueToHex = (value) => value === undefined ? false : Buffer.from(value).toString('hex')
-  const addressToHex = (value) => value === undefined ? false : Buffer.from(value.bytes).toString('hex')
-  const bigIntToHex = (value) => value === undefined ? false : Buffer.from(bigIntToUnpaddedBytes(value)).toString('hex')
 
   const blockHeaderUtils = BlockUtils(blockObject)
 
@@ -84,63 +63,11 @@ const BlockData = ({ blockChainNumberFromApp, setBlockPosition, setNoteFromRect,
     );
   }).join('')))
 
-  // // The Uncles reconstructed
-  // const uncleHeadersArr = blockObject.uncleHeaders.map(uncleHeader => ({
-  //   uncleParentHash: Buffer.from(uncleHeader.parentHash).toString('hex'),
-  //   uncleUncleHash: Buffer.from(uncleHeader.uncleHash).toString('hex'),
-  //   uncleCoinbase: Buffer.from(uncleHeader.coinbase.bytes).toString('hex'),
-  //   uncleStateRoot: Buffer.from(uncleHeader.stateRoot).toString('hex'),
-  //   uncleTransactionsTrie: Buffer.from(uncleHeader.transactionsTrie).toString('hex'),
-  //   uncleReceiptTrie: Buffer.from(uncleHeader.receiptTrie).toString('hex'),
-  //   uncleLogsBloom: Buffer.from(uncleHeader.logsBloom).toString('hex'),
-  //   uncleDifficulty: Buffer.from(bigIntToUnpaddedBytes(uncleHeader.difficulty)).toString('hex'),
-  //   uncleNumber: Buffer.from(bigIntToUnpaddedBytes(uncleHeader.number)).toString('hex'),
-  //   uncleGasLimit: Buffer.from(bigIntToUnpaddedBytes(uncleHeader.gasLimit)).toString('hex'),
-  //   uncleGasUsed: Buffer.from(bigIntToUnpaddedBytes(uncleHeader.gasUsed)).toString('hex'),
-  //   uncleTimestamp: Buffer.from(bigIntToUnpaddedBytes(uncleHeader.timestamp ?? BIGINT_0)).toString('hex'),
-  //   uncleExtraData: Buffer.from(uncleHeader.extraData).toString('hex'),
-  //   uncleMixHash: Buffer.from(uncleHeader.mixHash).toString('hex'),
-  //   uncleNonce: Buffer.from(uncleHeader.nonce).toString('hex'),
-  //   uncleBaseFeePerGas: Buffer.from(bigIntToUnpaddedBytes(uncleHeader.baseFeePerGas)).toString('hex'),
-  //   uncleWithdrawalsRoot: Buffer.from(uncleHeader.withdrawalsRoot).toString('hex'),
-  // }))
-
-  // const uncleHeadersString = Buffer.from((uncleHeadersArr.map(uncleHeader => {
-  //   return (`
-  //     parentHash: ${uncleHeader.parentHash}
-  //     uncleHash: ${uncleHeader.uncleHash}
-  //     coinbase: ${uncleHeader.coinbase}
-  //     stateRoot: ${uncleHeader.stateRoot}
-  //     transactionsTrie: ${uncleHeader.transactionsTrie}
-  //     recepitTrie: ${uncleHeader.receiptTrie}
-  //     logsBloom: ${uncleHeader.logsBloom}
-  //     difficulty: ${uncleHeader.difficulty}
-  //     number: ${uncleHeader.number}
-  //     gasLimit: ${uncleHeader.gasLimit}
-  //     gasUsed: ${uncleHeader.gasUsed}
-  //     timeStamp: ${uncleHeader.timestamp}
-  //     extraData: ${uncleHeader.extraData}
-  //     mixHash: ${uncleHeader.mixHash}
-  //     nonce: ${uncleHeader.nonce}
-  //     baseFeePerGas: ${uncleHeader.baseFeePerGas}
-  //   `);
-  // }).join(''))).toString('hex')
-
-    // The Transactions, reconstructed
-    // const withdrawalsArr = blockObject.withdrawals.map(withdrawal => ({
-    //   address: withdrawal.address,
-    //   amount: withdrawal.amount,
-    //   index: withdrawal.index,
-    //   validatorIndex: withdrawal.validatorIndex,
-    // }));
-
-    // console.log(blockObject)
-
-    const withdrawalsString = ((blockObject.withdrawals.map(withdrawal => {
-      return (
-        Buffer.from(RLP.encode(withdrawal.raw())).toString('hex')
-      );
-    }).join('')))
+  const withdrawalsString = ((blockObject.withdrawals.map(withdrawal => {
+    return (
+      Buffer.from(RLP.encode(withdrawal.raw())).toString('hex')
+    );
+  }).join('')))
 
 
   useEffect(() => {
@@ -148,30 +75,35 @@ const BlockData = ({ blockChainNumberFromApp, setBlockPosition, setNoteFromRect,
       const rect = textRef.current.getBoundingClientRect();
       setContentHeight(rect.height)
     };
-  }, [blockObject, blockScale]);
 
-  // const buffer = blockObject.serialize()
-  // const sizeInBytes = buffer.length
-  // console.log(`Size of "${blockObject}" in bytes: ${sizeInBytes}`)
+    if (transactionStringRef.current) {
+      const transactionStringRect = transactionStringRef.current.getBoundingClientRect();
+      setTransactionStringRect(transactionStringRect)
+    };
 
+    if (withdrawalStringRef.current) {
+      const withdrawalStringRect = withdrawalStringRef.current.getBoundingClientRect();
+      setWithdrawalStringRect(withdrawalStringRect);
+    };
+  }, [blockObject, blockScale, isToggled, setTransactionStringRect, setWithdrawalStringRect]);
 
   return (
     <g
       transform={`translate(${posterStartX} ${posterStartY})`}
     >
       <rect
-        width={803}
-        height={contentHeight+4}
+        width={803 + (marginRight * scale)}
+        height={contentHeight + (marginBottom * scale)}
         stroke='white'
         fill='black'
         strokeWidth='2'
         fillOpacity={'70%'}
+        ref={blockDataRef}
       />
       <foreignObject
         x={7}
         y={5}
-        ref={blockDataRef}
-        width={800/scale}
+        width={(795) / scale}
         height={contentHeight/scale}
         transform={`scale(${scale})`}
       >
@@ -203,9 +135,9 @@ const BlockData = ({ blockChainNumberFromApp, setBlockPosition, setNoteFromRect,
           { blockHeaderUtils.parentBeaconBlockRoot.value && <span ref={blockHeaderUtils.parentBeaconBlockRoot.ref} id='parentBeaconBlockRoot' style={{color: getColor(), overflowWrap: 'break-word', width: '100', height: '100'}}>{blockHeaderUtils.parentBeaconBlockRoot.value}</span>}
           { blockHeaderUtils.prevRandao.value && <span ref={blockHeaderUtils.prevRandao.ref} id='prevRandao' style={{color: getColor(), overflowWrap: 'break-word', width: '100', height: '100'}}>{blockHeaderUtils.prevRandao.value}</span>}
           
-          <span id='transactionsString' style={{color: getColor(), overflowWrap: 'break-word', width: '100', height: '100'}}>{transactionsString}</span>
+          { isToggled && <span ref={transactionStringRef} id='transactionsString' style={{color: getColor(), overflowWrap: 'break-word', width: '100', height: '100'}}>{transactionsString}</span>}
           {/* <span id='uncleHeadersString' style={{color: getColor(), overflowWrap: 'break-word', width: '100', height: '100'}}>{uncleHeadersString}</span> */}
-          <span id='withdrawalsString' style={{color: getColor(), overflowWrap: 'break-word', width: '100', height: '100'}}>{withdrawalsString}</span>
+          { isToggled && <span ref={withdrawalStringRef} id='withdrawalsString' style={{color: getColor(), overflowWrap: 'break-word', width: '100', height: '100'}}>{withdrawalsString}</span>}
 
 
           {/* <Rlp rlpObject={parentHash} /> */}

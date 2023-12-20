@@ -61,7 +61,7 @@ export default {
         },
         {
             "id": "difficulty",
-            "text": "used to change difficulty in finding a hash. Now Deprecated",
+            "text": "used to change difficulty in finding a hash",
             "color": getColor()
         },
         {
@@ -91,12 +91,12 @@ export default {
         },
         {
             "id": "mixHash",
-            "text": "hash of blockheader that meets difficulty condition. Now Deprecated",
+            "text": "hash of blockheader that meets difficulty condition",
             "color": getColor()
         },
         {
             "id": "nonce",
-            "text": "number used once to help generate hash. Now Deprecated",
+            "text": "number used once to help generate hash",
             "color": getColor()
         },
         {
@@ -136,7 +136,7 @@ export default {
         },
         // {
         //     "id": "uncleHeaders",
-        //     "text": "valid but stale blocks related to current block. Now Deprecated",
+        //     "text": "valid but stale blocks related to current block",
         //     "color": getColor()
         // },
         {
