@@ -63,7 +63,7 @@ const NoteLine = ({ noteFromRect, noteToRect, posterRect, transactionStringRect,
       <polygon
         points={headerPolygonData}
         fill={color}
-        opacity={'20%'}
+        opacity={'10%'}
       />
       {/* <polygon
         points={transactionsPolygonData}

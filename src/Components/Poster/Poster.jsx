@@ -190,7 +190,7 @@ const Poster = ({ blockChainNumberFromApp, blockObject }) => {
       <label className='transAndWithdrawalSwitchLabel' htmlFor='includeTransactions'>Include Transactions and Widthrawals: </label>
         {transSwitch()}
       <br/>
-      <button id='previewPoster' className='previewPoster' onClick={previewPoster}>Preview Poster</button>
+      {/* <button id='previewPoster' className='previewPoster' onClick={previewPoster}>Preview Poster</button> */}
       <button id='downloadSVG' className='downloadSVG' onClick={downloadSVG}>Download Poster</button>
     </div>
   );

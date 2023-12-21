@@ -100,6 +100,15 @@ const BlockData = ({ blockChainNumberFromApp, setBlockPosition, setNoteFromRect,
         fillOpacity={'70%'}
         ref={blockDataRef}
       />
+      <svg
+        overflow={'hidden'}
+        width='600'
+        height={contentHeight}
+        x='100'
+        y='0'
+        opacity='60%'>
+          <EthLogo/>
+        </svg>
       <foreignObject
         x={7}
         y={5}
@@ -160,15 +169,6 @@ const BlockData = ({ blockChainNumberFromApp, setBlockPosition, setNoteFromRect,
       >
         Block {blockNumberTitle}
       </text>
-      <svg
-        overflow={'hidden'}
-        width='600'
-        height={contentHeight}
-        x='100'
-        y='0'
-        opacity='20%'>
-          <EthLogo/>
-        </svg>
     </g>
   );
 };

@@ -41,3 +41,9 @@ FIXES:
     3. include notes in noteslayer or not
     4. if block data in notes boxes and noteslayer notes not included, then remove the noteslayer completely
     5. different color palettes.
+
+4. try use the first four bytes of each field as the color of that text!!!!!
+5. add the data to the notes layer as well!
+    1. toggle for note description or not!
+    2. nested notes! from block data to block header and transaction, then from those to the more specific elements of those things!
+    3. bring the lines back!

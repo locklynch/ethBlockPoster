@@ -53,7 +53,7 @@ const NotesLayer = ({blockObject, setNoteToRect, isToggled}) => {
             width={contentWidth[index]}
             height={45}
             fill="black"
-            fillOpacity={'90%'}
+            fillOpacity={'80%'}
             ref={lineRefs[index]}
           />
           <text
