@@ -10,20 +10,15 @@ const Lines = ({fromRect, toRect, posterRect}) => {
     return
   }
 
-  const relFromRect = {
-    top: (fromRect.top-posterRect.top),
-    right: (fromRect.right-posterRect.left),
-    bottom: (fromRect.bottom-posterRect.top),
-    left: (fromRect.left-posterRect.left),
+  const convertRectToRelative = (rect) => ({
+    top: rect.top - posterRect.top,
+    right: rect.right - posterRect.left,
+    bottom: rect.bottom - posterRect.top,
+    left: rect.left - posterRect.left,
+  });
 
-  }
-
-  const relToRect = {
-    top: (toRect.top-posterRect.top),
-    right: (toRect.right-posterRect.left),
-    bottom: (toRect.bottom-posterRect.top),
-    left: (toRect.left-posterRect.left),
-  }
+  const relFromRect = convertRectToRelative(fromRect)
+  const relToRect = convertRectToRelative(toRect)
 
   // Create the polygon data to fill the space between lines
   const polygonData = `
@@ -38,48 +33,48 @@ const Lines = ({fromRect, toRect, posterRect}) => {
         <polygon
           points={polygonData}
           fill={color}
-          opacity={'30%'}
+          opacity={'20%'}
         />
-        {/* <line
+        <line
           id='top-left-line'
-          x1={(fromRect.left-posterRect.left)}
-          y1={(fromRect.top-posterRect.top)}
-          x2={(toRect.left-posterRect.left)}
-          y2={(toRect.top-posterRect.top)}
+          x1={relFromRect.left}
+          y1={relFromRect.top}
+          x2={relToRect.left}
+          y2={relToRect.top}
           stroke='white'
           strokeWidth={3}
           opacity={'50%'}
         />
         <line
           id='top-right-line'
-          x1={(fromRect.right-posterRect.left)}
-          y1={(fromRect.top-posterRect.top)}
-          x2={(toRect.right-posterRect.left)}
-          y2={(toRect.top-posterRect.top)}
+          x1={relFromRect.right}
+          y1={relFromRect.top}
+          x2={relToRect.right}
+          y2={relToRect.top}
           stroke='white'
           strokeWidth={3}
           opacity={'50%'}
         />
         <line
           id='bottom-left-line'
-          x1={(fromRect.left-posterRect.left)}
-          y1={(fromRect.bottom-posterRect.top)}
-          x2={(toRect.left-posterRect.left)}
-          y2={(toRect.bottom-posterRect.top)}
+          x1={relFromRect.left}
+          y1={relFromRect.bottom}
+          x2={relToRect.left}
+          y2={relToRect.bottom}
           stroke='white'
           strokeWidth={3}
           opacity={'50%'}
         />
         <line
           id='bottom-right-line'
-          x1={(fromRect.right-posterRect.left)}
-          y1={(fromRect.bottom-posterRect.top)}
-          x2={(toRect.right-posterRect.left)}
-          y2={(toRect.bottom-posterRect.top)}
+          x1={relFromRect.right}
+          y1={relFromRect.bottom}
+          x2={relToRect.right}
+          y2={relToRect.bottom}
           stroke='white'
           strokeWidth={3}
           opacity={'50%'}
-        /> */}
+        />
       </g>
     );
   }

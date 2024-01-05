@@ -47,3 +47,13 @@ FIXES:
     1. toggle for note description or not!
     2. nested notes! from block data to block header and transaction, then from those to the more specific elements of those things!
     3. bring the lines back!
+
+
+Things to do!
+1. make it lines DONE
+2. make one window for header, then header notes from that
+3. make notes windows contain the value, not the description
+4. only keep first transaction and withdrawal
+5. copy code for window for header for transactions and withdrawal
+6. copy slider for including transactions and withdrawal
+7. copy code for header notes for transaction and withdrawal

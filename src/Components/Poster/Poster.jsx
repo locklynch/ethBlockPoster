@@ -73,7 +73,7 @@ const Poster = ({ blockChainNumberFromApp, blockObject }) => {
   const [toRect, setToRect] = useState ()
   const [posterRect, setPosterRect] = useState()
   const posterRef = useRef(null)
-  const [blockScale, setBlockScale] = useState(0.27)
+  const [blockScale, setBlockScale] = useState(2.4)
   const [svgPreview, setSvgPreview] = useState()
   const [isToggled, setToggled] = useState(true)
 
@@ -125,7 +125,7 @@ const Poster = ({ blockChainNumberFromApp, blockObject }) => {
     return (
       <label className='switch'>
           <input type='checkbox'
-            checked={isToggled}
+            checked={!isToggled}
             onChange={handleToggleChange}
             id='includeTranstions'
           />
@@ -184,7 +184,7 @@ const Poster = ({ blockChainNumberFromApp, blockObject }) => {
       </div>
       <br/>
       <label htmlFor='setBlockScale'>Set Block Scale: </label>
-      <input type='number' id='setBlockScale' name='setBlockScale' placeholder='0.27' onKeyDown={handleSetBlockScale}/>
+      <input type='number' id='setBlockScale' name='setBlockScale' placeholder='2.4' onKeyDown={handleSetBlockScale}/>
       <button id='setBlockScaleButton' className='setBlockScaleButton' onClick={sendBlockScale}>Rescale Block</button>
       <br/>
       <label className='transAndWithdrawalSwitchLabel' htmlFor='includeTransactions'>Include Transactions and Widthrawals: </label>

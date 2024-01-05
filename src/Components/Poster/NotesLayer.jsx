@@ -15,10 +15,10 @@ const NotesLayer = ({blockObject, setNoteToRect, isToggled}) => {
 
   //starting position of note boxes
   const x = 20
-  const y = 40
+  const y = 60
   const deltaX = 200
   const xSpread = 0
-  const ySpread = 68
+  const ySpread = 87
   
 
   useEffect(() => {
@@ -27,7 +27,7 @@ const NotesLayer = ({blockObject, setNoteToRect, isToggled}) => {
       const textRef = textRefs[index]
       if (textRef.current) {
         const rect = textRef.current.getBoundingClientRect();
-        newWidths[index] = rect.width + 30
+        newWidths[index] = rect.width + 40
       }
     });
     setContentWidth(newWidths);
@@ -51,7 +51,7 @@ const NotesLayer = ({blockObject, setNoteToRect, isToggled}) => {
             x={x + (index*xSpread)}
             y={y + (ySpread * index)}
             width={contentWidth[index]}
-            height={45}
+            height={50}
             fill="black"
             fillOpacity={'80%'}
             ref={lineRefs[index]}
@@ -64,21 +64,27 @@ const NotesLayer = ({blockObject, setNoteToRect, isToggled}) => {
             fill={theNotes.color}
             fontSize="26"
           >{theNotes.id}:</text>
-          <text
-            ref={textRefs[index]}
+          {/* <text
             id='note-{$note.index}'
             // x={x + 20 + (index % 2 === 0 ? 0 : deltaX)} // old stagger display
             x={x + 20 + (index*xSpread)}
             y={y + 38 + (ySpread * index)}
             fill={theNotes.color}
             fontSize="15"
-          >{theNotes.text}</text>
-          {/* {blockHeaderUtils && <text
-              x={x + 10 + (index % 2 === 0 ? 0 : deltaX)}
-              y={y + 55 + (60 * index)}
-              fill="white"
-              fontSize="14"
-            >{(blockHeaderUtils[note.id].value)}</text>} */}
+          >
+            {theNotes.text}
+          </text> */}
+          {blockHeaderUtils && <text
+              ref={textRefs[index]}
+              x={x + 10 + (index*xSpread)}
+              y={y + 45 + (ySpread * index)}
+              fill={theNotes.color}
+              fontSize="26"
+            >
+              {blockHeaderUtils[theNotes.id].value?.length > 40
+                ? blockHeaderUtils[theNotes.id].value.substring(0, 40) + '...'
+                : blockHeaderUtils[theNotes.id].value}
+            </text>}
         </DrapAndDropComponent>
       ))}
     </g>

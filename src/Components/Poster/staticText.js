@@ -29,11 +29,11 @@ export default {
             "text": "the hash of the previous execution block",
             "color": getColor() 
         },
-        {
-            "id": "uncleHash",
-            "text": "hash of mined block uncles. Now Deprecated",
-            "color": getColor() 
-        },
+        // {
+        //     "id": "uncleHash",
+        //     "text": "hash of mined block uncles. Now Deprecated",
+        //     "color": getColor() 
+        // },
         {
             "id": "coinbase",
             "text": "address of the validator who proposed the block",
@@ -59,11 +59,11 @@ export default {
             "text": "data structure containing event logs",
             "color": getColor()
         },
-        {
-            "id": "difficulty",
-            "text": "used to change difficulty in finding a hash",
-            "color": getColor()
-        },
+        // {
+        //     "id": "difficulty",
+        //     "text": "used to change difficulty in finding a hash",
+        //     "color": getColor()
+        // },
         {
             "id": "number",
             "text": "number of the current block",
@@ -94,11 +94,11 @@ export default {
             "text": "hash of blockheader that meets difficulty condition",
             "color": getColor()
         },
-        {
-            "id": "nonce",
-            "text": "number used once to help generate hash",
-            "color": getColor()
-        },
+        // {
+        //     "id": "nonce",
+        //     "text": "number used once to help generate hash",
+        //     "color": getColor()
+        // },
         {
             "id": "baseFeePerGas",
             "text": "the base fee value in Gwei",
@@ -129,20 +129,20 @@ export default {
             "text": "value used in random validator selection",
             "color": getColor()
         },
-        {
-            "id": "transactions",
-            "text": "list of transactions to be executed",
-            "color": getColor()
-        },
+        // {
+        //     "id": "transactions",
+        //     "text": "list of transactions to be executed",
+        //     "color": getColor()
+        // },
         // {
         //     "id": "uncleHeaders",
         //     "text": "valid but stale blocks related to current block",
         //     "color": getColor()
         // },
-        {
-            "id": "withdrawals",
-            "text": "list of withdrawal objects",
-            "color": getColor()
-        }
+        // {
+        //     "id": "withdrawals",
+        //     "text": "list of withdrawal objects",
+        //     "color": getColor()
+        // }
     ]
 }

@@ -15,10 +15,10 @@ const BlockUtils = (blockObject) => {
       ref: useRef(),
       value: valueToHex(blockObject.header.parentHash),
     },
-    uncleHash: {
-      ref: useRef(),
-      value: valueToHex(blockObject.header.uncleHash),
-    },
+    // uncleHash: {
+    //   ref: useRef(),
+    //   value: valueToHex(blockObject.header.uncleHash),
+    // },
     coinbase: {
       ref: useRef(),
       value: addressToHex(blockObject.header.coinbase),
@@ -67,10 +67,10 @@ const BlockUtils = (blockObject) => {
       ref: useRef(),
       value: valueToHex(blockObject.header.mixHash),
     },
-    nonce: {
-      ref: useRef(),
-      value: valueToHex(blockObject.header.nonce),
-    },
+    // nonce: {
+    //   ref: useRef(),
+    //   value: valueToHex(blockObject.header.nonce),
+    // },
     baseFeePerGas: {
       ref: useRef(),
       value: bigIntToHex(blockObject.header.baseFeePerGas),
@@ -79,18 +79,18 @@ const BlockUtils = (blockObject) => {
       ref: useRef(),
       value: valueToHex(blockObject.header.withdrawalsRoot),
     },
-    blobGasUsed: {
-      ref: useRef(bigIntToHex(blockObject.header.blobGasUsed)),
-      value: null,
-    },
-    excessBlobGas: {
-      ref: useRef(),
-      value: bigIntToHex(blockObject.header.excessBlobGas),
-    },
-    parentBeaconBlockRoot: {
-      ref: useRef(),
-      value: valueToHex(blockObject.header.parentBeaconBlockRoot),
-    },
+    // blobGasUsed: {
+    //   ref: useRef(bigIntToHex(blockObject.header.blobGasUsed)),
+    //   value: null,
+    // },
+    // excessBlobGas: {
+    //   ref: useRef(),
+    //   value: bigIntToHex(blockObject.header.excessBlobGas),
+    // },
+    // parentBeaconBlockRoot: {
+    //   ref: useRef(),
+    //   value: valueToHex(blockObject.header.parentBeaconBlockRoot),
+    // },
     prevRandao: {
       ref: useRef(),
       value: valueToHex(blockObject.header.prevRandao),

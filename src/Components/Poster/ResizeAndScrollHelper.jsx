@@ -11,7 +11,6 @@ import { useEffect } from 'react';
 const useResizeAndScrollEffect = (targetBlockRef, setBlockPosition) => {
   useEffect(() => {
     let prevScrollY = window.scrollY;
-    const targetBlock = targetBlockRef.current;
 
     const handleResize = () => {
       if (targetBlockRef.current) {
