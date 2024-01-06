@@ -2,6 +2,7 @@
 
 import React, { useState, useRef } from 'react';
 import BlockData from './BlockData';
+import BlockHeader from './BlockHeader.jsx';
 import { DrapAndDropComponent } from './DragAndDrop';
 import BlockChain from './BlockChain';
 import Lines from './LinesToBlock';
@@ -73,7 +74,7 @@ const Poster = ({ blockChainNumberFromApp, blockObject }) => {
   const [toRect, setToRect] = useState ()
   const [posterRect, setPosterRect] = useState()
   const posterRef = useRef(null)
-  const [blockScale, setBlockScale] = useState(2.4)
+  const [blockScale, setBlockScale] = useState(0.27)
   const [svgPreview, setSvgPreview] = useState()
   const [isToggled, setToggled] = useState(true)
 
@@ -173,6 +174,13 @@ const Poster = ({ blockChainNumberFromApp, blockObject }) => {
             />}
           </DrapAndDropComponent>
           {renderPolygons()}
+          <DrapAndDropComponent>
+            {blockObject && <BlockHeader
+              blockChainNumberFromApp={blockChainNumberFromApp}
+              blockObject={blockObject}
+              blockScale={blockScale}
+            />}
+          </DrapAndDropComponent>
           {blockObject && <NotesLayer
             blockObject={blockObject}
             setNoteToRect={setTo}
@@ -184,7 +192,7 @@ const Poster = ({ blockChainNumberFromApp, blockObject }) => {
       </div>
       <br/>
       <label htmlFor='setBlockScale'>Set Block Scale: </label>
-      <input type='number' id='setBlockScale' name='setBlockScale' placeholder='2.4' onKeyDown={handleSetBlockScale}/>
+      <input type='number' id='setBlockScale' name='setBlockScale' placeholder='0.27' onKeyDown={handleSetBlockScale}/>
       <button id='setBlockScaleButton' className='setBlockScaleButton' onClick={sendBlockScale}>Rescale Block</button>
       <br/>
       <label className='transAndWithdrawalSwitchLabel' htmlFor='includeTransactions'>Include Transactions and Widthrawals: </label>

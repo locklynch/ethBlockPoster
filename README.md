@@ -52,8 +52,10 @@ FIXES:
 Things to do!
 1. make it lines DONE
 2. make one window for header, then header notes from that
-3. make notes windows contain the value, not the description
-4. only keep first transaction and withdrawal
+3. make notes windows contain the value, not the description DONE
+    1. also, only make them so long and add ... after certain length DONE
+4. only keep first transaction and withdrawal in transaction and withdrawal windows
 5. copy code for window for header for transactions and withdrawal
-6. copy slider for including transactions and withdrawal
+6. copy slider for including transactions and withdrawal windows
 7. copy code for header notes for transaction and withdrawal
+8. get the color palette into a separet module for global control DONE

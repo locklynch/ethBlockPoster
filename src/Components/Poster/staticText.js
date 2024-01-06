@@ -1,25 +1,9 @@
-const colorPalette = [
-    '#FFD1DC', // Light Pink
-    '#FFD700', // Light Gold
-    '#98FB98', // Mint Green
-    '#ADD8E6', // Light Blue
-  
-  ];
-  
-  const useColorPalette = () => {
-  
-    let colorIndex = 0
-  
-    const getColor = () => {
-      colorIndex += 1
-      const color = colorPalette[colorIndex % colorPalette.length]
-      return color
-    }
-  
-    return getColor
-  }
+// staticText module for displaying the note info
 
-  const getColor = useColorPalette()
+import { getColor, resetColorIndex } from './GlobalColorPalette'
+
+resetColorIndex()
+
 
 export default {
 
@@ -32,7 +16,7 @@ export default {
         // {
         //     "id": "uncleHash",
         //     "text": "hash of mined block uncles. Now Deprecated",
-        //     "color": getColor() 
+        //     "color": getColor()
         // },
         {
             "id": "coinbase",
