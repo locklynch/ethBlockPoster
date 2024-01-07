@@ -81,8 +81,8 @@ const NotesLayer = ({blockObject, setNoteToRect, isToggled}) => {
               fill={theNotes.color}
               fontSize="26"
             >
-              {blockHeaderUtils[theNotes.id].value?.length > 40
-                ? blockHeaderUtils[theNotes.id].value.substring(0, 40) + '...'
+              {blockHeaderUtils[theNotes.id].value?.length > 30
+                ? blockHeaderUtils[theNotes.id].value.substring(0, 30) + '...'
                 : blockHeaderUtils[theNotes.id].value}
             </text>}
         </DrapAndDropComponent>

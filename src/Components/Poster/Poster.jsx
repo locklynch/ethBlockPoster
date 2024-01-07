@@ -167,19 +167,20 @@ const Poster = ({ blockChainNumberFromApp, blockObject }) => {
               setBlockPosition={setToRect}
               blockScale={blockScale}
               blockObject={blockObject}
-              setNoteFromRect={setFrom}
+              // setNoteFromRect={setFrom}
               isToggled={isToggled}
               setTransactionStringRect={setTransactionStringRect}
               setWithdrawalStringRect={setWithdrawalStringRect}
             />}
           </DrapAndDropComponent>
-          {renderPolygons()}
           <DrapAndDropComponent>
             {blockObject && <BlockHeader
               blockChainNumberFromApp={blockChainNumberFromApp}
               blockObject={blockObject}
               blockScale={blockScale}
+              setNoteFromRect={setFrom}
             />}
+          {renderPolygons()}
           </DrapAndDropComponent>
           {blockObject && <NotesLayer
             blockObject={blockObject}
