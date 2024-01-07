@@ -1,10 +1,10 @@
-// The line that connects the top left corner of the small block in the chain to the expanded block window
+// The line the blockHeader from the blockData window to the blockHeader window
 
 import React from 'react';
 
 
-const Lines = ({fromRect, toRect, posterRect}) => {
-  const opacity = '30%'
+const HeaderLines = ({fromRect, toRect, posterRect}) => {
+  const opacity = '50%'
 
   const color = 'white'
   if (!fromRect || !toRect || !posterRect) {
@@ -13,7 +13,7 @@ const Lines = ({fromRect, toRect, posterRect}) => {
 
   const convertRectToRelative = (rect) => ({
     top: rect.top - posterRect.top,
-    right: rect.right - posterRect.left,
+    right: rect.right - posterRect.left + 5,
     bottom: rect.bottom - posterRect.top,
     left: rect.left - posterRect.left,
   });
@@ -22,18 +22,53 @@ const Lines = ({fromRect, toRect, posterRect}) => {
   const relToRect = convertRectToRelative(toRect)
 
   // Create the polygon data to fill the space between lines
+  // const rightPolygonData = `
+  //   ${relFromRect.right} ${relFromRect.top}
+  //   ${relToRect.right} ${relToRect.top}
+  //   ${relToRect.right} ${relToRect.bottom}
+  //   ${relFromRect.right} ${relFromRect.bottom}
+  // `;
+
+  // const topPolygonData = `
+  // ${relFromRect.left} ${relFromRect.bottom}
+  // ${relToRect.left} ${relToRect.top}
+  // ${relToRect.right} ${relToRect.top}
+  // ${relFromRect.right} ${relFromRect.bottom}
+  // `
+
+  const leftPolygonData = `
+  ${relFromRect.left} ${relFromRect.top}
+  ${relToRect.left} ${relToRect.top}
+  ${relToRect.left} ${relToRect.bottom}
+  ${relFromRect.left} ${relFromRect.bottom}
+  `
   const rightPolygonData = `
-    ${relFromRect.right} ${relFromRect.top}
-    ${relToRect.right} ${relToRect.top}
-    ${relToRect.right} ${relToRect.bottom}
-    ${relFromRect.right} ${relFromRect.bottom}
-  `;
+  ${relFromRect.right} ${relFromRect.top}
+  ${relToRect.right} ${relToRect.top}
+  ${relToRect.right} ${relToRect.bottom}
+  ${relFromRect.right} ${relFromRect.bottom}
+  `
 
     return (
       <g>
         <polygon
+          points={leftPolygonData}
+          fill={color}
+          opacity={opacity}
+        />
+        <polygon
           points={rightPolygonData}
           fill={color}
+          opacity={opacity}
+        />
+        <line
+          id='block-data-header-bottom-line'
+          x1={relFromRect.left}
+          y1={relFromRect.bottom}
+          x2={relFromRect.right}
+          y2={relFromRect.bottom}
+          stroke='white'
+          strokeWidth={3}
           opacity={opacity}
         />
         <line
@@ -80,4 +115,4 @@ const Lines = ({fromRect, toRect, posterRect}) => {
     );
   }
 
-export default Lines
+export default HeaderLines

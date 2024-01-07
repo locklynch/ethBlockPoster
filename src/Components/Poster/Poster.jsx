@@ -6,6 +6,7 @@ import BlockHeader from './BlockHeader.jsx';
 import { DrapAndDropComponent } from './DragAndDrop';
 import BlockChain from './BlockChain';
 import Lines from './LinesToBlock';
+import HeaderLines from './LinesToHeader.jsx';
 import NotesLayer from './NotesLayer';
 import useResizeAndScrollEffect from './ResizeAndScrollHelper';
 import NoteLine from './LinesToNotes';
@@ -20,7 +21,6 @@ const useNotesController  = (posterRect) => {
   const [withdrawalStringRect, setWithdrawalStringRect] = useState(null);
 
   const set = (id, type, rect) => {
-    // console.log(id, type, rect)
     setNoteState(oldState => {
       return {
         ...oldState,
@@ -72,6 +72,8 @@ const useNotesController  = (posterRect) => {
 const Poster = ({ blockChainNumberFromApp, blockObject }) => {
   const [fromRect, setFromRect] = useState ()
   const [toRect, setToRect] = useState ()
+  const [fromBlockHeaderRect, setFromBlockHeaderRect] = useState ()
+  const [toBlockHeaderRect, setToBlockHeaderRect] = useState ()
   const [posterRect, setPosterRect] = useState()
   const posterRef = useRef(null)
   const [blockScale, setBlockScale] = useState(0.27)
@@ -154,7 +156,9 @@ const Poster = ({ blockChainNumberFromApp, blockObject }) => {
         >
           <rect key="renderWindow" width="1000" height="1414" fill="#1E1E1E"/>
           <DrapAndDropComponent>
-            {blockChainNumberFromApp && <BlockChain blockChainNumberFromApp={blockChainNumberFromApp} setBlockPosition={setFromRect}/>}
+            {blockChainNumberFromApp && <BlockChain
+              blockChainNumberFromApp={blockChainNumberFromApp}
+              setBlockPosition={setFromRect}/>}
           </DrapAndDropComponent>
           <Lines
             fromRect={fromRect}
@@ -165,6 +169,7 @@ const Poster = ({ blockChainNumberFromApp, blockObject }) => {
             {blockObject && blockChainNumberFromApp && <BlockData
               blockChainNumberFromApp={blockChainNumberFromApp}
               setBlockPosition={setToRect}
+              setBlockHeaderPosition={setFromBlockHeaderRect}
               blockScale={blockScale}
               blockObject={blockObject}
               // setNoteFromRect={setFrom}
@@ -173,15 +178,20 @@ const Poster = ({ blockChainNumberFromApp, blockObject }) => {
               setWithdrawalStringRect={setWithdrawalStringRect}
             />}
           </DrapAndDropComponent>
+          <HeaderLines
+            fromRect={fromBlockHeaderRect}
+            toRect={toBlockHeaderRect}
+            posterRect={posterRect}
+          />
           <DrapAndDropComponent>
             {blockObject && <BlockHeader
-              blockChainNumberFromApp={blockChainNumberFromApp}
               blockObject={blockObject}
               blockScale={blockScale}
               setNoteFromRect={setFrom}
+              setBlockHeaderPosition={setToBlockHeaderRect}
             />}
-          {renderPolygons()}
           </DrapAndDropComponent>
+          {renderPolygons()}
           {blockObject && <NotesLayer
             blockObject={blockObject}
             setNoteToRect={setTo}

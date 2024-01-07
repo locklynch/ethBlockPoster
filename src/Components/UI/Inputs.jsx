@@ -71,10 +71,10 @@ const Inputs = ({setBlockInfo, setBlockChainNumber, setBlockObject}) => {
       <br/>
       <button id='fetchBlock' className='fetchBlock' onClick={fetchBlock}>Fetch Block</button>
     </div>
-    <div id='blockInfo' className='blockInfo'>
+    {/* <div id='blockInfo' className='blockInfo'>
       <h2>Block Info</h2>
       <pre id='block' style={{maxWidth: '600px', wordWrap: 'break-word'}}>{blockJsonString}</pre>
-    </div>
+    </div> */}
     </>
   )
 }

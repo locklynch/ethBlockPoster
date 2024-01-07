@@ -15,13 +15,15 @@ function App() {
   return (
     <>
       <Instructions/>
-      <Poster
-        blockChainNumberFromApp={blockChainNumber}
-        blockObject={blockObject}/>
-      <br/>
       <Inputs
         setBlockChainNumber={handleBlockNumberFromInput}
-        setBlockObject={setBlockObject}/>
+        setBlockObject={setBlockObject}
+      />
+      <br/>
+      <Poster
+        blockChainNumberFromApp={blockChainNumber}
+        blockObject={blockObject}
+      />
       <br/>
     </>
   );

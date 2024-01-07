@@ -60,7 +60,7 @@ const NoteLine = ({ noteFromRect, noteToRect, posterRect, transactionStringRect,
         y2={middleToY}
         stroke='white'
         strokeWidth={5}
-        opacity={'100%'}
+        opacity={'50%'}
       />
       {/* <line
           id='top-left-line'

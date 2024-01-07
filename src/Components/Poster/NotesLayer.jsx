@@ -15,10 +15,10 @@ const NotesLayer = ({blockObject, setNoteToRect, isToggled}) => {
 
   //starting position of note boxes
   const x = 20
-  const y = 60
+  const y = 30
   const deltaX = 200
   const xSpread = 0
-  const ySpread = 87
+  const ySpread = 92
   
 
   useEffect(() => {
@@ -27,7 +27,7 @@ const NotesLayer = ({blockObject, setNoteToRect, isToggled}) => {
       const textRef = textRefs[index]
       if (textRef.current) {
         const rect = textRef.current.getBoundingClientRect();
-        newWidths[index] = rect.width + 40
+        newWidths[index] = rect.width <= 150 ? rect.width + 60 : rect.width+ 15;
       }
     });
     setContentWidth(newWidths);

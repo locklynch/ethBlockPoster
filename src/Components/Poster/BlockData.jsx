@@ -11,42 +11,44 @@ import BlockUtils from './BlockUtils'
 import { getColor, resetColorIndex } from './GlobalColorPalette';
 
 // const BlockData = ({ blockChainNumberFromApp, setBlockPosition, setNoteFromRect, blockScale, blockObject, isToggled, setTransactionStringRect, setWithdrawalStringRect}) => {
-const BlockData = ({ blockChainNumberFromApp, setBlockPosition, blockScale, blockObject, isToggled, setTransactionStringRect, setWithdrawalStringRect}) => {
+const BlockData = ({ blockChainNumberFromApp, setBlockPosition, setBlockHeaderPosition, blockScale, blockObject, isToggled, setTransactionStringRect, setWithdrawalStringRect}) => {
   const blockNumberTitle = blockChainNumberFromApp
   const getColorForBlockData = getColor()
   resetColorIndex()
 
   // block poster starting details
   const posterStartX = 50
-  const posterStartY = 120
+  const posterStartY = 80
   const marginRight = 5
   const marginBottom = 10
-  const opacity = '50%'
+  const opacity = '80%'
 
 
   let scale = blockScale
   const [contentHeight, setContentHeight] = useState(1045);
   const blockDataRef = useRef(null)
   const textRef = useRef(null);
+  const blockHeaderRef = useRef(null)
   const transactionStringRef = useRef(null)
   const withdrawalStringRef = useRef(null)
 
   useResizeAndScrollEffect(blockDataRef, setBlockPosition)
+  useResizeAndScrollEffect(blockHeaderRef, setBlockHeaderPosition)
 
   const blockHeaderUtils = BlockUtils(blockObject)
 
   // eventually to fix the starting location of the lines!
   // from first character of string instead of center of bounding rect!
-  const getBoundingRectForFirstCharacter = (text) => {
-    const span = document.createElement('span');
-    span.textContent = text.charAt(0);
-    span.style.position = 'absolute';
-    span.style.visibility = 'hidden';
-    document.body.appendChild(span);
-    const boundingRect = span.getBoundingClientRect();
-    document.body.removeChild(span);
-    return boundingRect;
-  };
+  // const getBoundingRectForFirstCharacter = (text) => {
+  //   const span = document.createElement('span');
+  //   span.textContent = text.charAt(0);
+  //   span.style.position = 'absolute';
+  //   span.style.visibility = 'hidden';
+  //   document.body.appendChild(span);
+  //   const boundingRect = span.getBoundingClientRect();
+  //   document.body.removeChild(span);
+  //   return boundingRect;
+  // };
 
   // make the blockheader
   const blockHeaderString = () => {
@@ -61,28 +63,32 @@ const BlockData = ({ blockChainNumberFromApp, setBlockPosition, blockScale, bloc
         xmlns="http://www.w3.org/1999/xhtml"
         className="block-data"
       >
-        <span ref={blockHeaderUtils.parentHash.ref} id='parentHash' style={{color: getColor(), overflowWrap: 'break-word', width: '100', height: '100', opacity: opacity}}>{blockHeaderUtils.parentHash.value}</span>
-        {/* <span ref={blockHeaderUtils.uncleHash.ref} id='uncleHash' style={{color: getColor(), overflowWrap: 'break-word', width: '100', height: '100', opacity: opacity}}>{blockHeaderUtils.uncleHash.value}</span> */}
-        <span ref={blockHeaderUtils.coinbase.ref} id='coinbase' style={{color: getColor(), overflowWrap: 'break-word', width: '100', height: '100', opacity: opacity}}>{blockHeaderUtils.coinbase.value}</span>
-        <span ref={blockHeaderUtils.stateRoot.ref} id='stateRoot' style={{color: getColor(), overflowWrap: 'break-word', width: '100', height: '100', opacity: opacity}}>{blockHeaderUtils.stateRoot.value}</span>
-        <span ref={blockHeaderUtils.transactionsTrie.ref} id='transactionsTrie' style={{color: getColor(), overflowWrap: 'break-word', width: '100', height: '100', opacity: opacity}}>{blockHeaderUtils.transactionsTrie.value}</span>
-        <span ref={blockHeaderUtils.receiptTrie.ref} id='receiptTrie' style={{color: getColor(), overflowWrap: 'break-word', width: '100', height: '100', opacity: opacity}}>{blockHeaderUtils.receiptTrie.value}</span>
-        <span ref={blockHeaderUtils.logsBloom.ref} id='logsBloom' style={{color: getColor(), overflowWrap: 'break-word', width: '100', height: '100', opacity: opacity}}>{blockHeaderUtils.logsBloom.value}</span>
-        {/* <span ref={blockHeaderUtils.difficulty.ref} id='difficulty' style={{color: getColor(), overflowWrap: 'break-word', width: '100', height: '100', opacity: opacity}}>{blockHeaderUtils.difficulty.value}</span> */}
-        <span ref={blockHeaderUtils.number.ref} id='number' style={{color: getColor(), overflowWrap: 'break-word', width: '100', height: '100', opacity: opacity}}>{blockHeaderUtils.number.value}</span>
-        <span ref={blockHeaderUtils.gasLimit.ref} id='gasLimit' style={{color: getColor(), overflowWrap: 'break-word', width: '100', height: '100', opacity: opacity}}>{blockHeaderUtils.gasLimit.value}</span>
-        <span ref={blockHeaderUtils.gasUsed.ref} id='gasUsed' style={{color: getColor(), overflowWrap: 'break-word', width: '100', height: '100', opacity: opacity}}>{blockHeaderUtils.gasUsed.value}</span>
-        <span ref={blockHeaderUtils.timestamp.ref} id='timestamp' style={{color: getColor(), overflowWrap: 'break-word', width: '100', height: '100', opacity: opacity}}>{blockHeaderUtils.timestamp.value}</span>
-        <span ref={blockHeaderUtils.extraData.ref} id='extraData' style={{color: getColor(), overflowWrap: 'break-word', width: '100', height: '100', opacity: opacity}}>{blockHeaderUtils.extraData.value}</span>
-        <span ref={blockHeaderUtils.mixHash.ref} id='mixHash' style={{color: getColor(), overflowWrap: 'break-word', width: '100', height: '100', opacity: opacity}}>{blockHeaderUtils.mixHash.value}</span>
-        {/* <span ref={blockHeaderUtils.nonce.ref} id='nonce' style={{color: getColor(), overflowWrap: 'break-word', width: '100', height: '100', opacity: opacity}}>{blockHeaderUtils.nonce.value}</span> */}
-        <span ref={blockHeaderUtils.baseFeePerGas.ref} id='baseFeePerGas' style={{color: getColor(), overflowWrap: 'break-word', width: '100', height: '100', opacity: opacity}}>{blockHeaderUtils.baseFeePerGas.value}</span>
-        <span ref={blockHeaderUtils.withdrawalsRoot.ref} id='withdrawalsRoot' style={{color: getColor(), overflowWrap: 'break-word', width: '100', height: '100', opacity: opacity}}>{blockHeaderUtils.withdrawalsRoot.value}</span>
-        
-        {/* { blockHeaderUtils.blobGasUsed.value && <span ref={blockHeaderUtils.blobGasUsed.ref} id='blobGasUsed' style={{color: getColor(), overflowWrap: 'break-word', width: '100', height: '100', opacity: opacity}}>{blockHeaderUtils.blobGasUsed.value}</span>}
-        { blockHeaderUtils.excessBlobGas.value && <span ref={blockHeaderUtils.excessBlobGas.ref} id='excessBlobGas' style={{color: getColor(), overflowWrap: 'break-word', width: '100', height: '100', opacity: opacity}}>{blockHeaderUtils.excessBlobGas.value}</span>}
-        { blockHeaderUtils.parentBeaconBlockRoot.value && <span ref={blockHeaderUtils.parentBeaconBlockRoot.ref} id='parentBeaconBlockRoot' style={{color: getColor(), overflowWrap: 'break-word', width: '100', height: '100', opacity: opacity}}>{blockHeaderUtils.parentBeaconBlockRoot.value}</span>} */}
-        { blockHeaderUtils.prevRandao.value && <span ref={blockHeaderUtils.prevRandao.ref} id='prevRandao' style={{color: getColor(), overflowWrap: 'break-word', width: '100', height: '100', opacity: opacity}}>{blockHeaderUtils.prevRandao.value}</span>}
+        <div
+          ref={blockHeaderRef}
+        >
+          <span style={{color: getColor(), overflowWrap: 'break-word', width: '100', height: '100', opacity: opacity}}>{blockHeaderUtils.parentHash.value}</span>
+          {/* <span style={{color: getColor(), overflowWrap: 'break-word', width: '100', height: '100', opacity: opacity}}>{blockHeaderUtils.uncleHash.value}</span> */}
+          <span style={{color: getColor(), overflowWrap: 'break-word', width: '100', height: '100', opacity: opacity}}>{blockHeaderUtils.coinbase.value}</span>
+          <span style={{color: getColor(), overflowWrap: 'break-word', width: '100', height: '100', opacity: opacity}}>{blockHeaderUtils.stateRoot.value}</span>
+          <span style={{color: getColor(), overflowWrap: 'break-word', width: '100', height: '100', opacity: opacity}}>{blockHeaderUtils.transactionsTrie.value}</span>
+          <span style={{color: getColor(), overflowWrap: 'break-word', width: '100', height: '100', opacity: opacity}}>{blockHeaderUtils.receiptTrie.value}</span>
+          <span style={{color: getColor(), overflowWrap: 'break-word', width: '100', height: '100', opacity: opacity}}>{blockHeaderUtils.logsBloom.value}</span>
+          {/* <span style={{color: getColor(), overflowWrap: 'break-word', width: '100', height: '100', opacity: opacity}}>{blockHeaderUtils.difficulty.value}</span> */}
+          <span style={{color: getColor(), overflowWrap: 'break-word', width: '100', height: '100', opacity: opacity}}>{blockHeaderUtils.number.value}</span>
+          <span style={{color: getColor(), overflowWrap: 'break-word', width: '100', height: '100', opacity: opacity}}>{blockHeaderUtils.gasLimit.value}</span>
+          <span style={{color: getColor(), overflowWrap: 'break-word', width: '100', height: '100', opacity: opacity}}>{blockHeaderUtils.gasUsed.value}</span>
+          <span style={{color: getColor(), overflowWrap: 'break-word', width: '100', height: '100', opacity: opacity}}>{blockHeaderUtils.timestamp.value}</span>
+          <span style={{color: getColor(), overflowWrap: 'break-word', width: '100', height: '100', opacity: opacity}}>{blockHeaderUtils.extraData.value}</span>
+          <span style={{color: getColor(), overflowWrap: 'break-word', width: '100', height: '100', opacity: opacity}}>{blockHeaderUtils.mixHash.value}</span>
+          {/* <span style={{color: getColor(), overflowWrap: 'break-word', width: '100', height: '100', opacity: opacity}}>{blockHeaderUtils.nonce.value}</span> */}
+          <span style={{color: getColor(), overflowWrap: 'break-word', width: '100', height: '100', opacity: opacity}}>{blockHeaderUtils.baseFeePerGas.value}</span>
+          <span style={{color: getColor(), overflowWrap: 'break-word', width: '100', height: '100', opacity: opacity}}>{blockHeaderUtils.withdrawalsRoot.value}</span>
+          
+          {/* { blockHeaderUtils.blobGasUsed.value && <span style={{color: getColor(), overflowWrap: 'break-word', width: '100', height: '100', opacity: opacity}}>{blockHeaderUtils.blobGasUsed.value}</span>}
+          { blockHeaderUtils.excessBlobGas.value && <span style={{color: getColor(), overflowWrap: 'break-word', width: '100', height: '100', opacity: opacity}}>{blockHeaderUtils.excessBlobGas.value}</span>}
+          { blockHeaderUtils.parentBeaconBlockRoot.value && <span style={{color: getColor(), overflowWrap: 'break-word', width: '100', height: '100', opacity: opacity}}>{blockHeaderUtils.parentBeaconBlockRoot.value}</span>} */}
+          { blockHeaderUtils.prevRandao.value && <span style={{color: getColor(), overflowWrap: 'break-word', width: '100', height: '100', opacity: opacity}}>{blockHeaderUtils.prevRandao.value}</span>}
+        </div>
         
         { isToggled && <span ref={transactionStringRef} id='transactionsString' style={{color: getColor(), overflowWrap: 'break-word', width: '100', height: '100', opacity: opacity}}>{transactionsString}</span>}
         {/* <span id='uncleHeadersString' style={{color: getColor(), overflowWrap: 'break-word', width: '100', height: '100', opacity: opacity}}>{uncleHeadersString}</span> */}
@@ -157,6 +163,15 @@ const BlockData = ({ blockChainNumberFromApp, setBlockPosition, blockScale, bloc
         transform={`scale(${scale})`}
       >
       {blockHeaderString()}
+      {/* <rect
+        x="0"
+        y="0"
+        width="100%"
+        height="100%"
+        stroke="white"
+        strokeWidth="1"
+        fill="transparent"
+      /> */}
       </foreignObject>
       {/* <rect
         stroke='white'
@@ -169,7 +184,7 @@ const BlockData = ({ blockChainNumberFromApp, setBlockPosition, blockScale, bloc
       /> */}
       <text
         x={220}
-        y={500}
+        y={200}
         fill="white"
         fontSize="150"
         opacity={'50%'}
@@ -178,7 +193,7 @@ const BlockData = ({ blockChainNumberFromApp, setBlockPosition, blockScale, bloc
       </text>
       <text
         x={60}
-        y={660}
+        y={360}
         fill="white"
         fontSize="150"
         opacity={'50%'}
