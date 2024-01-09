@@ -4,7 +4,7 @@ import React from 'react';
 
 
 const HeaderLines = ({fromRect, toRect, posterRect}) => {
-  const opacity = '50%'
+  const opacity = '40%'
 
   const color = 'white'
   if (!fromRect || !toRect || !posterRect) {
@@ -56,11 +56,11 @@ const HeaderLines = ({fromRect, toRect, posterRect}) => {
           fill={color}
           opacity={opacity}
         />
-        <polygon
+        {/* <polygon
           points={rightPolygonData}
           fill={color}
           opacity={opacity}
-        />
+        /> */}
         <line
           id='block-data-header-bottom-line'
           x1={relFromRect.left}
@@ -81,7 +81,7 @@ const HeaderLines = ({fromRect, toRect, posterRect}) => {
           strokeWidth={3}
           opacity={opacity}
         />
-        <line
+        {/* <line
           id='top-right-line'
           x1={relFromRect.right}
           y1={relFromRect.top}
@@ -90,7 +90,7 @@ const HeaderLines = ({fromRect, toRect, posterRect}) => {
           stroke='white'
           strokeWidth={3}
           opacity={opacity}
-        />
+        /> */}
         <line
           id='bottom-left-line'
           x1={relFromRect.left}
@@ -101,7 +101,7 @@ const HeaderLines = ({fromRect, toRect, posterRect}) => {
           strokeWidth={3}
           opacity={opacity}
         />
-        <line
+        {/* <line
           id='bottom-right-line'
           x1={relFromRect.right}
           y1={relFromRect.bottom}
@@ -110,7 +110,7 @@ const HeaderLines = ({fromRect, toRect, posterRect}) => {
           stroke='white'
           strokeWidth={3}
           opacity={opacity}
-        />
+        /> */}
       </g>
     );
   }

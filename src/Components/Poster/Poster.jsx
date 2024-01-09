@@ -1,6 +1,6 @@
 // Poster.jsx
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import BlockData from './BlockData';
 import BlockHeader from './BlockHeader.jsx';
 import { DrapAndDropComponent } from './DragAndDrop';
@@ -11,6 +11,7 @@ import NotesLayer from './NotesLayer';
 import useResizeAndScrollEffect from './ResizeAndScrollHelper';
 import NoteLine from './LinesToNotes';
 import notesText from './staticText.js';
+import html2canvas from 'html2canvas';
 import "../../App.css";
 
 const theNotes = notesText.ethereumjs_execution_block
@@ -79,6 +80,7 @@ const Poster = ({ blockChainNumberFromApp, blockObject }) => {
   const [blockScale, setBlockScale] = useState(0.27)
   const [svgPreview, setSvgPreview] = useState()
   const [isToggled, setToggled] = useState(true)
+  const [captureLoading, setCaptureLoading] = useState(false);
 
   const {
     setTo,
@@ -113,6 +115,31 @@ const Poster = ({ blockChainNumberFromApp, blockObject }) => {
     window.URL.revokeObjectURL(element.href);
     element.remove();
   }
+
+  const downloadPNG = async () => {
+    setCaptureLoading(true);
+    try {
+      const canvas = await html2canvas(posterRef.current);
+      const imgData = canvas.toDataURL('image/png');
+      const link = document.createElement('a');
+      link.href = imgData;
+      link.download = 'poster.png';
+      link.click();
+    } catch (error) {
+      console.error('Error capturing poster:', error);
+    } finally {
+      setCaptureLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (posterRef.current) {
+      html2canvas(posterRef.current).then(canvas => {
+        // Your logic here if needed after capturing the canvas
+      });
+    }
+  }, [posterRef.current]);
+
 
   const handleSetBlockScale = (event) => {
     if (event.key === 'Enter') {
@@ -154,7 +181,7 @@ const Poster = ({ blockChainNumberFromApp, blockObject }) => {
             lineHeight: '1'
           }}
         >
-          <rect key="renderWindow" width="1000" height="1414" fill="#1E1E1E"/>
+          <rect key="renderWindow" width="1000" height="1414" fill="#111111"/>
           <DrapAndDropComponent>
             {blockChainNumberFromApp && <BlockChain
               blockChainNumberFromApp={blockChainNumberFromApp}
@@ -210,7 +237,10 @@ const Poster = ({ blockChainNumberFromApp, blockObject }) => {
         {transSwitch()}
       <br/>
       {/* <button id='previewPoster' className='previewPoster' onClick={previewPoster}>Preview Poster</button> */}
-      <button id='downloadSVG' className='downloadSVG' onClick={downloadSVG}>Download Poster</button>
+      <button id='downloadSVG' className='downloadSVG' onClick={downloadSVG}>Download SVG</button>
+      <button id='downloadPNG' className='downloadPNG' onClick={downloadPNG}>
+          {captureLoading ? 'Capturing...' : 'Download PNG'}
+        </button>
     </div>
   );
 };

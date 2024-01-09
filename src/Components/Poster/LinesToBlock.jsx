@@ -4,7 +4,7 @@ import React from 'react';
 
 
 const Lines = ({fromRect, toRect, posterRect}) => {
-  const opacity = '30%'
+  const opacity = '20%'
 
   const color = 'white'
   if (!fromRect || !toRect || !posterRect) {
@@ -36,7 +36,7 @@ const Lines = ({fromRect, toRect, posterRect}) => {
           fill={color}
           opacity={opacity}
         />
-        <line
+        {/* <line
           id='top-left-line'
           x1={relFromRect.left}
           y1={relFromRect.top}
@@ -45,7 +45,7 @@ const Lines = ({fromRect, toRect, posterRect}) => {
           stroke='white'
           strokeWidth={3}
           opacity={opacity}
-        />
+        /> */}
         <line
           id='top-right-line'
           x1={relFromRect.right}
@@ -56,7 +56,7 @@ const Lines = ({fromRect, toRect, posterRect}) => {
           strokeWidth={3}
           opacity={opacity}
         />
-        <line
+        {/* <line
           id='bottom-left-line'
           x1={relFromRect.left}
           y1={relFromRect.bottom}
@@ -65,7 +65,7 @@ const Lines = ({fromRect, toRect, posterRect}) => {
           stroke='white'
           strokeWidth={3}
           opacity={opacity}
-        />
+        /> */}
         <line
           id='bottom-right-line'
           x1={relFromRect.right}

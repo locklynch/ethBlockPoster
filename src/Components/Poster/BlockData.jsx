@@ -21,7 +21,7 @@ const BlockData = ({ blockChainNumberFromApp, setBlockPosition, setBlockHeaderPo
   const posterStartY = 80
   const marginRight = 5
   const marginBottom = 10
-  const opacity = '80%'
+  const opacity = '60%'
 
 
   let scale = blockScale
@@ -187,7 +187,7 @@ const BlockData = ({ blockChainNumberFromApp, setBlockPosition, setBlockHeaderPo
         y={200}
         fill="white"
         fontSize="150"
-        opacity={'50%'}
+        opacity={'40%'}
       >
         block
       </text>
@@ -196,7 +196,7 @@ const BlockData = ({ blockChainNumberFromApp, setBlockPosition, setBlockHeaderPo
         y={360}
         fill="white"
         fontSize="150"
-        opacity={'50%'}
+        opacity={'40%'}
       >
         {blockNumberTitle}
       </text>

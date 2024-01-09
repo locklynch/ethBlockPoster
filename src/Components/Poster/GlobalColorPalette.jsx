@@ -19,9 +19,9 @@ const colorPalette = [
     // "#00FFFF"  // Neon Cyan
 
     // grey scale
-    "#888888", // medium grey 
+    "#BBBBBB", // medium grey 
     "#FFFFFF", // white
-    "#CCCCCC", // light grey
+    // "#DDDDDD", // light grey
    
   
   ];
