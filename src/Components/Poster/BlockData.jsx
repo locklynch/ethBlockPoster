@@ -8,12 +8,15 @@ import { RLP } from '@ethereumjs/rlp'
 // import { bigIntToUnpaddedBytes } from '@ethereumjs/util'
 // import {Block} from '@ethereumjs/block'
 import BlockUtils from './BlockUtils'
-import { getColor, resetColorIndex } from './GlobalColorPalette';
+import GlobalColorPalette from './GlobalColorPalette';
+
+const { resetColorIndex, getColor} = GlobalColorPalette()
 
 // const BlockData = ({ blockChainNumberFromApp, setBlockPosition, setNoteFromRect, blockScale, blockObject, isToggled, setTransactionStringRect, setWithdrawalStringRect}) => {
 const BlockData = ({ blockChainNumberFromApp, setBlockPosition, setBlockHeaderPosition, blockScale, blockObject, isToggled, setTransactionStringRect, setWithdrawalStringRect}) => {
   const blockNumberTitle = blockChainNumberFromApp
   const getColorForBlockData = getColor()
+  
   resetColorIndex()
 
   // block poster starting details

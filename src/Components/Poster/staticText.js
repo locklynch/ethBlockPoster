@@ -1,6 +1,8 @@
 // staticText module for displaying the note info
 
-import { getColor, resetColorIndex } from './GlobalColorPalette'
+import GlobalColorPalette from './GlobalColorPalette'
+
+const { resetColorIndex, getColor} = GlobalColorPalette()
 
 resetColorIndex()
 

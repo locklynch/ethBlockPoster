@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import useResizeAndScrollEffect from './ResizeAndScrollHelper';
 import BlockUtils from './BlockUtils'
-import { getColor, resetColorIndex } from './GlobalColorPalette';
+import GlobalColorPalette from './GlobalColorPalette';
+
+const { resetColorIndex, getColor} = GlobalColorPalette()
 
 const BlockHeader = ({blockObject, blockScale, setNoteFromRect, setBlockHeaderPosition}) => {
   resetColorIndex()

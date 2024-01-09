@@ -13,7 +13,6 @@ import NoteLine from './LinesToNotes';
 import notesText from './staticText.js';
 import html2canvas from 'html2canvas';
 import "../../App.css";
-import { setPaletteSelector } from './GlobalColorPalette.jsx'
 
 const theNotes = notesText.ethereumjs_execution_block
 
@@ -240,13 +239,6 @@ const Poster = ({ blockChainNumberFromApp, blockObject }) => {
         <br/>
         {svgPreview && <img src={svgPreview}/>}
       </div>
-      <label htmlFor="colorSelector">Select a pallete:</label>
-      <select id="colorSelector" onChange={handleColorChange}>
-        <option value="white">White</option>
-        <option value="greys">Two Tone Grey</option>
-        <option value="neon">Neon 90's Laser Tag</option>
-        <option value="pastels">Pastel Clown Bois!</option>
-      </select>
       <br/>
       <label htmlFor='setBlockScale'>Set Block Scale: </label>
       <input type='number' id='setBlockScale' name='setBlockScale' placeholder='0.27' onKeyDown={handleSetBlockScale}/>
