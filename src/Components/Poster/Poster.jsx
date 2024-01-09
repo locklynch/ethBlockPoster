@@ -13,6 +13,7 @@ import NoteLine from './LinesToNotes';
 import notesText from './staticText.js';
 import html2canvas from 'html2canvas';
 import "../../App.css";
+import { setPaletteSelector } from './GlobalColorPalette.jsx'
 
 const theNotes = notesText.ethereumjs_execution_block
 
@@ -93,11 +94,37 @@ const Poster = ({ blockChainNumberFromApp, blockObject }) => {
 
   useResizeAndScrollEffect(posterRef, setPosterRect)
 
+  // code for sending the color selection to the GlobalColorPalette module
+  const handleColorChange = (event) => {
+    const selectedPalette = event.target.value;
+    setPaletteSelector(selectedPalette);
+  }
+
+  // code for running the set block scale control
   const sendBlockScale = () => {
     let blockScale = document.getElementById('setBlockScale').value;
     setBlockScale(blockScale)
   }
 
+  // code for handling inclusion of transactions and withdrawals
+  const handleToggleChange = () => {
+    setToggled(!isToggled)
+  }
+
+  const transSwitch = () => {
+    return (
+      <label className='switch'>
+          <input type='checkbox'
+            checked={!isToggled}
+            onChange={handleToggleChange}
+            id='includeTranstions'
+          />
+          <span className='slider'/>
+        </label>
+    )
+  }
+
+  // preview poster code (was using to compair poster display and what the download looks like, probably don't need this anymore though)
   const previewPoster = () => {
     const svg = posterRef.current.outerHTML;
     const encodedSVG = btoa(svg);
@@ -105,6 +132,7 @@ const Poster = ({ blockChainNumberFromApp, blockObject }) => {
     setSvgPreview(imgSrc)
   }
 
+  // code for downloading SVG STILL ONLY DISPLAYS CORRECTLY IN CHROME!
   const downloadSVG = () => {
     const svg = posterRef.current.outerHTML;
     const blob = new Blob([svg], { type: 'image/svg+xml'});
@@ -116,6 +144,7 @@ const Poster = ({ blockChainNumberFromApp, blockObject }) => {
     element.remove();
   }
 
+  // code for downloading PNG STILL NEED TO FIX THIS!
   const downloadPNG = async () => {
     setCaptureLoading(true);
     try {
@@ -135,7 +164,7 @@ const Poster = ({ blockChainNumberFromApp, blockObject }) => {
   useEffect(() => {
     if (posterRef.current) {
       html2canvas(posterRef.current).then(canvas => {
-        // Your logic here if needed after capturing the canvas
+        // Probably need to fill this out to fix stuff! will get to later
       });
     }
   }, [posterRef.current]);
@@ -145,23 +174,6 @@ const Poster = ({ blockChainNumberFromApp, blockObject }) => {
     if (event.key === 'Enter') {
       sendBlockScale();
     }
-  }
-
-  const handleToggleChange = () => {
-    setToggled(!isToggled)
-  }
-
-  const transSwitch = () => {
-    return (
-      <label className='switch'>
-          <input type='checkbox'
-            checked={!isToggled}
-            onChange={handleToggleChange}
-            id='includeTranstions'
-          />
-          <span className='slider'/>
-        </label>
-    )
   }
 
   return (
@@ -228,6 +240,13 @@ const Poster = ({ blockChainNumberFromApp, blockObject }) => {
         <br/>
         {svgPreview && <img src={svgPreview}/>}
       </div>
+      <label htmlFor="colorSelector">Select a pallete:</label>
+      <select id="colorSelector" onChange={handleColorChange}>
+        <option value="white">White</option>
+        <option value="greys">Two Tone Grey</option>
+        <option value="neon">Neon 90's Laser Tag</option>
+        <option value="pastels">Pastel Clown Bois!</option>
+      </select>
       <br/>
       <label htmlFor='setBlockScale'>Set Block Scale: </label>
       <input type='number' id='setBlockScale' name='setBlockScale' placeholder='0.27' onKeyDown={handleSetBlockScale}/>

@@ -14,7 +14,6 @@ function App() {
 
   return (
     <>
-      <Instructions/>
       <Inputs
         setBlockChainNumber={handleBlockNumberFromInput}
         setBlockObject={setBlockObject}
@@ -24,6 +23,8 @@ function App() {
         blockChainNumberFromApp={blockChainNumber}
         blockObject={blockObject}
       />
+      <br/>
+      <Instructions/>
       <br/>
     </>
   );

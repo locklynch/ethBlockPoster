@@ -61,3 +61,4 @@ Things to do!
 6. copy slider for including transactions and withdrawal windows
 7. copy code for header notes for transaction and withdrawal
 9. now get the color palette selection in the inputs section of the controls
+10. fix rasterization png download
