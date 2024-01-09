@@ -1,8 +1,11 @@
 // GlobalColorPalette module for selecting the color palettes
 // NOTE!! call resetColorIndex in each module to make sure it starts at 1 (because of the getColor function it'll always start at 1 instead of 0)
-import { useState } from "react"
+// import React, { useState, useEffect, useRef } from 'react';
+// import Poster from "./Poster"
 
 const GlobalColorPalette = () => {
+
+  let selectedPalette = 'neon'
 
   const paletteOptions = {
     white: [
@@ -31,43 +34,28 @@ const GlobalColorPalette = () => {
     ]
   }
   
-  let colorIndex = 0
+  // let colorIndex = 0
   
-  let paletteSelector = 'neon'
-  
-  const setPaletteSelector = (newPalette) => {
-    paletteSelector = newPalette
-    console.log(paletteSelector)
-  }
-  
-  let colorPalette = paletteOptions[paletteSelector]
+  let colorPalette = paletteOptions[selectedPalette]
   console.log(colorPalette)
 
-  const resetColorIndex = () => {
-    colorIndex = 0
-  }
+  // const resetColorIndex = () => {
+  //   colorIndex = 0
+  // }
   
-  const getColor = () => {
-    colorIndex += 1
-    const color = colorPalette[colorIndex % colorPalette.length]
-    return color
-  }
+  // const getColor = () => {
+  //   colorIndex += 1
+  //   const color = colorPalette[colorIndex % colorPalette.length]
+  //   return color
+  // }
 
-  return ({
-    setPaletteSelector,
-    resetColorIndex,
-    getColor,
-  }
-    // <div>
-    //   <label for="colorSelector">Select a color:</label>
-    //   <select id="colorSelector" onChange={handleColorChange}>
-    //     <option value="white">White</option>
-    //     <option value="greys">Two Tone Grey</option>
-    //     <option value="neon">Neon 90's Laser Tag</option>
-    //     <option value="pastels">Pastel Clown Bois!</option>
-    //   </select>
-    // </div>
-  )
+  return null
+  // {
+    // setPaletteSelector,
+    // resetColorIndex,
+    // getColor,
+  // }
 }
 
 export default GlobalColorPalette
+// export { GlobalColorPalette, getColor, resetColorIndex };

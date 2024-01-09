@@ -8,9 +8,10 @@ import { RLP } from '@ethereumjs/rlp'
 // import { bigIntToUnpaddedBytes } from '@ethereumjs/util'
 // import {Block} from '@ethereumjs/block'
 import BlockUtils from './BlockUtils'
-import GlobalColorPalette from './GlobalColorPalette';
+// import GlobalColorPalette from './GlobalColorPalette';
+import { getColor, resetColorIndex } from './ColorUtils'
 
-const { resetColorIndex, getColor} = GlobalColorPalette()
+// const { resetColorIndex, getColor} = GlobalColorPalette()
 
 // const BlockData = ({ blockChainNumberFromApp, setBlockPosition, setNoteFromRect, blockScale, blockObject, isToggled, setTransactionStringRect, setWithdrawalStringRect}) => {
 const BlockData = ({ blockChainNumberFromApp, setBlockPosition, setBlockHeaderPosition, blockScale, blockObject, isToggled, setTransactionStringRect, setWithdrawalStringRect}) => {

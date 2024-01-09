@@ -13,6 +13,7 @@ import NoteLine from './LinesToNotes';
 import notesText from './staticText.js';
 import html2canvas from 'html2canvas';
 import "../../App.css";
+import GlobalColorPalette from './GlobalColorPalette.jsx';
 
 const theNotes = notesText.ethereumjs_execution_block
 
@@ -81,6 +82,9 @@ const Poster = ({ blockChainNumberFromApp, blockObject }) => {
   const [svgPreview, setSvgPreview] = useState()
   const [isToggled, setToggled] = useState(true)
   const [captureLoading, setCaptureLoading] = useState(false);
+  const [selectedPalette, setSelectedPalette] = useState('neon')
+
+  console.log(selectedPalette)
 
   const {
     setTo,
@@ -96,7 +100,7 @@ const Poster = ({ blockChainNumberFromApp, blockObject }) => {
   // code for sending the color selection to the GlobalColorPalette module
   const handleColorChange = (event) => {
     const selectedPalette = event.target.value;
-    setPaletteSelector(selectedPalette);
+    setSelectedPalette(selectedPalette)
   }
 
   // code for running the set block scale control
@@ -210,7 +214,6 @@ const Poster = ({ blockChainNumberFromApp, blockObject }) => {
               setBlockHeaderPosition={setFromBlockHeaderRect}
               blockScale={blockScale}
               blockObject={blockObject}
-              // setNoteFromRect={setFrom}
               isToggled={isToggled}
               setTransactionStringRect={setTransactionStringRect}
               setWithdrawalStringRect={setWithdrawalStringRect}
@@ -239,6 +242,13 @@ const Poster = ({ blockChainNumberFromApp, blockObject }) => {
         <br/>
         {svgPreview && <img src={svgPreview}/>}
       </div>
+      <label htmlFor="colorSelector">Select a color:</label>
+      <select id="colorSelector" onChange={handleColorChange}>
+        <option value="white">White</option>
+        <option value="greys">Two Tone Grey</option>
+        <option value="neon">Neon 90's Laser Tag</option>
+        <option value="pastels">Pastel Clown Bois!</option>
+      </select>
       <br/>
       <label htmlFor='setBlockScale'>Set Block Scale: </label>
       <input type='number' id='setBlockScale' name='setBlockScale' placeholder='0.27' onKeyDown={handleSetBlockScale}/>
@@ -252,6 +262,9 @@ const Poster = ({ blockChainNumberFromApp, blockObject }) => {
       <button id='downloadPNG' className='downloadPNG' onClick={downloadPNG}>
           {captureLoading ? 'Capturing...' : 'Download PNG'}
         </button>
+      <div>
+        <GlobalColorPalette selectedPalette={selectedPalette} />
+      </div>
     </div>
   );
 };
