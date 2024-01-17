@@ -85,3 +85,7 @@ body {
 input:checked + .slider:before {
   transform: translateX(20px);
 }
+
+.colorPaletteContainer {
+  display: none;
+}

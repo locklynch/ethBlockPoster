@@ -84,8 +84,6 @@ const Poster = ({ blockChainNumberFromApp, blockObject }) => {
   const [captureLoading, setCaptureLoading] = useState(false);
   const [selectedPalette, setSelectedPalette] = useState('neon')
 
-  console.log(selectedPalette)
-
   const {
     setTo,
     setFrom,
@@ -261,11 +259,12 @@ const Poster = ({ blockChainNumberFromApp, blockObject }) => {
       <button id='downloadSVG' className='downloadSVG' onClick={downloadSVG}>Download SVG</button>
       <button id='downloadPNG' className='downloadPNG' onClick={downloadPNG}>
           {captureLoading ? 'Capturing...' : 'Download PNG'}
-        </button>
-      <div>
+      </button>
+      <div className='colorPaletteContainer'>
         <GlobalColorPalette selectedPalette={selectedPalette} />
       </div>
     </div>
   );
 };
+
 export default Poster;

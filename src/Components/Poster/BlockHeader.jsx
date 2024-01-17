@@ -7,6 +7,7 @@ import { getColor, resetColorIndex } from './ColorUtils'
 // const { resetColorIndex, getColor} = GlobalColorPalette()
 
 const BlockHeader = ({blockObject, blockScale, setNoteFromRect, setBlockHeaderPosition}) => {
+  
   resetColorIndex()
 
   // block poster starting location
