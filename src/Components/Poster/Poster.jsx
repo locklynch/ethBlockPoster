@@ -14,6 +14,7 @@ import notesText from './staticText.js';
 import html2canvas from 'html2canvas';
 import "../../App.css";
 import GlobalColorPalette from './GlobalColorPalette.jsx';
+import Transaction from './Transaction.jsx';
 
 const theNotes = notesText.ethereumjs_execution_block
 
@@ -230,6 +231,15 @@ const Poster = ({ blockChainNumberFromApp, blockObject }) => {
               setBlockHeaderPosition={setToBlockHeaderRect}
             />}
           </DrapAndDropComponent>
+          <DrapAndDropComponent>
+            {blockObject && <Transaction
+              blockObject={blockObject}
+              blockScale={blockScale}
+              setNoteFromRect={setFrom}
+              setBlockHeaderPosition={setToBlockHeaderRect}
+              isToggled={isToggled}
+            />}
+          </DrapAndDropComponent>
           {renderPolygons()}
           {blockObject && <NotesLayer
             blockObject={blockObject}
@@ -246,6 +256,13 @@ const Poster = ({ blockChainNumberFromApp, blockObject }) => {
         <option value="greys">Two Tone Grey</option>
         <option value="neon">Neon 90's Laser Tag</option>
         <option value="pastels">Pastel Clown Bois!</option>
+        <option value="purples">Purple Plurality</option>
+        <option value="blues">Bluey</option>
+        <option value="greens">Ganga Greens</option>
+        <option value="yellows">Yellow, because i have to</option>
+        <option value="oranges">Orange Trees</option>
+        <option value="reds">Reds, i'm tired of naming things now</option>
+        <option value="pinks">Pinky and the Brain</option>
       </select>
       <br/>
       <label htmlFor='setBlockScale'>Set Block Scale: </label>

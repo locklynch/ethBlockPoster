@@ -109,7 +109,7 @@ const BlockData = ({ blockChainNumberFromApp, setBlockPosition, setBlockHeaderPo
   const transactionsString = ((blockObject.transactions.map(transaction => {
     return (
       Buffer.from(transaction.serialize()).toString('hex')
-    );9
+    );
   }).join('')))
 
   // make the withdrawals
@@ -188,7 +188,7 @@ const BlockData = ({ blockChainNumberFromApp, setBlockPosition, setBlockHeaderPo
       /> */}
       <text
         x={220}
-        y={200}
+        y={500}
         fill="white"
         fontSize="150"
         opacity={'40%'}
@@ -197,7 +197,7 @@ const BlockData = ({ blockChainNumberFromApp, setBlockPosition, setBlockHeaderPo
       </text>
       <text
         x={60}
-        y={360}
+        y={660}
         fill="white"
         fontSize="150"
         opacity={'40%'}

@@ -11,6 +11,7 @@ BlockChain - a depiction of the block chain with the second from the top block b
 BlockData - show the block accessed in a window
 BlockHeader - show the blockHeader accessed in a window
 BlockUtils - helper function to get the parsed block data to the BlockData module and noteslayer for display (MIGHT REDO THIS METHOD WITH useState TYPE STUFF!)
+ColorUtils - helper functions for regulating colors throughout the poster
 DragAndDrop - parent component to call other elements of the poster within so they can be moved around the poster, to allow custom formatting by the user
 EthLogo - deconstruction of the ethereum logo svg to be used in poster
 GlobalColorPalette - the store of the color palette info to be used across the whole poster

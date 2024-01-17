@@ -11,12 +11,12 @@ const BlockHeader = ({blockObject, blockScale, setNoteFromRect, setBlockHeaderPo
   resetColorIndex()
 
   // block poster starting location
-  const posterStartX = 160
-  const posterStartY = 550
+  const posterStartX = 100
+  const posterStartY = 150
   const marginRight = 5
   const marginBottom = 10
 
-  let scale = blockScale * 5.5
+  let scale = blockScale * 4.5
   const [contentHeight, setContentHeight] = useState(1045);
   const targetBlockRef = useRef(null)
   const textRef = useRef(null);
@@ -53,7 +53,7 @@ const BlockHeader = ({blockObject, blockScale, setNoteFromRect, setBlockHeaderPo
       />
       <text
         x={70}
-        y={230}
+        y={180}
         fill="white"
         fontSize="120"
         opacity={'50%'}
