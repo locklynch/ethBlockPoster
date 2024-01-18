@@ -3,13 +3,13 @@ import useResizeAndScrollEffect from './ResizeAndScrollHelper';
 import BlockUtils from './BlockUtils'
 import { getColor, resetColorIndex } from './ColorUtils'
 
-const Transaction = ({blockObject, blockScale, setNoteFromRect, setBlockHeaderPosition, isToggled}) => {
+const Transaction = ({blockObject, blockScale, setToTransactionRect, isToggled}) => {
   
   resetColorIndex()
 
   // block poster starting location
-  const posterStartX = 160
-  const posterStartY = 550
+  const posterStartX = 175
+  const posterStartY = 600
   const marginRight = 5
   const marginBottom = 10
 
@@ -18,7 +18,7 @@ const Transaction = ({blockObject, blockScale, setNoteFromRect, setBlockHeaderPo
   const targetBlockRef = useRef(null)
   const textRef = useRef(null);
 
-  useResizeAndScrollEffect(targetBlockRef, setBlockHeaderPosition)
+  useResizeAndScrollEffect(targetBlockRef, setToTransactionRect)
 
   const blockHeaderUtils = BlockUtils(blockObject)
 
@@ -48,7 +48,7 @@ const Transaction = ({blockObject, blockScale, setNoteFromRect, setBlockHeaderPo
       transform={`translate(${posterStartX} ${posterStartY})`}
     >
       <rect
-        width={800 + (marginRight * scale)}
+        width={500 + (marginRight * scale)}
         height={contentHeight + (marginBottom * scale)}
         stroke='white'
         fill='black'
@@ -57,10 +57,10 @@ const Transaction = ({blockObject, blockScale, setNoteFromRect, setBlockHeaderPo
         ref={targetBlockRef}
       />
       <text
-        x={120}
+        x={65}
         y={80}
         fill="white"
-        fontSize="100"
+        fontSize="80"
         opacity={'50%'}
       >
         transaction
@@ -68,7 +68,7 @@ const Transaction = ({blockObject, blockScale, setNoteFromRect, setBlockHeaderPo
       <foreignObject
         x={7}
         y={5}
-        width={(795) / scale}
+        width={(495) / scale}
         height={contentHeight/scale}
         transform={`scale(${scale})`}
       >

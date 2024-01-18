@@ -7,6 +7,7 @@ import { DrapAndDropComponent } from './DragAndDrop';
 import BlockChain from './BlockChain';
 import Lines from './LinesToBlock';
 import HeaderLines from './LinesToHeader.jsx';
+import TransactionLines from './LinesToTransaction.jsx';
 import NotesLayer from './NotesLayer';
 import useResizeAndScrollEffect from './ResizeAndScrollHelper';
 import NoteLine from './LinesToNotes';
@@ -77,6 +78,8 @@ const Poster = ({ blockChainNumberFromApp, blockObject }) => {
   const [toRect, setToRect] = useState ()
   const [fromBlockHeaderRect, setFromBlockHeaderRect] = useState ()
   const [toBlockHeaderRect, setToBlockHeaderRect] = useState ()
+  const [fromTransactionRect, setFromTransactionRect] = useState ()
+  const [toTransactionRect, setToTransactionRect] = useState ()
   const [posterRect, setPosterRect] = useState()
   const posterRef = useRef(null)
   const [blockScale, setBlockScale] = useState(0.27)
@@ -211,11 +214,25 @@ const Poster = ({ blockChainNumberFromApp, blockObject }) => {
               blockChainNumberFromApp={blockChainNumberFromApp}
               setBlockPosition={setToRect}
               setBlockHeaderPosition={setFromBlockHeaderRect}
+              setFromTransactionRect={setFromTransactionRect}
               blockScale={blockScale}
               blockObject={blockObject}
               isToggled={isToggled}
               setTransactionStringRect={setTransactionStringRect}
               setWithdrawalStringRect={setWithdrawalStringRect}
+            />}
+          </DrapAndDropComponent>
+          <TransactionLines
+            fromRect={fromTransactionRect}
+            toRect={toTransactionRect}
+            posterRect={posterRect}
+          />
+          <DrapAndDropComponent>
+            {blockObject && <Transaction
+              blockObject={blockObject}
+              blockScale={blockScale}
+              setToTransactionRect={setToTransactionRect}
+              isToggled={isToggled}
             />}
           </DrapAndDropComponent>
           <HeaderLines
@@ -229,15 +246,6 @@ const Poster = ({ blockChainNumberFromApp, blockObject }) => {
               blockScale={blockScale}
               setNoteFromRect={setFrom}
               setBlockHeaderPosition={setToBlockHeaderRect}
-            />}
-          </DrapAndDropComponent>
-          <DrapAndDropComponent>
-            {blockObject && <Transaction
-              blockObject={blockObject}
-              blockScale={blockScale}
-              setNoteFromRect={setFrom}
-              setBlockHeaderPosition={setToBlockHeaderRect}
-              isToggled={isToggled}
             />}
           </DrapAndDropComponent>
           {renderPolygons()}

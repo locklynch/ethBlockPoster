@@ -14,7 +14,7 @@ import { getColor, resetColorIndex } from './ColorUtils'
 // const { resetColorIndex, getColor} = GlobalColorPalette()
 
 // const BlockData = ({ blockChainNumberFromApp, setBlockPosition, setNoteFromRect, blockScale, blockObject, isToggled, setTransactionStringRect, setWithdrawalStringRect}) => {
-const BlockData = ({ blockChainNumberFromApp, setBlockPosition, setBlockHeaderPosition, blockScale, blockObject, isToggled, setTransactionStringRect, setWithdrawalStringRect}) => {
+const BlockData = ({ blockChainNumberFromApp, setBlockPosition, setBlockHeaderPosition, blockScale, blockObject, isToggled, setTransactionStringRect, setWithdrawalStringRect, setFromTransactionRect}) => {
   const blockNumberTitle = blockChainNumberFromApp
   const getColorForBlockData = getColor()
   
@@ -25,7 +25,7 @@ const BlockData = ({ blockChainNumberFromApp, setBlockPosition, setBlockHeaderPo
   const posterStartY = 80
   const marginRight = 5
   const marginBottom = 10
-  const opacity = '60%'
+  const opacity = '100%'
 
 
   let scale = blockScale
@@ -35,9 +35,11 @@ const BlockData = ({ blockChainNumberFromApp, setBlockPosition, setBlockHeaderPo
   const blockHeaderRef = useRef(null)
   const transactionStringRef = useRef(null)
   const withdrawalStringRef = useRef(null)
+  const transactionRef = useRef(null)
 
   useResizeAndScrollEffect(blockDataRef, setBlockPosition)
   useResizeAndScrollEffect(blockHeaderRef, setBlockHeaderPosition)
+  useResizeAndScrollEffect(transactionRef, setFromTransactionRect)
 
   const blockHeaderUtils = BlockUtils(blockObject)
 
@@ -94,7 +96,11 @@ const BlockData = ({ blockChainNumberFromApp, setBlockPosition, setBlockHeaderPo
           { blockHeaderUtils.prevRandao.value && <span style={{color: getColor(), overflowWrap: 'break-word', width: '100', height: '100', opacity: opacity}}>{blockHeaderUtils.prevRandao.value}</span>}
         </div>
         
-        { isToggled && <span ref={transactionStringRef} id='transactionsString' style={{color: getColor(), overflowWrap: 'break-word', width: '100', height: '100', opacity: opacity}}>{transactionsString}</span>}
+        { isToggled && 
+          <div ref={transactionStringRef} id='transactionsString'>
+            <span ref={transactionRef} id='firstTransaction' style={{color: getColor(), overflowWrap: 'break-word', width: '100', height: '100', opacity: opacity}}>{singleTransaction}</span>
+            <span style={{color: getColor(), overflowWrap: 'break-word', width: '100', height: '100', opacity: opacity}}>{transactionsExceptFirstString}</span>
+          </div>}
         {/* <span id='uncleHeadersString' style={{color: getColor(), overflowWrap: 'break-word', width: '100', height: '100', opacity: opacity}}>{uncleHeadersString}</span> */}
         { isToggled && <span ref={withdrawalStringRef} id='withdrawalsString' style={{color: getColor(), overflowWrap: 'break-word', width: '100', height: '100', opacity: opacity}}>{withdrawalsString}</span>}
 
@@ -105,8 +111,34 @@ const BlockData = ({ blockChainNumberFromApp, setBlockPosition, setBlockHeaderPo
 
   }
   
-  // make the transactions
-  const transactionsString = ((blockObject.transactions.map(transaction => {
+  // make the first transaction alone
+  const singleTransaction = (() => {
+    if (blockObject.transactions.length > 0) {
+      return Buffer.from(blockObject.transactions[0].serialize()).toString('hex');
+    } else {
+      return "No first transaction";
+    }
+  })();
+
+  // make the transactions minues the first one
+  // const transactionsExceptFirstString = (() => {
+  //   if (blockObject.transactions.length > 1) {
+  //     const transactionsExceptFirst = blockObject.transactions.slice(1)
+  //     return transactionsExceptFirst.map(transaction => (
+  //       Buffer.from(transaction.serialize()).toString('hex')
+  //     )).join('')
+  //   } else {
+  //     return "No additional transactions"
+  //   }
+  // })
+  // const transactionsString = ((blockObject.transactions.map(transaction => {
+  //   return (
+  //     Buffer.from(transaction.serialize()).toString('hex')
+  //   );
+  // }).join('')))
+
+  const transactionsExceptFirst = blockObject.transactions.slice(1)
+  const transactionsExceptFirstString = ((transactionsExceptFirst.map(transaction => {
     return (
       Buffer.from(transaction.serialize()).toString('hex')
     );

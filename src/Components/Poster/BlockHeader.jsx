@@ -11,7 +11,7 @@ const BlockHeader = ({blockObject, blockScale, setNoteFromRect, setBlockHeaderPo
   resetColorIndex()
 
   // block poster starting location
-  const posterStartX = 100
+  const posterStartX = 175
   const posterStartY = 150
   const marginRight = 5
   const marginBottom = 10
