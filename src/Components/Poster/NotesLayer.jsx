@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { DrapAndDropComponent } from './DragAndDrop';
-import notesText from './staticText.js';
+import notesText from './StaticText.js';
 import useResizeAndScrollEffect from "./ResizeAndScrollHelper";
 import BlockUtils from './BlockUtils'
 

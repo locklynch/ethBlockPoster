@@ -53,6 +53,16 @@ const NoteLine = ({ noteFromRect, noteToRect, posterRect, transactionStringRect,
   return (
     <g>
       <line
+        id='left-side-to-middle'
+        x1={relFromRect.left}
+        y1={middleFromY}
+        x2={middleToX}
+        y2={middleToY}
+        stroke='white'
+        strokeWidth={5}
+        opacity={'50%'}
+      />
+      {/* <line
         id='middle-to-middle'
         x1={middleFromX}
         y1={middleFromY}
@@ -61,7 +71,7 @@ const NoteLine = ({ noteFromRect, noteToRect, posterRect, transactionStringRect,
         stroke='white'
         strokeWidth={5}
         opacity={'50%'}
-      />
+      /> */}
       {/* <line
           id='top-left-line'
           x1={relFromRect.left}

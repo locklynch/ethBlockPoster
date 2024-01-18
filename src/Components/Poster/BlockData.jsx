@@ -1,6 +1,6 @@
 // BlockData.jsx The window to show the block being accessed
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import useResizeAndScrollEffect from './ResizeAndScrollHelper';
 import EthLogo from './EthLogo';
 import {Buffer} from 'buffer'
@@ -9,16 +9,17 @@ import { RLP } from '@ethereumjs/rlp'
 // import {Block} from '@ethereumjs/block'
 import BlockUtils from './BlockUtils'
 // import GlobalColorPalette from './GlobalColorPalette';
-import { getColor, resetColorIndex } from './ColorUtils'
-
+import { makeGetColor } from './ColorUtils'
+import { ThemeContext, getPalette } from './GlobalColorPalette';
 // const { resetColorIndex, getColor} = GlobalColorPalette()
 
 // const BlockData = ({ blockChainNumberFromApp, setBlockPosition, setNoteFromRect, blockScale, blockObject, isToggled, setTransactionStringRect, setWithdrawalStringRect}) => {
 const BlockData = ({ blockChainNumberFromApp, setBlockPosition, setBlockHeaderPosition, blockScale, blockObject, isToggled, setTransactionStringRect, setWithdrawalStringRect, setFromTransactionRect, setFromWithdrawalRect}) => {
   const blockNumberTitle = blockChainNumberFromApp
-  const getColorForBlockData = getColor()
-  
-  resetColorIndex()
+
+  const theme = useContext(ThemeContext);
+  const palette = getPalette(theme);
+  const getColor = makeGetColor(palette);
 
   // block poster starting details
   const posterStartX = 50

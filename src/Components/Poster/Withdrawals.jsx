@@ -1,12 +1,17 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import useResizeAndScrollEffect from './ResizeAndScrollHelper';
 import BlockUtils from './BlockUtils'
-import { getColor, resetColorIndex } from './ColorUtils'
+// import { getColor, resetColorIndex } from './ColorUtils'
 import { RLP } from '@ethereumjs/rlp'
+import { makeGetColor } from './ColorUtils'
+import { ThemeContext, getPalette } from './GlobalColorPalette';
 
 const Withdrawal = ({blockObject, blockScale, setToWithdrawalRect, isToggled}) => {
   
-  resetColorIndex()
+  const theme = useContext(ThemeContext);
+  const palette = getPalette(theme);
+  const getColor = makeGetColor(palette);
+  // resetColorIndex()
 
   // block poster starting location
   const posterStartX = 500

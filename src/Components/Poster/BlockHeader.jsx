@@ -1,14 +1,21 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import useResizeAndScrollEffect from './ResizeAndScrollHelper';
+import useResizeAndScrollEffectOnlyLines from './ResizeAndScrollHelperOnlyLines';
 import BlockUtils from './BlockUtils'
 // import GlobalColorPalette from './GlobalColorPalette';
-import { getColor, resetColorIndex } from './ColorUtils'
+// import { getColor, resetColorIndex } from './ColorUtils'
+import { makeGetColor } from './ColorUtils'
+import { ThemeContext, getPalette } from './GlobalColorPalette';
 
 // const { resetColorIndex, getColor} = GlobalColorPalette()
 
 const BlockHeader = ({blockObject, blockScale, setNoteFromRect, setBlockHeaderPosition}) => {
+
+  const theme = useContext(ThemeContext);
+  const palette = getPalette(theme);
+  const getColor = makeGetColor(palette);
   
-  resetColorIndex()
+  // resetColorIndex()
 
   // block poster starting location
   const posterStartX = 500
@@ -28,7 +35,7 @@ const BlockHeader = ({blockObject, blockScale, setNoteFromRect, setBlockHeaderPo
 
   Object.keys(blockHeaderUtils).map((id) => {
     const {ref} = blockHeaderUtils[id];
-    useResizeAndScrollEffect(ref, (rect) => setNoteFromRect(id, rect))
+    useResizeAndScrollEffectOnlyLines(ref, (rect) => setNoteFromRect(id, rect))
   })
 
   useEffect(() => {

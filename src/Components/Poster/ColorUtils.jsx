@@ -16,4 +16,16 @@ const getColor = () => {
   return color
 }
 
+export const makeGetColor = (palette) => {
+  let colorIndex = 0
+
+  const getColor = () => {
+    colorIndex += 1
+    const color = palette[colorIndex % palette.length]
+    return color
+  }
+
+  return getColor
+}
+
 export { getColor, resetColorIndex }

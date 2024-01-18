@@ -4,7 +4,7 @@ import React from 'react';
 
 
 const Lines = ({fromRect, toRect, posterRect}) => {
-  const opacity = '20%'
+  const opacity = '50%'
 
   const color = 'white'
   if (!fromRect || !toRect || !posterRect) {

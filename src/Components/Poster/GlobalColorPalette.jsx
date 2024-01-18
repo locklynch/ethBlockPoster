@@ -1,5 +1,9 @@
 // GlobalColorPalette module for selecting the color palettes
 
+import { createContext } from 'react';
+export const ThemeContext = createContext('neon');
+
+
 const paletteOptions = {
   white: [
     "#FFFFFF" // white
@@ -109,6 +113,13 @@ const paletteOptions = {
     "#D87093", // MediumVioletRed
     "#C71585"  // MediumPurple
   ]
+}
+
+export const getPalette = (name) => {
+  if (!paletteOptions[name]) {
+    throw new Error(`no color palette "${name}"`)
+  }
+  return paletteOptions[name]
 }
 
 let colorPalette
