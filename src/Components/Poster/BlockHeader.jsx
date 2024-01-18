@@ -11,10 +11,11 @@ const BlockHeader = ({blockObject, blockScale, setNoteFromRect, setBlockHeaderPo
   resetColorIndex()
 
   // block poster starting location
-  const posterStartX = 175
+  const posterStartX = 500
   const posterStartY = 150
   const marginRight = 5
   const marginBottom = 10
+  const windowWidth = 400
 
   let scale = blockScale * 4.5
   const [contentHeight, setContentHeight] = useState(1045);
@@ -43,7 +44,7 @@ const BlockHeader = ({blockObject, blockScale, setNoteFromRect, setBlockHeaderPo
       transform={`translate(${posterStartX} ${posterStartY})`}
     >
       <rect
-        width={800 + (marginRight * scale)}
+        width={windowWidth + (marginRight * scale)}
         height={contentHeight + (marginBottom * scale)}
         stroke='white'
         fill='black'
@@ -52,18 +53,18 @@ const BlockHeader = ({blockObject, blockScale, setNoteFromRect, setBlockHeaderPo
         ref={targetBlockRef}
       />
       <text
-        x={70}
-        y={180}
+        x={40}
+        y={280}
         fill="white"
-        fontSize="120"
-        opacity={'50%'}
+        fontSize="60"
+        opacity={'40%'}
       >
         blockHeader
       </text>
       <foreignObject
         x={7}
         y={5}
-        width={(795) / scale}
+        width={(windowWidth - 5) / scale}
         height={contentHeight/scale}
         transform={`scale(${scale})`}
       >

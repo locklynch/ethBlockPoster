@@ -14,7 +14,7 @@ import { getColor, resetColorIndex } from './ColorUtils'
 // const { resetColorIndex, getColor} = GlobalColorPalette()
 
 // const BlockData = ({ blockChainNumberFromApp, setBlockPosition, setNoteFromRect, blockScale, blockObject, isToggled, setTransactionStringRect, setWithdrawalStringRect}) => {
-const BlockData = ({ blockChainNumberFromApp, setBlockPosition, setBlockHeaderPosition, blockScale, blockObject, isToggled, setTransactionStringRect, setWithdrawalStringRect, setFromTransactionRect}) => {
+const BlockData = ({ blockChainNumberFromApp, setBlockPosition, setBlockHeaderPosition, blockScale, blockObject, isToggled, setTransactionStringRect, setWithdrawalStringRect, setFromTransactionRect, setFromWithdrawalRect}) => {
   const blockNumberTitle = blockChainNumberFromApp
   const getColorForBlockData = getColor()
   
@@ -26,6 +26,7 @@ const BlockData = ({ blockChainNumberFromApp, setBlockPosition, setBlockHeaderPo
   const marginRight = 5
   const marginBottom = 10
   const opacity = '100%'
+  const svgOpacity = '50%'
 
 
   let scale = blockScale
@@ -36,10 +37,12 @@ const BlockData = ({ blockChainNumberFromApp, setBlockPosition, setBlockHeaderPo
   const transactionStringRef = useRef(null)
   const withdrawalStringRef = useRef(null)
   const transactionRef = useRef(null)
+  const withdrawalRef = useRef(null)
 
   useResizeAndScrollEffect(blockDataRef, setBlockPosition)
   useResizeAndScrollEffect(blockHeaderRef, setBlockHeaderPosition)
   useResizeAndScrollEffect(transactionRef, setFromTransactionRect)
+  useResizeAndScrollEffect(withdrawalRef, setFromWithdrawalRect)
 
   const blockHeaderUtils = BlockUtils(blockObject)
 
@@ -102,7 +105,12 @@ const BlockData = ({ blockChainNumberFromApp, setBlockPosition, setBlockHeaderPo
             <span style={{color: getColor(), overflowWrap: 'break-word', width: '100', height: '100', opacity: opacity}}>{transactionsExceptFirstString}</span>
           </div>}
         {/* <span id='uncleHeadersString' style={{color: getColor(), overflowWrap: 'break-word', width: '100', height: '100', opacity: opacity}}>{uncleHeadersString}</span> */}
-        { isToggled && <span ref={withdrawalStringRef} id='withdrawalsString' style={{color: getColor(), overflowWrap: 'break-word', width: '100', height: '100', opacity: opacity}}>{withdrawalsString}</span>}
+        { isToggled && 
+          <div ref={withdrawalStringRef} id='withdrawalString'>
+            <span ref={withdrawalRef} id='firstWithdrawal' style={{color: getColor(), overflowWrap: 'break-word', width: '100', height: '100', opacity: opacity}}>{singleWithdrawal}</span>
+            <span style={{color: getColor(), overflowWrap: 'break-word', width: '100', height: '100', opacity: opacity}}>{withdrawalsExceptFirstString}</span>
+          </div>}
+        {/* { isToggled && <span ref={withdrawalStringRef} id='withdrawalsString' style={{color: getColor(), overflowWrap: 'break-word', width: '100', height: '100', opacity: opacity}}>{withdrawalsString}</span>} */}
 
 
         {/* <Rlp rlpObject={parentHash} /> */}
@@ -119,30 +127,40 @@ const BlockData = ({ blockChainNumberFromApp, setBlockPosition, setBlockHeaderPo
       return "No first transaction";
     }
   })();
-
-  // make the transactions minues the first one
-  // const transactionsExceptFirstString = (() => {
-  //   if (blockObject.transactions.length > 1) {
-  //     const transactionsExceptFirst = blockObject.transactions.slice(1)
-  //     return transactionsExceptFirst.map(transaction => (
-  //       Buffer.from(transaction.serialize()).toString('hex')
-  //     )).join('')
-  //   } else {
-  //     return "No additional transactions"
-  //   }
-  // })
-  // const transactionsString = ((blockObject.transactions.map(transaction => {
-  //   return (
-  //     Buffer.from(transaction.serialize()).toString('hex')
-  //   );
-  // }).join('')))
-
+  // make rest of transactions
   const transactionsExceptFirst = blockObject.transactions.slice(1)
   const transactionsExceptFirstString = ((transactionsExceptFirst.map(transaction => {
     return (
       Buffer.from(transaction.serialize()).toString('hex')
     );
   }).join('')))
+
+  // make the first withdrawal alone
+  const singleWithdrawal = (() => {
+    if (blockObject.withdrawals.length > 0) {
+      const firstWithdrawal = blockObject.withdrawals[0];
+      if (firstWithdrawal && typeof firstWithdrawal.raw === 'function') {
+        return Buffer.from(RLP.encode(firstWithdrawal.raw())).toString('hex');
+      } else {
+        return "Invalid withdrawal structure";
+      }
+    } else {
+      return "No withdrawals available";
+    }
+  })();
+
+  // make rest of withdrawals
+  const withdrawalsExceptFirst = blockObject.withdrawals.slice(1);
+  const withdrawalsExceptFirstString = (() => {
+    if (blockObject.withdrawals.length > 1) {
+      return withdrawalsExceptFirst.map(withdrawal => (
+        Buffer.from(RLP.encode(withdrawal.raw())).toString('hex')
+      )).join('');
+    } else {
+      return "No additional withdrawals";
+    }
+  })();
+  
 
   // make the withdrawals
   const withdrawalsString = ((blockObject.withdrawals.map(withdrawal => {
@@ -188,7 +206,7 @@ const BlockData = ({ blockChainNumberFromApp, setBlockPosition, setBlockHeaderPo
         height={contentHeight}
         x='100'
         y='0'
-        opacity={opacity}>
+        opacity={svgOpacity}>
           <EthLogo/>
         </svg>
       <foreignObject

@@ -8,10 +8,11 @@ const Transaction = ({blockObject, blockScale, setToTransactionRect, isToggled})
   resetColorIndex()
 
   // block poster starting location
-  const posterStartX = 175
-  const posterStartY = 600
+  const posterStartX = 500
+  const posterStartY = 800
   const marginRight = 5
   const marginBottom = 10
+  const windowWidth = 400
 
   let scale = blockScale * 4.5
   const [contentHeight, setContentHeight] = useState(1045);
@@ -48,7 +49,7 @@ const Transaction = ({blockObject, blockScale, setToTransactionRect, isToggled})
       transform={`translate(${posterStartX} ${posterStartY})`}
     >
       <rect
-        width={500 + (marginRight * scale)}
+        width={windowWidth + (marginRight * scale)}
         height={contentHeight + (marginBottom * scale)}
         stroke='white'
         fill='black'
@@ -57,18 +58,18 @@ const Transaction = ({blockObject, blockScale, setToTransactionRect, isToggled})
         ref={targetBlockRef}
       />
       <text
-        x={65}
-        y={80}
+        x={60}
+        y={90}
         fill="white"
-        fontSize="80"
-        opacity={'50%'}
+        fontSize="60"
+        opacity={'40%'}
       >
         transaction
       </text>
       <foreignObject
         x={7}
         y={5}
-        width={(495) / scale}
+        width={(windowWidth - 5) / scale}
         height={contentHeight/scale}
         transform={`scale(${scale})`}
       >

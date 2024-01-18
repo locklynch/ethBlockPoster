@@ -8,6 +8,7 @@ import BlockChain from './BlockChain';
 import Lines from './LinesToBlock';
 import HeaderLines from './LinesToHeader.jsx';
 import TransactionLines from './LinesToTransaction.jsx';
+import WithdrawalLines from './LineToWithdrawal.jsx';
 import NotesLayer from './NotesLayer';
 import useResizeAndScrollEffect from './ResizeAndScrollHelper';
 import NoteLine from './LinesToNotes';
@@ -16,6 +17,7 @@ import html2canvas from 'html2canvas';
 import "../../App.css";
 import GlobalColorPalette from './GlobalColorPalette.jsx';
 import Transaction from './Transaction.jsx';
+import Withdrawal from './Withdrawals.jsx';
 
 const theNotes = notesText.ethereumjs_execution_block
 
@@ -80,6 +82,8 @@ const Poster = ({ blockChainNumberFromApp, blockObject }) => {
   const [toBlockHeaderRect, setToBlockHeaderRect] = useState ()
   const [fromTransactionRect, setFromTransactionRect] = useState ()
   const [toTransactionRect, setToTransactionRect] = useState ()
+  const [fromWithdrawalRect, setFromWithdrawalRect] = useState ()
+  const [toWithdrawalRect, setToWithdrawalRect] = useState ()
   const [posterRect, setPosterRect] = useState()
   const posterRef = useRef(null)
   const [blockScale, setBlockScale] = useState(0.27)
@@ -215,6 +219,7 @@ const Poster = ({ blockChainNumberFromApp, blockObject }) => {
               setBlockPosition={setToRect}
               setBlockHeaderPosition={setFromBlockHeaderRect}
               setFromTransactionRect={setFromTransactionRect}
+              setFromWithdrawalRect={setFromWithdrawalRect}
               blockScale={blockScale}
               blockObject={blockObject}
               isToggled={isToggled}
@@ -232,6 +237,19 @@ const Poster = ({ blockChainNumberFromApp, blockObject }) => {
               blockObject={blockObject}
               blockScale={blockScale}
               setToTransactionRect={setToTransactionRect}
+              isToggled={isToggled}
+            />}
+          </DrapAndDropComponent>
+          <WithdrawalLines
+            fromRect={fromWithdrawalRect}
+            toRect={toWithdrawalRect}
+            posterRect={posterRect}
+          />
+          <DrapAndDropComponent>
+            {blockObject && <Withdrawal
+              blockObject={blockObject}
+              blockScale={blockScale}
+              setToWithdrawalRect={setToWithdrawalRect}
               isToggled={isToggled}
             />}
           </DrapAndDropComponent>
