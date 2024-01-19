@@ -12,7 +12,7 @@ import WithdrawalLines from './LineToWithdrawal.jsx';
 import NotesLayer from './NotesLayer';
 import useResizeAndScrollEffect from './ResizeAndScrollHelper';
 import NoteLine from './LinesToNotes';
-import notesText from './StaticText.js';
+import notesText from './staticText.js';
 import html2canvas from 'html2canvas';
 import "../../App.css";
 import GlobalColorPalette from './GlobalColorPalette.jsx';
@@ -300,7 +300,7 @@ const Poster = ({ blockChainNumberFromApp, blockObject }) => {
         <label className='transAndWithdrawalSwitchLabel' htmlFor='includeTransactions'>Include Transactions and Widthrawals: </label>
           {transSwitch()}
         <br/>
-        {/* <button id='previewPoster' className='previewPoster' onClick={previewPoster}>Preview Poster</button> */}
+        <button id='previewPoster' className='previewPoster' onClick={previewPoster}>Preview Poster</button>
         <button id='downloadSVG' className='downloadSVG' onClick={downloadSVG}>Download SVG</button>
         <button id='downloadPNG' className='downloadPNG' onClick={downloadPNG}>
             {captureLoading ? 'Capturing...' : 'Download PNG'}
