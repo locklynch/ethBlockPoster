@@ -2,18 +2,17 @@
 
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import useResizeAndScrollEffect from './ResizeAndScrollHelper';
-import EthLogo from './EthLogo';
+import EthLogo from '../EthLogo';
 import {Buffer} from 'buffer'
 import { RLP } from '@ethereumjs/rlp'
 // import { bigIntToUnpaddedBytes } from '@ethereumjs/util'
 // import {Block} from '@ethereumjs/block'
-import BlockUtils from './BlockUtils'
+import BlockUtils from '../BlockUtils'
 // import GlobalColorPalette from './GlobalColorPalette';
-import { makeGetColor } from './ColorUtils'
-import { ThemeContext, getPalette } from './GlobalColorPalette';
+import { makeGetColor } from '../ColorUtils'
+import { ThemeContext, getPalette } from '../GlobalColorPalette';
 // const { resetColorIndex, getColor} = GlobalColorPalette()
 
-// const BlockData = ({ blockChainNumberFromApp, setBlockPosition, setNoteFromRect, blockScale, blockObject, isToggled, setTransactionStringRect, setWithdrawalStringRect}) => {
 const BlockData = ({ blockChainNumberFromApp, setBlockPosition, setBlockHeaderPosition, blockScale, blockObject, isToggled, setTransactionStringRect, setWithdrawalStringRect, setFromTransactionRect, setFromWithdrawalRect}) => {
   const blockNumberTitle = blockChainNumberFromApp
 
@@ -34,8 +33,8 @@ const BlockData = ({ blockChainNumberFromApp, setBlockPosition, setBlockHeaderPo
   const [contentHeight, setContentHeight] = useState(1045);
   const blockDataRef = useRef(null)
   const textRef = useRef(null);
-  const blockHeaderRef = useRef(null)
-  const transactionStringRef = useRef(null)
+  const blockHeaderRef = useRef(1)
+  const transactionStringRef = useRef(1000)
   const withdrawalStringRef = useRef(null)
   const transactionRef = useRef(null)
   const withdrawalRef = useRef(null)
@@ -47,24 +46,10 @@ const BlockData = ({ blockChainNumberFromApp, setBlockPosition, setBlockHeaderPo
 
   const blockHeaderUtils = BlockUtils(blockObject)
 
-  // eventually to fix the starting location of the lines!
-  // from first character of string instead of center of bounding rect!
-  // const getBoundingRectForFirstCharacter = (text) => {
-  //   const span = document.createElement('span');
-  //   span.textContent = text.charAt(0);
-  //   span.style.position = 'absolute';
-  //   span.style.visibility = 'hidden';
-  //   document.body.appendChild(span);
-  //   const boundingRect = span.getBoundingClientRect();
-  //   document.body.removeChild(span);
-  //   return boundingRect;
-  // };
-
   // make the blockheader
   const blockHeaderString = () => {
     Object.keys(blockHeaderUtils).map((id) => {
       const {ref} = blockHeaderUtils[id];
-      // useResizeAndScrollEffect(ref, (rect) => setNoteFromRect(id, rect))
     })
 
     return (
@@ -190,6 +175,7 @@ const BlockData = ({ blockChainNumberFromApp, setBlockPosition, setBlockHeaderPo
 
   return (
     <g
+      className='hidden'
       transform={`translate(${posterStartX} ${posterStartY})`}
     >
       <rect
@@ -209,7 +195,7 @@ const BlockData = ({ blockChainNumberFromApp, setBlockPosition, setBlockHeaderPo
         y='0'
         opacity={svgOpacity}>
           <EthLogo/>
-        </svg>
+      </svg>
       <foreignObject
         x={7}
         y={5}

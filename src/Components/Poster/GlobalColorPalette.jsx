@@ -1,10 +1,16 @@
 // GlobalColorPalette module for selecting the color palettes
 
 import { createContext } from 'react';
-export const ThemeContext = createContext('neon');
+export const ThemeContext = createContext('startingPoint');
 
 
 const paletteOptions = {
+  startingPoint: [
+    "#6ABD86", // some kinda seafoam
+    "#997EEF", // washed out purple
+    
+
+  ],
   white: [
     "#FFFFFF" // white
   ],
@@ -130,7 +136,7 @@ const GlobalColorPalette = ({selectedPalette}) => {
   return colorPalette
 }
 
-GlobalColorPalette({ selectedPalette: 'purples' })
+GlobalColorPalette({ selectedPalette: 'startingPoint' })
 
 let pickedColors = colorPalette
 

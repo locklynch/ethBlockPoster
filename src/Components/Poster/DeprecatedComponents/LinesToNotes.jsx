@@ -51,7 +51,7 @@ const NoteLine = ({ noteFromRect, noteToRect, posterRect, transactionStringRect,
 
 
   return (
-    <g>
+    <g className='hidden'>
       <line
         id='left-side-to-middle'
         x1={relFromRect.left}

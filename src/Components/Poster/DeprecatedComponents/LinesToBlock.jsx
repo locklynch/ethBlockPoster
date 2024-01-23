@@ -30,7 +30,7 @@ const Lines = ({fromRect, toRect, posterRect}) => {
   `;
 
     return (
-      <g>
+      <g className='hidden'>
         <polygon
           points={rightPolygonData}
           fill={color}

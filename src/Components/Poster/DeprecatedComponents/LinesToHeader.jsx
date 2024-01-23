@@ -3,7 +3,7 @@
 import React from 'react';
 
 
-const TransactionLines = ({fromRect, toRect, posterRect}) => {
+const HeaderLines = ({fromRect, toRect, posterRect}) => {
   const opacity = '40%'
 
   const color = 'white'
@@ -50,7 +50,7 @@ const TransactionLines = ({fromRect, toRect, posterRect}) => {
   `
 
     return (
-      <g>
+      <g className='hidden'>
         <polygon
           points={leftPolygonData}
           fill={color}
@@ -115,4 +115,4 @@ const TransactionLines = ({fromRect, toRect, posterRect}) => {
     );
   }
 
-export default TransactionLines
+export default HeaderLines

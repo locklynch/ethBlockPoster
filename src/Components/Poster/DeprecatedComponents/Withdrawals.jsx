@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import useResizeAndScrollEffect from './ResizeAndScrollHelper';
-import BlockUtils from './BlockUtils'
+import BlockUtils from '../BlockUtils'
 // import { getColor, resetColorIndex } from './ColorUtils'
 import { RLP } from '@ethereumjs/rlp'
-import { makeGetColor } from './ColorUtils'
-import { ThemeContext, getPalette } from './GlobalColorPalette';
+import { makeGetColor } from '../ColorUtils'
+import { ThemeContext, getPalette } from '../GlobalColorPalette';
 
 const Withdrawal = ({blockObject, blockScale, setToWithdrawalRect, isToggled}) => {
   
@@ -77,6 +77,7 @@ const Withdrawal = ({blockObject, blockScale, setToWithdrawalRect, isToggled}) =
 
   return (
     <g
+      className='hidden'
       transform={`translate(${posterStartX} ${posterStartY})`}
     >
       <rect

@@ -50,7 +50,7 @@ const WithdrawalLines = ({fromRect, toRect, posterRect}) => {
   `
 
     return (
-      <g>
+      <g className='hidden'>
         <polygon
           points={leftPolygonData}
           fill={color}

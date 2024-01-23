@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import useResizeAndScrollEffect from './ResizeAndScrollHelper';
 import useResizeAndScrollEffectOnlyLines from './ResizeAndScrollHelperOnlyLines';
-import BlockUtils from './BlockUtils'
+import BlockUtils from '../BlockUtils'
 // import GlobalColorPalette from './GlobalColorPalette';
 // import { getColor, resetColorIndex } from './ColorUtils'
-import { makeGetColor } from './ColorUtils'
-import { ThemeContext, getPalette } from './GlobalColorPalette';
+import { makeGetColor } from '../ColorUtils'
+import { ThemeContext, getPalette } from '../GlobalColorPalette';
 
 // const { resetColorIndex, getColor} = GlobalColorPalette()
 
@@ -48,6 +48,7 @@ const BlockHeader = ({blockObject, blockScale, setNoteFromRect, setBlockHeaderPo
 
   return (
     <g
+      className='hidden'
       transform={`translate(${posterStartX} ${posterStartY})`}
     >
       <rect

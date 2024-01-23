@@ -2,7 +2,7 @@
 
 import React, { useRef } from 'react';
 import useResizeAndScrollEffect from './ResizeAndScrollHelper';
-import EthLogo from './EthLogo';
+import EthLogo from '../EthLogo';
 
 const BlockChain = ( { blockChainNumberFromApp, setBlockPosition }) => {
   const number = blockChainNumberFromApp
@@ -15,7 +15,9 @@ const BlockChain = ( { blockChainNumberFromApp, setBlockPosition }) => {
   useResizeAndScrollEffect(targetBlockRef, setBlockPosition)
 
   return (
-    <g key={'blockChain'}>
+    <g key={'blockChain'}
+      className='hidden'
+    >
       {blockNumberArray.map((num, index) => (
         <g key={'block' + num}>
           <rect

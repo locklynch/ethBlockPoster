@@ -53,7 +53,7 @@ const Inputs = ({setBlockInfo, setBlockChainNumber, setBlockObject}) => {
   return (
     <>
     <div id='inputs' className='inputs'>
-      <h2>Inputs</h2>
+      <h1>Inputs</h1>
       <label htmlFor='infuraAPIKey'>Infura API Key: </label>
       <input type='text' id='infuraAPIKey' name='infuraAPIKey' placeholder='Infura API Key'/>
       <br/>
@@ -68,6 +68,7 @@ const Inputs = ({setBlockInfo, setBlockChainNumber, setBlockObject}) => {
         }}
         onKeyDown={handleSetBlockNumber}
       />
+      <br/>
       <br/>
       <button id='fetchBlock' className='fetchBlock' onClick={fetchBlock}>Fetch Block</button>
     </div>

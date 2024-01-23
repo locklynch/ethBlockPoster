@@ -51,15 +51,15 @@ FIXES:
     1. toggle for note description or not! ehhh maybe no need (but could do after all the other toggles for including or not including stuff)
     2. nested notes! from block data to block header and transaction, then from those to the more specific elements of those things!
         1. blockheader DONE!
-        2. a single transaction from the transactions
-        3. a single withdrawal from the withdrawals
+        2. a single transaction from the transactions DONE
+        3. a single withdrawal from the withdrawals DONE
     3. bring the lines back!
 
 
 Things to do!
-4. only keep first transaction and withdrawal in transaction and withdrawal windows
-5. copy code for window for header for transactions and withdrawal
+4. only keep first transaction and withdrawal in transaction and withdrawal windows DONE
+5. copy code for window for header for transactions and withdrawal DONE
 6. copy slider for including transactions and withdrawal windows
-7. copy code for header notes for transaction and withdrawal
-9. now get the color palette selection in the inputs section of the controls
+7. copy code for header notes for transaction and withdrawal DONE
+9. now get the color palette selection in the inputs section of the controls DONE
 10. fix rasterization png download

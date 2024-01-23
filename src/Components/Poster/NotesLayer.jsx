@@ -1,9 +1,9 @@
 // layer for notes about the block
 
 import React, { useState, useEffect, useRef, useContext } from "react";
-import { DrapAndDropComponent } from './DragAndDrop';
+import { DrapAndDropComponent } from './DeprecatedComponents/DragAndDrop';
 // import notesText from './staticText.js';
-import useResizeAndScrollEffect from "./ResizeAndScrollHelper";
+import useResizeAndScrollEffect from "./DeprecatedComponents/ResizeAndScrollHelper";
 import BlockUtils from './BlockUtils'
 import { makeGetColor } from './ColorUtils'
 import { ThemeContext, getPalette } from './GlobalColorPalette';
@@ -169,7 +169,7 @@ const NotesLayer = ({blockObject, setNoteToRect, isToggled}) => {
   const blockHeaderUtils = BlockUtils(blockObject)
 
   return (
-    <g>
+    <g className="hidden">
       {blockObject && theNotes.map((theNotes, index) => (
         <DrapAndDropComponent key={theNotes.id} style={{ borderStyle: 'solid', borderWidth: '1px', borderColor: theNotes.color}}>
           <rect
