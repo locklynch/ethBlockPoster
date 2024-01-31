@@ -12,35 +12,46 @@ const splitStringAtLength = (inputString, length) => {
 }
 
 const createTSpans = (strings) => {
-  return strings.map((string) => {
-    return '<<tspan>${string}</tspan>>'
+  return strings.map((string, index) => {
+    return <tspan key={index}>{string}</tspan>
   })
+}
+
+const createSVGText = (string, x, y) => {
+  return (
+    <text
+        x={x}
+        y={y}
+        width='10'
+        heigh='100'
+        fill='black'
+        fontFamily="monospace"
+        fontSize='16'
+        style={{overflowWrap: 'break-word'}}
+        transform='rotate(-25) skewX(-25)'>
+          {string}
+      </text>
+  )
 }
 
 const ParentHash = ({blockObject}) => {
   
   const valueToHex = (value) => value === undefined ? false : Buffer.from(value).toString('hex')
   const parentHash = blockObject.header ? valueToHex(blockObject.header.parentHash) : null;
-  const splitParentHashArr = splitStringAtLength(parentHash, 10)
+  const splitParentHashArr = splitStringAtLength(parentHash, 19)
   const tspans = createTSpans(splitParentHashArr)
   console.log('tspans:', tspans)
 
   return (
     <g>
-      <text
-        x={50}
-        y={400}
-        width='50'
-        heigh='100'
-        fill='black'
-        fontFamily="system-ui"
-        fontSize='16'
-        style={{overflowWrap: 'break-word'}}
-        transform='rotate(-25)'>
-        <tspan>12345</tspan>
-        <tspan>12345</tspan>
-      </text>
-          </g>
+      <g>
+        {createSVGText(tspans[0], 200, 400)}
+        {createSVGText(tspans[1], 200, 415)}
+        {createSVGText(tspans[2], 200, 430)}
+        {createSVGText(tspans[3], 200, 445)}
+      </g>
+      {/* put cube svg asset here! */}
+    </g>
   )
 }
 
