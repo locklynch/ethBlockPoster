@@ -24,7 +24,7 @@ const countBytesInBlockHeader = ({blockObject}) => {
   const keyToExtract = 'value'
   const arrOfValues = Object.values(posExecutionBlockHeader).map(obj => obj[keyToExtract])
   const stringOfValues = arrOfValues.join('')
-  return stringOfValues.length
+  return stringOfValues.length / 2
 }
 
 const createSVGText = (string, x, y) => {
