@@ -2,6 +2,7 @@ import React from 'react';
 // import BlockUtils from "./BlockUtils";
 import {Buffer} from 'buffer'
 // import { overflowWrap } from 'html2canvas/dist/types/css/property-descriptors/overflow-wrap';
+import BlockUtils from './BlockUtils';
 
 const splitStringAtLength = (inputString, length) => {
   let result = []
@@ -15,6 +16,15 @@ const createTSpans = (strings) => {
   return strings.map((string, index) => {
     return <tspan key={index}>{string}</tspan>
   })
+}
+
+//function to find the length of the blockHeader in bytes
+const countBytesInBlockHeader = ({blockObject}) => {
+  const posExecutionBlockHeader = BlockUtils({blockObject})
+  const keyToExtract = 'value'
+  const arrOfValues = Object.values(posExecutionBlockHeader).map(obj => obj[keyToExtract])
+  const stringOfValues = arrOfValues.join('')
+  return stringOfValues.length
 }
 
 const createSVGText = (string, x, y) => {
@@ -40,7 +50,9 @@ const ParentHash = ({blockObject}) => {
   const parentHash = blockObject.header ? valueToHex(blockObject.header.parentHash) : null;
   const splitParentHashArr = splitStringAtLength(parentHash, 19)
   const tspans = createTSpans(splitParentHashArr)
+  const headerByteLength = countBytesInBlockHeader({blockObject})
   console.log('tspans:', tspans)
+  console.log('headerByteLength:', headerByteLength)
 
   return (
     <g>

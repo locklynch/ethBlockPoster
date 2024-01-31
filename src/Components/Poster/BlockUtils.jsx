@@ -4,7 +4,7 @@ import { useRef } from 'react'
 import { bigIntToUnpaddedBytes } from '@ethereumjs/util'
 import {Buffer} from 'buffer'
 
-const BlockUtils = (blockObject) => {
+const BlockUtils = ({blockObject}) => {
 
   const valueToHex = (value) => value === undefined ? false : Buffer.from(value).toString('hex')
   const addressToHex = (value) => value === undefined ? false : Buffer.from(value.bytes).toString('hex')
@@ -39,10 +39,10 @@ const BlockUtils = (blockObject) => {
       ref: useRef(),
       value: valueToHex(blockObject.header.logsBloom),
     },
-    difficulty: {
-      ref: useRef(),
-      value: bigIntToHex(blockObject.header.difficulty),
-    },
+    // difficulty: {
+    //   ref: useRef(),
+    //   value: bigIntToHex(blockObject.header.difficulty),
+    // },
     number: {
       ref: useRef(),
       value: bigIntToHex(blockObject.header.number),
