@@ -3,7 +3,7 @@ import React from 'react';
 import {Buffer} from 'buffer'
 // import { overflowWrap } from 'html2canvas/dist/types/css/property-descriptors/overflow-wrap';
 import BlockUtils from './BlockUtils';
-import Cubes from './Cubes';
+import CubesLayer from './CubesLayer';
 
 const splitStringAtLength = (inputString, length) => {
   let result = []
@@ -63,7 +63,15 @@ const ParentHash = ({blockObject}) => {
         {createSVGText(tspans[2], 200, 430)}
         {createSVGText(tspans[3], 200, 445)}
       </g>
-      <Cubes/>
+      <CubesLayer/>
+      <text
+        x={800}
+        y={700}
+        fill='black'
+        transform='rotate(-25) skewX(-25)'
+      >
+        ................ parentHash
+      </text>
     </g>
   )
 }

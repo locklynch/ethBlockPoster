@@ -1,19 +1,19 @@
 import React from "react";
 
-const Cubes = ({ width, height, x, y, opacity }) => {
+const FullCube = ({ }) => {
 
   return (
     <svg
       viewBox="0 0 256 417"
-      width="32"
-      height="42"
-      x="100"
-      y1="100"
+      width="320"
+      height="420"
+      x="452.5"
+      y="500"
       opacity="100%"
     >
       <g>
       <g clipPath="url(#clip0_16_27)">
-        <rect width="32" height="42" fill="white"/>
+        <rect width="32" height="42" fill="none"/>
         <g clipPath="url(#clip1_16_27)">
         <path d="M31.6537 10.7819L15.8334 21.2454L0 10.7819L15.8334 0.10788L31.6537 10.7819Z" fill="#0D0E11"/>
         <path d="M31.68 30.4191L31.6536 14.5725L15.8334 25.036L15.8597 41.0932L31.68 30.4191Z" fill="#0D0E11"/>
@@ -33,5 +33,5 @@ const Cubes = ({ width, height, x, y, opacity }) => {
   )
 }
 
-export default Cubes
+export default FullCube
 
