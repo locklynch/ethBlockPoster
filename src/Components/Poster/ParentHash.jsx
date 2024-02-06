@@ -3,7 +3,7 @@ import React from 'react';
 import {Buffer} from 'buffer'
 // import { overflowWrap } from 'html2canvas/dist/types/css/property-descriptors/overflow-wrap';
 import BlockUtils from './BlockUtils';
-import CubesLayer from './CubesLayer';
+import FullCubeLayer from './FullCubeLayer';
 
 const splitStringAtLength = (inputString, length) => {
   let result = []
@@ -39,7 +39,7 @@ const createSVGText = (string, x, y) => {
         fontFamily="monospace"
         fontSize='16'
         style={{overflowWrap: 'break-word'}}
-        transform='rotate(-25) skewX(-25)'>
+        transform='rotate(-35) skewX(-35)'>
           {string}
       </text>
   )
@@ -58,19 +58,19 @@ const ParentHash = ({blockObject}) => {
   return (
     <g>
       <g>
-        {createSVGText(tspans[0], 200, 400)}
-        {createSVGText(tspans[1], 200, 415)}
-        {createSVGText(tspans[2], 200, 430)}
-        {createSVGText(tspans[3], 200, 445)}
+        {createSVGText(tspans[0], 200, 300)}
+        {createSVGText(tspans[1], 200, 315)}
+        {createSVGText(tspans[2], 200, 330)}
+        {createSVGText(tspans[3], 200, 345)}
       </g>
-      <CubesLayer/>
+      <FullCubeLayer/>
       <text
-        x={800}
-        y={700}
+        x={700}
+        y={735}
         fill='black'
-        transform='rotate(-25) skewX(-25)'
+        transform='rotate(-35) skewX(-30)'
       >
-        ................ parentHash
+        .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  parentHash
       </text>
     </g>
   )
