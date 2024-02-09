@@ -41,9 +41,8 @@ const manualColorPalette = () => {
   ]  
 }
 
-const colorsArr = []
-
-
 const ColorSelector = ({}) => {
   
 }
+
+export default ColorSelector
