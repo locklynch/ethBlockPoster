@@ -42,7 +42,7 @@ const manualColorPalette = () => {
 }
 
 const colorPalette = ({}) => {
-  
+  manualColorPalette()
 }
 
 export default colorPalette
