@@ -4,6 +4,7 @@ import {Buffer} from 'buffer'
 // import { overflowWrap } from 'html2canvas/dist/types/css/property-descriptors/overflow-wrap';
 import BlockUtils from './BlockUtils';
 import FullCubeLayer from './FullCubeLayer';
+import colorPalette from './ColorPalette';
 
 const splitStringAtLength = (inputString, length) => {
   let result = []
@@ -63,7 +64,9 @@ const ParentHash = ({blockObject}) => {
         {createSVGText(tspans[2], 200, 330)}
         {createSVGText(tspans[3], 200, 345)}
       </g>
-      <FullCubeLayer/>
+      {blockObject && <FullCubeLayer
+        data={blockObject.header.parentHash}
+      />}
       <text
         x={700}
         y={735}

@@ -1,6 +1,34 @@
 import React from "react";
+import colorPalette from "./ColorPalette";
 
-const FullCube = () => {
+const drawCubeLayer = () => {
+  //take byte 1 of data and draw centerBottomCube with that data
+
+  //take byte 2 of data and draw first righthand side cube with that data
+
+  // then sequencially spiral around the cube layer clockwise ending in the middle of the cube layer
+
+  //return this whole new thing back to the FullCubeLayer, to then display it whenever it's called by a modula that's using it
+}
+
+// // notes from aaron about how to do things
+// function drawCube (byte, index) {
+//   // impl here
+// }
+// <>{...Array.from(data).map(drawCube)}<></>
+
+const getColorForData = ({byteString}) => {
+  const [xStr, yStr] = byteString.split('')
+  const x = parseInt(xStr, 16)
+  const y = parseInt(yStr, 16)
+ 
+  colorPalette()
+  console.log('colorsArr:', colorsArr)
+ 
+ }
+ 
+
+const centerBottomCube = () => {
   return (
     <svg
       viewBox="0 0 256 417"
@@ -118,12 +146,14 @@ const topsOnly = (x, y, x1, y1) => {
   )
 }
 
-const FullCubeLayer = ({ }) => {
+const FullCubeLayer = ({data}) => {
+
+  getColorForData(data)
 
   return (
     <g>
       {/* Bottom Center Cube */}
-      {FullCube()}
+      {centerBottomCube()}
       {/* left row of cubes */}
       {leftRow(-19 * 0, -12.5 * 0)}
       {leftRow(-19 * 1, -12.5 * 1)}
