@@ -8,7 +8,7 @@ const FullCubeLayer = ({data}) => {
   // getColorForData(data)
 
   return (
-    CubeLayerBitPlane({data})
+    CubeLayerBytesPlane({data})
   )
 }
 

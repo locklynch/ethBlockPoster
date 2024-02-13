@@ -133,11 +133,11 @@ const CubeLayerBytesPlane = ({data}) => {
     if (index === 0) {
       return centerBottomCube(color)
     }
-    if (y === 0) {
-      return rightCube((x * 19), (x * -12), color)
-    }
     if (x === 0) {
-      return leftCube((y * -19), (y * -12), color)
+      return rightCube((y * 19), (y * -12), color)
+    }
+    if (y === 0) {
+      return leftCube((x * -19), (x * -12), color)
     }
     return topsOnly((-19 * x), (-12 * x), (19 * y), (-12 * y), color)
   }
