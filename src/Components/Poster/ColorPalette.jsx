@@ -1,3 +1,5 @@
+//where we select the used color palette for the whole poster
+
 import React from "react";
 
 const colorPaletteGenerator = () => {
