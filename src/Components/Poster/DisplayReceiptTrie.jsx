@@ -3,21 +3,21 @@ import FullCubeLayer from './FullCubeLayer';
 import GhostText from './GhostText';
 import LabelMaker from './LabelMaker';
 
-const Coinbase = ({blockObject}) => {
-  const coinbase = 'coinbase'
+const ReceiptTrie = ({blockObject}) => {
+  const receiptTrie = 'receiptTrie'
 
   return (
-    <g transform='translate(0,0)'>
+    <g transform='translate(0,360)'>
       <GhostText
-        indexString={coinbase}
+        indexString={receiptTrie}
         blockObject={blockObject}/>
       {blockObject && <FullCubeLayer
-        data={blockObject.header.coinbase.bytes}
+        data={blockObject.header.receiptTrie}
       />}
       <LabelMaker
-        text={coinbase}/>
+        text={receiptTrie}/>
     </g>
   )
 }
 
-export default Coinbase
+export default ReceiptTrie

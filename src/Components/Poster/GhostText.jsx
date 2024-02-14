@@ -25,6 +25,7 @@ const createSVGText = (string, x, y) => {
         fill='black'
         fontFamily="monospace"
         fontSize='16'
+        opacity={'50%'}
         style={{overflowWrap: 'break-word'}}
         transform='rotate(-35) skewX(-35)'>
           {string}
@@ -41,10 +42,10 @@ const GhostText = ({indexString, blockObject}) => {
 
   return (
     <g>
-      {createSVGText(tspans[0], 200, 300)}
-      {createSVGText(tspans[1], 200, 315)}
-      {createSVGText(tspans[2], 200, 330)}
-      {createSVGText(tspans[3], 200, 345)}
+      {createSVGText(tspans[0], 300, 510)}
+      {createSVGText(tspans[1], 300, 525)}
+      {createSVGText(tspans[2], 300, 540)}
+      {createSVGText(tspans[3], 300, 555)}
     </g>
   )
 }

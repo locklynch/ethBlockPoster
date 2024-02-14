@@ -7,7 +7,7 @@ const StateRoot = ({blockObject}) => {
   const stateRoot = 'stateRoot'
 
   return (
-    <g transform='translate(0,100)'>
+    <g transform='translate(0,80)'>
       <GhostText
         indexString={stateRoot}
         blockObject={blockObject}/>
