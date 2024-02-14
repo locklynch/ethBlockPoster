@@ -3,21 +3,21 @@ import FullCubeLayer from './FullCubeLayer';
 import GhostText from './GhostText';
 import LabelMaker from './LabelMaker';
 
-const ParentHash = ({blockObject}) => {
-  const parentHash = 'parentHash'
+const Coinbase = ({blockObject}) => {
+  const coinbase = 'coinbase'
 
   return (
-    <g transform='translate(0,-100)'>
+    <g transform='translate(0,0)'>
       <GhostText
-        indexString={parentHash}
+        indexString={coinbase}
         blockObject={blockObject}/>
       {blockObject && <FullCubeLayer
-        data={blockObject.header.parentHash}
+        data={blockObject.header.coinbase.bytes}
       />}
       <LabelMaker
-        text={parentHash}/>
+        text={coinbase}/>
     </g>
   )
 }
 
-export default ParentHash
+export default Coinbase

@@ -6,6 +6,8 @@ import html2canvas from 'html2canvas';
 import "../../App.css";
 import {ThemeContext} from './GlobalColorPalette.jsx'
 import ParentHash from './ParentHash.jsx'
+import Coinbase from './CoinBaseDisplay.jsx';
+import StateRoot from './StateRootDisplay.jsx';
 
 const Poster = ({ blockObject }) => {
   const posterRef = useRef(null)
@@ -87,6 +89,12 @@ const Poster = ({ blockObject }) => {
               opacity='50%'>
                 <EthLogo/>
             </svg>
+            {blockObject && <StateRoot
+              blockObject={blockObject}
+            />}
+            {blockObject && <Coinbase
+              blockObject={blockObject}
+            />}
             {blockObject && <ParentHash
               blockObject={blockObject}
             />}
