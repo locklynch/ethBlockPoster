@@ -10,6 +10,7 @@ import Coinbase from './DisplayCoinBase.jsx';
 import StateRoot from './DisplayStateRoot.jsx';
 import TransactionsTrie from './DisplayTransactionTrie.jsx';
 import ReceiptTrie from './DisplayReceiptTrie.jsx';
+import LogsBloom from './DisplayLogsBloom.jsx';
 
 const Poster = ({ blockObject }) => {
   const posterRef = useRef(null)
@@ -91,21 +92,26 @@ const Poster = ({ blockObject }) => {
               opacity='50%'>
                 <EthLogo/>
             </svg>
-            {blockObject && <ReceiptTrie
-              blockObject={blockObject}
-            />}
-            {blockObject && <TransactionsTrie
-              blockObject={blockObject}
-            />}
-            {blockObject && <StateRoot
-              blockObject={blockObject}
-            />}
-            {blockObject && <Coinbase
-              blockObject={blockObject}
-            />}
-            {blockObject && <ParentHash
-              blockObject={blockObject}
-            />}
+            <g transform='translate(0,-100)'>
+              {blockObject && <LogsBloom
+                blockObject={blockObject}
+              />}
+              {blockObject && <ReceiptTrie
+                blockObject={blockObject}
+              />}
+              {blockObject && <TransactionsTrie
+                blockObject={blockObject}
+              />}
+              {blockObject && <StateRoot
+                blockObject={blockObject}
+              />}
+              {blockObject && <Coinbase
+                blockObject={blockObject}
+              />}
+              {blockObject && <ParentHash
+                blockObject={blockObject}
+              />}
+            </g>
           </svg>
           <br/>
           {/* {svgPreview && <img src={svgPreview}/>} */}

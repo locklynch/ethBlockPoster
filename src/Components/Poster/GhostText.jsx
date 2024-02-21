@@ -37,15 +37,32 @@ const createSVGText = (string, x, y) => {
 const GhostText = ({indexString, blockObject}) => {
   const blockHeaderAsHexObj = BlockUtils({blockObject})
   const text = blockHeaderAsHexObj[indexString].value
-  const splitTextArr = splitStringAtLength(text, 19)
+  const splitTextArr = splitStringAtLength(text, 30)
   const tspans = createTSpans(splitTextArr)
 
   return (
     <g>
-      {createSVGText(tspans[0], 300, 510)}
-      {createSVGText(tspans[1], 300, 525)}
-      {createSVGText(tspans[2], 300, 540)}
-      {createSVGText(tspans[3], 300, 555)}
+      {createSVGText(tspans[0], 220, 510)}
+      {createSVGText(tspans[1], 220, 525)}
+      {createSVGText(tspans[2], 220, 540)}
+      {createSVGText(tspans[3], 220, 555)}
+      {createSVGText(tspans[4], 220, 570)}
+      {createSVGText(tspans[5], 220, 585)}
+      {createSVGText(tspans[6], 220, 600)}
+      {createSVGText(tspans[7], 220, 615)}
+      {createSVGText(tspans[8], 220, 630)}
+      {createSVGText(tspans[9], 220, 645)}
+      {createSVGText(tspans[10], 220, 660)}
+      {createSVGText(tspans[11], 220, 675)}
+      {createSVGText(tspans[12], 220, 690)}
+      {createSVGText(tspans[13], 220, 705)}
+      {createSVGText(tspans[14], 220, 720)}
+      {createSVGText(tspans[15], 220, 735)}
+      {createSVGText(tspans[16], 220, 750)}
+      {createSVGText(tspans[17], 220, 765)}
+      {createSVGText(tspans[18], 220, 780)}
+      {createSVGText(tspans[19], 220, 795)}
+      {createSVGText(tspans[20], 220, 810)}
     </g>
   )
 }
