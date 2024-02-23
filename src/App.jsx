@@ -20,7 +20,7 @@ function App() {
       />
       <br/>
       <Poster
-        blockChainNumberFromApp={blockChainNumber}
+        blockChainNumberFromInputs={blockChainNumber}
         blockObject={blockObject}
       />
       <br/>

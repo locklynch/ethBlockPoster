@@ -4,7 +4,6 @@ import GhostText from './GhostText';
 import LabelMaker from './LabelMaker';
 
 const LogsBloom = ({blockObject}) => {
-
   const byteIntArray = new Uint8Array(blockObject.header.logsBloom.buffer, blockObject.header.logsBloom.byteOffset, 252);
   const cubeLayersArray = []
 

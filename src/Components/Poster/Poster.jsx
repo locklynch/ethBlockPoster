@@ -11,8 +11,9 @@ import StateRoot from './DisplayStateRoot.jsx';
 import TransactionsTrie from './DisplayTransactionTrie.jsx';
 import ReceiptTrie from './DisplayReceiptTrie.jsx';
 import LogsBloom from './DisplayLogsBloom.jsx';
+import AuxilaryInfo from './DisplayAuxilaryText.jsx';
 
-const Poster = ({ blockObject }) => {
+const Poster = ({ blockObject, blockChainNumberFromInputs }) => {
   const posterRef = useRef(null)
   const [selectedPalette, setSelectedPalette] = useState('startingPoint')
   const [svgPreview, setSvgPreview] = useState()
@@ -110,6 +111,9 @@ const Poster = ({ blockObject }) => {
               />}
               {blockObject && <ParentHash
                 blockObject={blockObject}
+              />}
+              {blockChainNumberFromInputs && <AuxilaryInfo
+                blockChainNumberFromInputs={blockChainNumberFromInputs}
               />}
             </g>
           </svg>

@@ -149,6 +149,7 @@ const CubeLayerBytesPlane = ({data}) => {
   )
 }
 
+export {centerBottomCube}
 export default CubeLayerBytesPlane
 
 
