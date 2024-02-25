@@ -18,7 +18,9 @@ const MultiLayer = ({blockObject}) => {
     const baseFeePerGas = blockObject.header.baseFeePerGas
     const timestamp = blockObject.header.timestamp
 
-    console.log('number:', number)
+    const concatenatedValues = `${number}, ${gasLimit}, ${gasUsed}, ${baseFeePerGas}, ${timestamp}`;
+
+    console.log('all of them:', concatenatedValues)
 
     //add all the Text constants into one variable then send to the labelMaker
     //somehow combine all the data above into one layer and send it to FullCubeLayer!

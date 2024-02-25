@@ -5,6 +5,7 @@ import LabelMaker from './LabelMaker';
 
 const ParentHash = ({blockObject}) => {
   const parentHash = 'parentHash'
+  console.log('parentHash:', blockObject.header.parentHash)
 
   return (
     <g transform='translate(0,-200)'>
