@@ -12,6 +12,7 @@ import TransactionsTrie from './DisplayTransactionTrie.jsx';
 import ReceiptTrie from './DisplayReceiptTrie.jsx';
 import LogsBloom from './DisplayLogsBloom.jsx';
 import AuxilaryInfo from './DisplayAuxilaryText.jsx';
+import MultiLayer from './DisplayNum-GL-GU-T-BFPG.jsx';
 
 const Poster = ({ blockObject, blockChainNumberFromInputs }) => {
   const posterRef = useRef(null)
@@ -94,6 +95,9 @@ const Poster = ({ blockObject, blockChainNumberFromInputs }) => {
                 <EthLogo/>
             </svg>
             <g transform='translate(0,-100)'>
+            {blockObject && <MultiLayer
+                blockObject={blockObject}
+              />}
               {blockObject && <LogsBloom
                 blockObject={blockObject}
               />}

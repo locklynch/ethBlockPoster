@@ -7,7 +7,7 @@ const ReceiptTrie = ({blockObject}) => {
   const receiptTrie = 'receiptTrie'
 
   return (
-    <g transform='translate(0,360)'>
+    <g transform='translate(0,180)'>
       <GhostText
         indexString={receiptTrie}
         blockObject={blockObject}/>

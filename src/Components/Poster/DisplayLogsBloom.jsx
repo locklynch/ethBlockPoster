@@ -16,7 +16,7 @@ const LogsBloom = ({blockObject}) => {
   const logsBloom = 'logsBloom'
 
   return (
-    <g transform='translate(0,500)'>
+    <g transform='translate(0,275)'>
       <GhostText
         indexString={logsBloom}
         blockObject={blockObject}/>

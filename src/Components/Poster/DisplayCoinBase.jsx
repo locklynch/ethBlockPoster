@@ -7,7 +7,7 @@ const Coinbase = ({blockObject}) => {
   const coinbase = 'coinbase'
 
   return (
-    <g transform='translate(0,-60)'>
+    <g transform='translate(0,-105)'>
       <GhostText
         indexString={coinbase}
         blockObject={blockObject}/>

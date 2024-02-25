@@ -37,7 +37,7 @@ const createSVGText = (string, x, y) => {
 const GhostText = ({indexString, blockObject}) => {
   const blockHeaderAsHexObj = BlockUtils({blockObject})
   const text = blockHeaderAsHexObj[indexString].value
-  const splitTextArr = splitStringAtLength(text, 30)
+  const splitTextArr = splitStringAtLength(text, 40)
   const tspans = createTSpans(splitTextArr)
 
   return (
