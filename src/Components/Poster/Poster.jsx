@@ -13,6 +13,10 @@ import ReceiptTrie from './DisplayReceiptTrie.jsx';
 import LogsBloom from './DisplayLogsBloom.jsx';
 import AuxilaryInfo from './DisplayAuxilaryText.jsx';
 import MultiLayer from './DisplayNum-GL-GU-T-BFPG.jsx';
+import ExtraData from './DisplayExtraData.jsx';
+import MixHash from './DisplayMixHash.jsx';
+import WithdrawalsRoot from './DisplayWithdrawalsRoot.jsx';
+import PrevRandao from './DisplayPrevRandao.jsx';
 
 const Poster = ({ blockObject, blockChainNumberFromInputs }) => {
   const posterRef = useRef(null)
@@ -95,7 +99,19 @@ const Poster = ({ blockObject, blockChainNumberFromInputs }) => {
                 <EthLogo/>
             </svg>
             <g transform='translate(0,-100)'>
-            {blockObject && <MultiLayer
+              {blockObject && <PrevRandao
+                blockObject={blockObject}
+              />}
+              {blockObject && <WithdrawalsRoot
+                blockObject={blockObject}
+              />}
+              {blockObject && <MixHash
+                blockObject={blockObject}
+              />}
+              {blockObject && <ExtraData
+                blockObject={blockObject}
+              />}
+              {blockObject && <MultiLayer
                 blockObject={blockObject}
               />}
               {blockObject && <LogsBloom

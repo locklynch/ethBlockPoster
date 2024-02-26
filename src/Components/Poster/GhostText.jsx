@@ -19,7 +19,7 @@ const createSVGText = (string, x, y) => {
   return (
     <text
         x={x}
-        y={y}
+        y={y+30}
         width='10'
         heigh='100'
         fill='black'

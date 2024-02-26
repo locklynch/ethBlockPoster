@@ -27,7 +27,7 @@ const MultiLayer = ({blockObject}) => {
     //then also send the combined bytes to the ghostText as well
 
     return (
-        <g transform='translate(0,640)'>
+        <g transform='translate(0,490)'>
           <GhostText
             indexString={numberText}
             blockObject={blockObject}/>
