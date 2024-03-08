@@ -22,7 +22,7 @@ const createSVGText = (string, x, y) => {
         y={y+30}
         width='10'
         heigh='100'
-        fill='black'
+        fill='none' // CHANGE THIS BACK TO BLACK TO BE SEEN!!!!
         fontFamily="monospace"
         fontSize='16'
         opacity={'50%'}

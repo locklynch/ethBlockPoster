@@ -98,7 +98,9 @@ const Poster = ({ blockObject, blockChainNumberFromInputs }) => {
               opacity='50%'>
                 <EthLogo/>
             </svg>
-            <g transform='translate(0,-100)'>
+            <g
+              transform={'translate(50,100) scale(0.9)'}
+              >
               {blockObject && <PrevRandao
                 blockObject={blockObject}
               />}
@@ -132,9 +134,9 @@ const Poster = ({ blockObject, blockChainNumberFromInputs }) => {
               {blockObject && <ParentHash
                 blockObject={blockObject}
               />}
-              {blockChainNumberFromInputs && <AuxilaryInfo
+              {/* {blockChainNumberFromInputs && <AuxilaryInfo
                 blockChainNumberFromInputs={blockChainNumberFromInputs}
-              />}
+              />} */}
             </g>
           </svg>
           <br/>

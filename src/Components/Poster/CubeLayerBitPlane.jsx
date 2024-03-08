@@ -126,7 +126,8 @@ const topsOnly = (x, y, x1, y1, color) => {
 
 function uint8ArrayToBitArray(uInt8Array) {
   const bitArray = [];
-  for (let byte of uInt8Array) {
+  const byteArray = Array.from(uInt8Array)
+  for (let byte of byteArray) {
       for (let i = 7; i >= 0; i--) {
           const bit = (byte >> i) & 1;
           bitArray.push(bit);
@@ -135,7 +136,7 @@ function uint8ArrayToBitArray(uInt8Array) {
   return bitArray;
 }
 
-const CubeLayerBitPlane = ({data}) => {
+const CubeLayerBytesPlane = ({data}) => {
   const drawCube = (bit, index) => {
     const color = (bit ? '#000000' : '#FFFFFF')
     const x = index % 16
@@ -160,7 +161,7 @@ const CubeLayerBitPlane = ({data}) => {
   )
 }
 
-export default CubeLayerBitPlane
+export default CubeLayerBytesPlane
 
 
   // const drawtheCube = (byte, index) => {
