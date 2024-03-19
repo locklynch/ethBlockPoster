@@ -104,7 +104,7 @@ const Poster = ({ blockObject, blockChainNumberFromInputs }) => {
               {blockObject && <PrevRandao
                 blockObject={blockObject}
               />}
-              {blockObject && <WithdrawalsRoot
+              {/* {blockObject && <WithdrawalsRoot
                 blockObject={blockObject}
               />}
               {blockObject && <MixHash
@@ -133,7 +133,7 @@ const Poster = ({ blockObject, blockChainNumberFromInputs }) => {
               />}
               {blockObject && <ParentHash
                 blockObject={blockObject}
-              />}
+              />} */}
               {/* {blockChainNumberFromInputs && <AuxilaryInfo
                 blockChainNumberFromInputs={blockChainNumberFromInputs}
               />} */}
