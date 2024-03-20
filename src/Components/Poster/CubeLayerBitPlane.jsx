@@ -119,10 +119,14 @@ const CubeLayerBytesPlane = ({data}) => {
     }
     return topsOnly((-19 * x), (-12 * x), (19 * y), (-12 * y), color)
   }
+  const bitArray = uint8ArrayToBitArray(data)
 
   return (
     <>
-      {...uint8ArrayToBitArray(data).map(drawCube)}
+      {...bitArray.map((entry, index) => {
+        const reversedIndex = (bitArray.length - 1) - index
+        return drawCube(entry, reversedIndex)
+      })}
     </>
   )
 }
