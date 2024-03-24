@@ -99,12 +99,13 @@ const Poster = ({ blockObject, blockChainNumberFromInputs }) => {
                 <EthLogo/>
             </svg>
             <g
-              transform={'translate(50,100) scale(0.9)'}
+              transform={'translate(50,100) scale(0.9)'} //use this for bits not bytes!
+              // transform={'translate(0,-100)'} //use this for bytes not bits!
               >
               {blockObject && <PrevRandao
                 blockObject={blockObject}
               />}
-              {blockObject && <WithdrawalsRoot
+              {/* {blockObject && <WithdrawalsRoot
                 blockObject={blockObject}
               />}
               {blockObject && <MixHash
@@ -133,7 +134,7 @@ const Poster = ({ blockObject, blockChainNumberFromInputs }) => {
               />}
               {blockObject && <ParentHash
                 blockObject={blockObject}
-              />}
+              />} */}
               {/* {blockChainNumberFromInputs && <AuxilaryInfo
                 blockChainNumberFromInputs={blockChainNumberFromInputs}
               />} */}

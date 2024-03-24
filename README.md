@@ -1,3 +1,11 @@
+notes about next logic issues:
+- if the display layer isn't the last drawn (top most display layer) then remove the top 9 (3x3) cubes drawn in the layer
+- if the display layer is the logsBloom, then only draw the outsides
+- randomly distribute the "missing" cubes in each layer throughout the whole layer, not just the top right row style shenanigans
+-- can i make it into a 6x6 matrix like i did the colors? then distribute the bytes 
+
+JUST USE BITS!!!!!
+
 New direction. Make the infographic poster, then pivot to the narrative one once we have the block data set up all good to go.
 
 Inforgraphic Poster - just display the block as an expanded block from the chain, then popup type windows on top of it displaying some particular notes about each part of the block

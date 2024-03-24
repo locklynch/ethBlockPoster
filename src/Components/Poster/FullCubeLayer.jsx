@@ -3,12 +3,12 @@ import React from "react";
 import CubeLayerBytesPlane from "./CubeLayerBitPlane";
 import colorPalette from "./ColorPalette";
 
-const FullCubeLayer = ({data}) => {
+const FullCubeLayer = ({data, saturationModifier}) => {
 
   // getColorForData(data)
 
   return (
-    CubeLayerBytesPlane({data})
+    CubeLayerBytesPlane({data, saturationModifier})
   )
 }
 
